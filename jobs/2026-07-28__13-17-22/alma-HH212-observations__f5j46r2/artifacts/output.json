@@ -1,0 +1,183 @@
+{
+  "target_name": "HH 212",
+  "resolved_ra_deg": 85.96420833,
+  "resolved_dec_deg": -1.04808333,
+  "search_radius_arcsec": 30.0,
+  "band_filter": [
+    6,
+    7
+  ],
+  "max_spatial_resolution_arcsec": 1.0,
+  "num_observations": 14,
+  "observations": [
+    {
+      "member_ous_uid": "uid://A001/X1273/X1f9",
+      "project_code": "2017.1.00044.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421125000545,
+      "dec_deg": -1.0481019444447288,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.0316734361630697,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17b8",
+      "project_code": "2017.1.00712.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421125001223,
+      "dec_deg": -1.0481019444444382,
+      "band": [
+        6
+      ],
+      "best_spatial_resolution_arcsec": 0.022781354834911657,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17ba",
+      "project_code": "2017.1.00712.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421125004338,
+      "dec_deg": -1.0481019444447166,
+      "band": [
+        6
+      ],
+      "best_spatial_resolution_arcsec": 0.1489361985467903,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1473/Xbe6",
+      "project_code": "2019.1.00086.S",
+      "alma_source_name": "HH212M",
+      "ra_deg": 85.96421250001843,
+      "dec_deg": -1.0481111111112291,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.8027864728676456,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X22",
+      "project_code": "2015.1.00037.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421124998832,
+      "dec_deg": -1.0481019444444875,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.11296974037381813,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X42",
+      "project_code": "2015.1.00024.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.9642,
+      "dec_deg": -1.0480916666666666,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.014753635301994835,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X340/X1f9",
+      "project_code": "2015.1.00041.S",
+      "alma_source_name": "HH212mms",
+      "ra_deg": 85.9642125000427,
+      "dec_deg": -1.0481027777780914,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.09217021640101315,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X362b/Xf37",
+      "project_code": "2023.1.00494.S",
+      "alma_source_name": "HH212MMS",
+      "ra_deg": 85.96420833336394,
+      "dec_deg": -1.048096666666971,
+      "band": [
+        6
+      ],
+      "best_spatial_resolution_arcsec": 0.14924825593190996,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X88f/X259",
+      "project_code": "2016.1.01475.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96420833333109,
+      "dec_deg": -1.0481000000000829,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.09152828751568182,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X88f/X25b",
+      "project_code": "2016.1.01475.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96420833338408,
+      "dec_deg": -1.0481000000004446,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.338030740167654,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A002/X36d874/X11",
+      "project_code": "2011.0.00647.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96419999999999,
+      "dec_deg": -1.0480916666666666,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.47080931157879113,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A002/X36d874/X13",
+      "project_code": "2011.0.00647.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96420833333333,
+      "dec_deg": -1.0481,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.46249283249648676,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A002/X6ac013/X11",
+      "project_code": "2012.1.00997.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96420833333333,
+      "dec_deg": -1.0481,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.29337548756861065,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A002/X7b15a9/X5a",
+      "project_code": "2012.1.00122.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96439055186667,
+      "dec_deg": -1.048172537602811,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.1423064091216609,
+      "qa2_status": "T"
+    }
+  ],
+  "summary": "A total of 14 unique ALMA Member Observation Unit Sets (MOUS) targeting HH 212 were found in Band 6/7 with spatial resolution under 1 arcsecond. The synthesized beam sizes (spatial_resolution) for these observations range from 0.0148 to 0.8028 arcsec, providing high-resolution views of the HH 212 protostellar jet system. These observations come from multiple ALMA proposals and cover the continuum and line emission in the submillimeter regime typical of Band 6/7 science."
+}

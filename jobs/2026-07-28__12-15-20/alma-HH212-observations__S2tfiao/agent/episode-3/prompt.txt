@@ -1,0 +1,86 @@
+New Terminal Output:
+
+root@c6ffb4bc816b:/app# python3 << 'EOF'
+> from astroquery.alma import Alma
+> import astropy.units as u
+> from astropy.coordinates import SkyCoord
+> Alma.archive_url = 'https://almascience.eso.org'
+> c = SkyCoord(85.96420833, -1.04808333, unit='deg')
+> result = Alma.query_region(c, radius=30*u.arcsec)
+> for col in ['target_name','s_ra','s_dec','member_ous_uid','band_list','spatial_resolution','qa2_passed','science_observation','data_rights','proposal_id']:
+>     print(col, result[col][:5])
+> EOF
+target_name target_name
+-----------
+      HH212
+      HH212
+      HH212
+      HH212
+      HH212
+s_ra        s_ra
+       deg
+-----------------
+85.96420833333333
+85.96420833333333
+85.96420833333333
+85.96420833333333
+85.96420833333333
+s_dec  s_dec
+  deg
+-------
+-1.0481
+-1.0481
+-1.0481
+-1.0481
+-1.0481
+member_ous_uid     member_ous_uid
+----------------------
+uid://A002/X36d874/X13
+uid://A002/X36d874/X13
+uid://A002/X36d874/X13
+uid://A002/X36d874/X13
+ uid://A002/X36d874/Xf
+band_list band_list
+---------
+        7
+        7
+        7
+        7
+        9
+spatial_resolution  spatial_resolution
+       arcsec
+-------------------
+0.46249283249648676
+0.46249283249648676
+0.46249283249648676
+0.46249283249648676
+0.22987265569859888
+qa2_passed qa2_passed
+----------
+         T
+         T
+         T
+         T
+         T
+science_observation science_observation
+-------------------
+                  T
+                  T
+                  T
+                  T
+                  T
+data_rights data_rights
+-----------
+     Public
+     Public
+     Public
+     Public
+     Public
+proposal_id  proposal_id
+--------------
+2011.0.00647.S
+2011.0.00647.S
+2011.0.00647.S
+2011.0.00647.S
+2011.0.00647.S
+root@c6ffb4bc816b:/app#

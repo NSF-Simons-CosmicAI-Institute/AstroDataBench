@@ -1,0 +1,18 @@
+New Terminal Output:
+
+root@f1b01bdb67bf:/app# python3 << 'EOF'
+> from astroquery.alma import Alma
+> alma = Alma()
+> ra, dec = 85.96420833333333, -1.0480833333333335
+> radius = 30.0  # arcsec
+> query = f"""
+> SELECT target_name, s_ra, s_dec, member_ous_uid, proposal_id, band_list, spatial_resolution, qa2_passed, science_observation, data_rights
+> FROM ivoa.obscore
+> WHERE CONTAINS(POINT('ICRS', s_ra, s_dec), CIRCLE('ICRS', {ra}, {dec}, {radius/3600.0})) = 1
+> """
+> result = alma.query_tap(query)
+> tab = result.to_table()
+> print(len(tab))
+> print(tab)
+> EOF
+

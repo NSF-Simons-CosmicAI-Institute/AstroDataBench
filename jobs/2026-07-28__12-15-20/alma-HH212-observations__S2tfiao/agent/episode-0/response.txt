@@ -1,0 +1,18 @@
+{
+  "analysis": "Starting fresh in /app. Need to explore environment, check internet connectivity to ALMA archive, and verify astroquery/pyvo installation before writing the solution script.",
+  "plan": "First check Python and package versions, test name resolution for HH 212 coordinates, and test basic connectivity to the ALMA TAP service. Then build a full script incrementally.",
+  "commands": [
+    {
+      "keystrokes": "python3 -c \"import astroquery; print(astroquery.__version__)\"\n",
+      "duration": 3.0
+    },
+    {
+      "keystrokes": "python3 -c \"import pyvo; print(pyvo.__version__)\"\n",
+      "duration": 3.0
+    },
+    {
+      "keystrokes": "python3 -c \"from astropy.coordinates import SkyCoord; c = SkyCoord.from_name('HH 212'); print(c.ra.deg, c.dec.deg)\"\n",
+      "duration": 15.0
+    }
+  ]
+}

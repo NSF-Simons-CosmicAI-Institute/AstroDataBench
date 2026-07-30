@@ -1,0 +1,502 @@
+[?2004hroot@f1b01bdb67bf:/app# asciinema rec --stdin /logs/agent/recording.cast
+[?2004l[0;32masciinema: recording asciicast to /logs/agent/recording.cast[0m
+[0;32masciinema: press <ctrl-d> or type "exit" when you're done[0m
+[?2004hroot@f1b01bdb67bf:/app# clear
+[?2004l[H[J[3J[?2004hroot@f1b01bdb67bf:/app# python3 -c "import astroquery, pyvo; print(astroquery.__version__, pyvo.__version__)"
+[?2004l0.4.11 1.9.1
+[?2004hroot@f1b01bdb67bf:/app# python3 << 'EOF'
+[?2004l[?2004h> from astroquery.simbad import Simbad
+[?2004l[?2004h> result = Simbad.query_object('HH 212')
+[?2004l[?2004h> print(result)
+[?2004l[?2004h> EOF
+[?2004lmain_id         ra                dec         coo_err_maj coo_err_min coo_err_angle coo_wavelength     coo_bibcode     matched_id
+               deg                deg             mas         mas          deg                                                   
+------- ----------------- ------------------- ----------- ----------- ------------- -------------- ------------------- ----------
+HH  212 85.96420833333333 -1.0480833333333335          --          --            --                2013ApJ...768..110C    HH  212
+[?2004hroot@f1b01bdb67bf:/app# python3 << 'EOF'
+[?2004l[?2004h> from astroquery.alma import Alma
+[?2004l[?2004h> print(Alma.help())
+[?2004l[?2004h> EOF
+[?2004l
+Most common ALMA query keywords are listed below. These keywords are part of the ALMA ObsCore model, an IVOA standard for metadata representation (3rd column). They were also present in original ALMA Web form and, for backwards compatibility can be accessed with their old names (2nd column).
+More elaborate queries on the ObsCore model are possible with `query_sia` or `query_tap` methods
+  Description                       Original ALMA keyword               ObsCore keyword                    
+-------------------------------------------------------------------------------------------------------
+
+Position
+  Source name (astropy Resolver)    source_name_resolver                SkyCoord.from_name                 
+  Source name (ALMA)                source_name_alma                    target_name                        
+  RA Dec (Sexagesimal)              ra_dec                              s_ra, s_dec                        
+  Galactic (Degrees)                galactic                            gal_longitude, gal_latitude        
+  Angular resolution (arcsec)       spatial_resolution                  spatial_resolution                 
+  Largest angular scale (arcsec)    spatial_scale_max                   spatial_scale_max                  
+  Field of view (arcsec)            fov                                 s_fov                              
+
+Energy
+  Frequency (GHz)                   frequency                           frequency                          
+  Bandwidth (Hz)                    bandwidth                           bandwidth                          
+  Spectral resolution (KHz)         spectral_resolution                 spectral_resolution                
+  Spectral resolution (m)           em_resolution                       em_resolution                      
+  Band                              band_list                           band_list                          
+
+Time
+  Observation date                  start_date                          t_min                              
+  Integration time (s)              integration_time                    t_exptime                          
+
+Polarization
+  Polarisation type (Single, Dual, Full) polarisation_type                   pol_states                         
+
+Observation
+  Line sensitivity (10 km/s) (mJy/beam) line_sensitivity                    sensitivity_10kms                  
+  Continuum sensitivity (mJy/beam)  continuum_sensitivity               cont_sensitivity_bandwidth         
+  Water vapour (mm)                 water_vapour                        pvw                                
+
+Project
+  Project code                      project_code                        proposal_id                        
+  Project title                     project_title                       obs_title                          
+  PI name                           pi_name                             pi_name                            
+  Proposal authors                  proposal_authors                    proposal_authors                   
+  Project abstract                  project_abstract                    proposal_abstract                  
+  Publication count                 publication_count                   NA                                 
+  Science keyword                   science_keyword                     science_keyword                    
+
+Publication
+  Bibcode                           bibcode                             bib_reference                      
+  Title                             pub_title                           pub_title                          
+  First author                      first_author                        first_author                       
+  Authors                           authors                             authors                            
+  Abstract                          pub_abstract                        pub_abstract                       
+  Year                              publication_year                    pub_year                           
+
+Options
+  Public data only                  public_data                         data_rights                        
+  Science observations only         science_observation                 science_observation                
+
+Examples of queries:
+Alma.query('proposal_id':'2011.0.00131.S'}
+Alma.query({'band_list': ['5', '7']}
+Alma.query({'source_name_alma': 'GRB021004'})
+Alma.query(payload=dict(project_code='2017.1.01355.L', source_name_alma='G008.67'))
+None
+[?2004hroot@f1b01bdb67bf:/app# python3 << 'EOF'
+[?2004l[?2004h> from astroquery.alma import Alma
+[?2004l[?2004h> alma = Alma()
+[?2004l[?2004h> # Test TAP query - get column names
+[?2004l[?2004h> query = "SELECT TOP 1 * FROM ivoa.obscore"
+[?2004l[?2004h> result = alma.query_tap(query)
+[?2004l[?2004h> print(result.to_table().colnames)
+[?2004l[?2004h> EOF
+[?2004l['pol_states', 'obs_publisher_did', 'obs_collection', 'facility_name', 'instrument_name', 'obs_id', 'dataproduct_type', 'calib_level', 'collections', 'target_name', 's_ra', 's_dec', 's_fov', 's_region', 's_xel1', 's_xel2', 'em_xel', 't_xel', 'pol_xel', 's_resolution', 't_min', 't_max', 't_exptime', 't_resolution', 'em_min', 'em_max', 'em_res_power', 'sensitivity_10kms', 'cont_sensitivity_bandwidth', 'pwv', 'group_ous_uid', 'member_ous_uid', 'asdm_uid', 'obs_title', 'type', 'scan_intent', 'science_observation', 'spatial_scale_max', 'qa2_passed', 'bib_reference', 'science_keyword', 'scientific_category', 'pi_userid', 'pi_name', 'spectral_resolution', 'lastModified', 'o_ucd', 'access_url', 'access_format', 'access_estsize', 'proposal_id', 'data_rights', 'gal_longitude', 'gal_latitude', 'band_list', 'em_resolution', 'bandwidth', 'antenna_arrays', 'is_mosaic', 'obs_release_date', 'spatial_resolution', 'frequency_support', 'frequency', 'velocity_resolution', 'obs_creator_name', 'pub_title', 'first_author', 'authors', 'pub_abstract', 'publication_year', 'proposal_abstract', 'schedblock_name', 'proposal_authors']
+[?2004hroot@f1b01bdb67bf:/app# python3 << 'EOF'
+[?2004l[?2004h> from astroquery.alma import Alma
+[?2004l[?2004h> alma = Alma()
+[?2004l[?2004h> ra, dec = 85.96420833333333, -1.0480833333333335
+[?2004l[?2004h> radius = 30.0  # arcsec
+[?2004l[?2004h> query = f"""
+[?2004l[?2004h> SELECT target_name, s_ra, s_dec, member_ous_uid, proposal_id, band_list, spatial_resolution, qa2_passed, science_observation, data_rights
+[?2004l[?2004h> FROM ivoa.obscore
+[?2004l[?2004h> WHERE CONTAINS(POINT('ICRS', s_ra, s_dec), CIRCLE('ICRS', {ra}, {dec}, {radius/3600.0})) = 1
+[?2004l[?2004h> """
+[?2004l[?2004h> result = alma.query_tap(query)
+[?2004l[?2004h> tab = result.to_table()
+[?2004l[?2004h> print(len(tab))
+[?2004l[?2004h> print(tab)
+[?2004l[?2004h> EOF
+[?2004l137
+target_name        s_ra              s_dec            member_ous_uid      proposal_id   ...  spatial_resolution  qa2_passed science_observation data_rights
+                   deg                deg                                               ...        arcsec                                                  
+----------- ----------------- ------------------- ---------------------- -------------- ... -------------------- ---------- ------------------- -----------
+      HH212 85.96420833333333             -1.0481 uid://A002/X6ac013/X11 2012.1.00997.S ...   0.2933729566553391          T                   T      Public
+      HH212 85.96420833333333             -1.0481 uid://A002/X6ac013/X11 2012.1.00997.S ...   0.2933729566553391          T                   T      Public
+      HH212 85.96420833333333             -1.0481 uid://A002/X6ac013/X11 2012.1.00997.S ...   0.2933729566553391          T                   T      Public
+      HH212 85.96420833333333             -1.0481 uid://A002/X6ac013/X11 2012.1.00997.S ...   0.2933729566553391          T                   T      Public
+      HH212 85.96420833333333             -1.0481  uid://A002/X36d874/Xf 2011.0.00647.S ...  0.22987265473134813          T                   T      Public
+      HH212 85.96420833333333             -1.0481  uid://A002/X36d874/Xf 2011.0.00647.S ...  0.22987265473134813          T                   T      Public
+      HH212 85.96420833333333             -1.0481  uid://A002/X36d874/Xf 2011.0.00647.S ...  0.22987265473134813          T                   T      Public
+      HH212 85.96420833333333             -1.0481  uid://A002/X36d874/Xf 2011.0.00647.S ...  0.22987265473134813          T                   T      Public
+     HH_212 85.96407980039285 -1.0481343795220877    uid://A001/X196/X9f 2013.1.00165.S ...   1.5447061932030821          T                   T      Public
+     HH_212 85.96407980039285 -1.0481343795220877    uid://A001/X196/X9f 2013.1.00165.S ...   1.5447061932030821          T                   T      Public
+     HH_212 85.96407980039285 -1.0481343795220877    uid://A001/X196/X9f 2013.1.00165.S ...   1.5447061932030821          T                   T      Public
+     HH_212 85.96407980039285 -1.0481343795220877    uid://A001/X196/X9f 2013.1.00165.S ...   1.5447061932030821          T                   T      Public
+     HH_212 85.96407980039285 -1.0481343795220877    uid://A001/X196/X9f 2013.1.00165.S ...   1.5447061932030821          T                   T      Public
+      HH212 85.96420833333333             -1.0481 uid://A002/X36d874/X13 2011.0.00647.S ...   0.4624913139122095          T                   T      Public
+      HH212 85.96420833333333             -1.0481 uid://A002/X36d874/X13 2011.0.00647.S ...   0.4624913139122095          T                   T      Public
+      HH212 85.96420833333333             -1.0481 uid://A002/X36d874/X13 2011.0.00647.S ...   0.4624913139122095          T                   T      Public
+      HH212 85.96420833333333             -1.0481 uid://A002/X36d874/X13 2011.0.00647.S ...   0.4624913139122095          T                   T      Public
+        ...               ...                 ...                    ...            ... ...                  ...        ...                 ...         ...
+     HH_212 85.96421125000087 -1.0481019444444541 uid://A001/X3788/X624b 2024.1.00117.S ...    10.98569107118773          T                   T      Public
+     HH_212 85.96421125000087 -1.0481019444444541 uid://A001/X3788/X624b 2024.1.00117.S ...    10.98569107118773          T                   T      Public
+      HH212           85.9642 -1.0480916666666666 uid://A002/X7b15a9/X5e 2012.1.00122.S ...   0.0640427738188997          T                   T      Public
+      HH212           85.9642 -1.0480916666666666 uid://A002/X7b15a9/X5e 2012.1.00122.S ...   0.0640427738188997          T                   T      Public
+      HH212           85.9642 -1.0480916666666666 uid://A002/X7b15a9/X5e 2012.1.00122.S ...   0.0640427738188997          T                   T      Public
+      HH212           85.9642 -1.0480916666666666 uid://A002/X7b15a9/X5e 2012.1.00122.S ...   0.0640427738188997          T                   T      Public
+     HH_212 85.96421124996728 -1.0481019444448472 uid://A001/X1465/X3b5e 2019.1.00037.S ... 0.044982253818936745          T                   T      Public
+     HH_212 85.96421124996728 -1.0481019444448472 uid://A001/X1465/X3b5e 2019.1.00037.S ... 0.044982253818936745          T                   T      Public
+     HH_212 85.96421124996728 -1.0481019444448472 uid://A001/X1465/X3b5e 2019.1.00037.S ... 0.044982253818936745          T                   T      Public
+     HH_212 85.96421124996728 -1.0481019444448472 uid://A001/X1465/X3b5e 2019.1.00037.S ... 0.044982253818936745          T                   T      Public
+   HH212MMS 85.96420833332748 -1.0480966666668554  uid://A001/X362b/Xf41 2023.1.00494.S ...  0.16319729319468823          F                   T      Public
+   HH212MMS 85.96420833332748 -1.0480966666668554  uid://A001/X362b/Xf41 2023.1.00494.S ...  0.16319729319468823          F                   T      Public
+   HH212MMS 85.96420833332748 -1.0480966666668554  uid://A001/X362b/Xf41 2023.1.00494.S ...  0.16319729319468823          F                   T      Public
+   HH212MMS 85.96420833332748 -1.0480966666668554  uid://A001/X362b/Xf41 2023.1.00494.S ...  0.16319729319468823          F                   T      Public
+     HH212M        85.9642125 -1.0481111111111234 uid://A001/X3788/X624b 2024.1.00117.S ...   10.983501816877965          T                   T      Public
+     HH212M        85.9642125 -1.0481111111111234 uid://A001/X3788/X624b 2024.1.00117.S ...   10.983501816877965          T                   T      Public
+     HH212M        85.9642125 -1.0481111111111234 uid://A001/X3788/X624b 2024.1.00117.S ...   10.983501816877965          T                   T      Public
+     HH212M        85.9642125 -1.0481111111111234 uid://A001/X3788/X624b 2024.1.00117.S ...   10.983501816877965          T                   T      Public
+Length = 137 rows
+[?2004hroot@f1b01bdb67bf:/app# python3 << 'EOF'
+[?2004l[?2004h> from astroquery.alma import Alma
+[?2004l[?2004h> alma = Alma()
+[?2004l[?2004h> ra, dec = 85.96420833333333, -1.0480833333333335
+[?2004l[?2004h> radius = 30.0
+[?2004l[?2004h> query = f"""
+[?2004l[?2004h> SELECT target_name, s_ra, s_dec, member_ous_uid, proposal_id, band_list, spatial_resolution, qa2_passed, science_observation, data_rights
+[?2004l[?2004h> FROM ivoa.obscore
+[?2004l[?2004h> WHERE CONTAINS(POINT('ICRS', s_ra, s_dec), CIRCLE('ICRS', {ra}, {dec}, {radius/3600.0})) = 1
+[?2004l[?2004h> """
+[?2004l[?2004h> result = alma.query_tap(query)
+[?2004l[?2004h> tab = result.to_table()
+[?2004l[?2004h> import numpy as np
+[?2004l[?2004h> print(set(tab['band_list']))
+[?2004l[?2004h> print(set(tab['science_observation']))
+[?2004l[?2004h> print(set(tab['data_rights']))
+[?2004l[?2004h> EOF
+[?2004l{np.str_('4'), np.str_('7'), np.str_('3'), np.str_('6'), np.str_('9'), np.str_('5')}
+{np.str_('T')}
+{np.str_('Public')}
+[?2004hroot@f1b01bdb67bf:/app# cat << 'PYEOF' > /app/query.py
+[?2004l[?2004h> from astroquery.alma import Alma
+[?2004l[?2004h> import numpy as np
+[?2004l[?2004h> import json
+[?2004l[?2004h> 
+[?2004l[?2004h> alma = Alma()
+[?2004l[?2004h> ra, dec = 85.96420833333333, -1.0480833333333335
+[?2004l[?2004h> radius_arcsec = 30.0
+[?2004l[?2004h> 
+[?2004l[?2004h> query = f"""
+[?2004l[?2004h> SELECT target_name, s_ra, s_dec, member_ous_uid, proposal_id, band_list,
+[?2004l[?2004h>        spatial_resolution, qa2_passed, science_observation, data_rights
+[?2004l[?2004h> FROM ivoa.obscore
+[?2004l[?2004h> WHERE CONTAINS(POINT('ICRS', s_ra, s_dec), CIRCLE('ICRS', {ra}, {dec}, {radius_arcsec/3600.0})) = 1
+[?2004l[?2004h> AND science_observation = 'T'
+[?2004l[?2004h> AND data_rights = 'Public'
+[?2004l[?2004h> """
+[?2004l[?2004h> 
+[?2004l[?2004h> result = alma.query_tap(query)
+[?2004l[?2004h> tab = result.to_table()
+[?2004l[?2004h> print(f"Total rows before band/resolution filter: {len(tab)}")
+[?2004l[?2004h> 
+[?2004l[?2004h> # Filter by band 6 or 7
+[?2004l[?2004h> band_mask = np.isin(tab['band_list'], ['6', '7'])
+[?2004l[?2004h> tab_band = tab[band_mask]
+[?2004l[?2004h> print(f"Rows after band filter: {len(tab_band)}")
+[?2004l[?2004h> 
+[?2004l[?2004h> # Filter by spatial_resolution < 1.0
+[?2004l[?2004h> res_mask = tab_band['spatial_resolution'] < 1.0
+[?2004l[?2004h> tab_filt = tab_band[res_mask]
+[?2004l[?2004h> print(f"Rows after resolution filter: {len(tab_filt)}")
+[?2004l[?2004h> 
+[?2004l[?2004h> # Group by member_ous_uid
+[?2004l[?2004h> mous_groups = {}
+[?2004l[?2004h> for row in tab_filt:
+[?2004l[?2004h>     mous = str(row['member_ous_uid'])
+[?2004l[?2004h>     if mous not in mous_groups:
+[?2004l[?2004h>         mous_groups[mous] = {
+[?2004l[?2004h>             'member_ous_uid': mous,
+[?2004l[?2004h>             'project_code': str(row['proposal_id']),
+[?2004l[?2004h>             'alma_source_name': str(row['target_name']),
+[?2004l[?2004h>             'ra_deg': float(row['s_ra']),
+[?2004l[?2004h>             'dec_deg': float(row['s_dec']),
+[?2004l[?2004h>             'bands': set(),
+[?2004l[?2004h>             'resolutions': [],
+[?2004l[?2004h>             'qa2_status': str(row['qa2_passed'])
+[?2004l[?2004h>         }
+[?2004l[?2004h>     mous_groups[mous]['bands'].add(int(row['band_list']))
+[?2004l[?2004h>     mous_groups[mous]['resolutions'].append(float(row['spatial_resolution']))
+[?2004l[?2004h> 
+[?2004l[?2004h> observations = []
+[?2004l[?2004h> for mous, data in mous_groups.items():
+[?2004l[?2004h>     observations.append({
+[?2004l[?2004h>         'member_ous_uid': data['member_ous_uid'],
+[?2004l[?2004h>         'project_code': data['project_code'],
+[?2004l[?2004h>         'alma_source_name': data['alma_source_name'],
+[?2004l[?2004h>         'ra_deg': data['ra_deg'],
+[?2004l[?2004h>         'dec_deg': data['dec_deg'],
+[?2004l[?2004h>         'band': sorted(data['bands']),
+[?2004l[?2004h>         'best_spatial_resolution_arcsec': min(data['resolutions']),
+[?2004l[?2004h>         'qa2_status': data['qa2_status']
+[?2004l[?2004h>     })
+[?2004l[?2004h> 
+[?2004l[?2004h> # Sort by project_code for consistency
+[?2004l[?2004h> observations.sort(key=lambda x: x['member_ous_uid'])
+[?2004l[?2004h> 
+[?2004l[?2004h> print(f"Number of unique MOUS: {len(observations)}")
+[?2004l[?2004h> for obs in observations:
+[?2004l[?2004h>     print(obs)
+[?2004l[?2004h> 
+[?2004l[?2004h> # Save intermediate for building final output
+[?2004l[?2004h> with open('/app/observations_temp.json', 'w') as f:
+[?2004l[?2004h>     json.dump(observations, f, indent=2)
+[?2004l[?2004h> PYEOF
+[?2004l[?2004hroot@f1b01bdb67bf:/app# python3 /app/query.py
+[?2004lTotal rows before band/resolution filter: 137
+Rows after band filter: 104
+Rows after resolution filter: 80
+Number of unique MOUS: 14
+{'member_ous_uid': 'uid://A001/X1273/X1f9', 'project_code': '2017.1.00044.S', 'alma_source_name': 'HH_212', 'ra_deg': 85.96421125000545, 'dec_deg': -1.0481019444447288, 'band': [7], 'best_spatial_resolution_arcsec': 0.031673634814604494, 'qa2_status': 'T'}
+{'member_ous_uid': 'uid://A001/X1284/X17b8', 'project_code': '2017.1.00712.S', 'alma_source_name': 'HH_212', 'ra_deg': 85.96421125001223, 'dec_deg': -1.0481019444444382, 'band': [6], 'best_spatial_resolution_arcsec': 0.02278124950467702, 'qa2_status': 'T'}
+{'member_ous_uid': 'uid://A001/X1284/X17ba', 'project_code': '2017.1.00712.S', 'alma_source_name': 'HH_212', 'ra_deg': 85.96421125004338, 'dec_deg': -1.0481019444447166, 'band': [6], 'best_spatial_resolution_arcsec': 0.14893816480549288, 'qa2_status': 'T'}
+{'member_ous_uid': 'uid://A001/X1473/Xbe6', 'project_code': '2019.1.00086.S', 'alma_source_name': 'HH212M', 'ra_deg': 85.96421250001843, 'dec_deg': -1.0481111111112291, 'band': [7], 'best_spatial_resolution_arcsec': 0.8027872456620005, 'qa2_status': 'T'}
+{'member_ous_uid': 'uid://A001/X2de/X22', 'project_code': '2015.1.00037.S', 'alma_source_name': 'HH_212', 'ra_deg': 85.96421124998832, 'dec_deg': -1.0481019444444875, 'band': [7], 'best_spatial_resolution_arcsec': 0.11296986085870395, 'qa2_status': 'T'}
+{'member_ous_uid': 'uid://A001/X2de/X42', 'project_code': '2015.1.00024.S', 'alma_source_name': 'HH212', 'ra_deg': 85.9642, 'dec_deg': -1.0480916666666666, 'band': [7], 'best_spatial_resolution_arcsec': 0.014753585373160617, 'qa2_status': 'T'}
+{'member_ous_uid': 'uid://A001/X340/X1f9', 'project_code': '2015.1.00041.S', 'alma_source_name': 'HH212mms', 'ra_deg': 85.9642125000427, 'dec_deg': -1.0481027777780914, 'band': [7], 'best_spatial_resolution_arcsec': 0.09217025115787568, 'qa2_status': 'T'}
+{'member_ous_uid': 'uid://A001/X362b/Xf37', 'project_code': '2023.1.00494.S', 'alma_source_name': 'HH212MMS', 'ra_deg': 85.96420833336393, 'dec_deg': -1.0480966666669709, 'band': [6], 'best_spatial_resolution_arcsec': 0.14924733340479288, 'qa2_status': 'T'}
+{'member_ous_uid': 'uid://A001/X88f/X259', 'project_code': '2016.1.01475.S', 'alma_source_name': 'HH212', 'ra_deg': 85.96420833333109, 'dec_deg': -1.048100000000083, 'band': [7], 'best_spatial_resolution_arcsec': 0.09153000172541567, 'qa2_status': 'T'}
+{'member_ous_uid': 'uid://A001/X88f/X25b', 'project_code': '2016.1.01475.S', 'alma_source_name': 'HH212', 'ra_deg': 85.96420833338408, 'dec_deg': -1.0481000000004446, 'band': [7], 'best_spatial_resolution_arcsec': 0.3380344938969452, 'qa2_status': 'T'}
+{'member_ous_uid': 'uid://A002/X36d874/X11', 'project_code': '2011.0.00647.S', 'alma_source_name': 'HH212', 'ra_deg': 85.96420000000002, 'dec_deg': -1.0480916666666666, 'band': [7], 'best_spatial_resolution_arcsec': 0.4708088764687824, 'qa2_status': 'T'}
+{'member_ous_uid': 'uid://A002/X36d874/X13', 'project_code': '2011.0.00647.S', 'alma_source_name': 'HH212', 'ra_deg': 85.96420833333333, 'dec_deg': -1.0481, 'band': [7], 'best_spatial_resolution_arcsec': 0.4624913139122095, 'qa2_status': 'T'}
+{'member_ous_uid': 'uid://A002/X6ac013/X11', 'project_code': '2012.1.00997.S', 'alma_source_name': 'HH212', 'ra_deg': 85.96420833333333, 'dec_deg': -1.0481, 'band': [7], 'best_spatial_resolution_arcsec': 0.2933729566553391, 'qa2_status': 'T'}
+{'member_ous_uid': 'uid://A002/X7b15a9/X5a', 'project_code': '2012.1.00122.S', 'alma_source_name': 'HH212', 'ra_deg': 85.96439055186667, 'dec_deg': -1.048172537602811, 'band': [7], 'best_spatial_resolution_arcsec': 0.15042839436433436, 'qa2_status': 'T'}
+[?2004hroot@f1b01bdb67bf:/app# python3 << 'EOF'
+[?2004l[?2004h> from astroquery.alma import Alma
+[?2004l[?2004h> alma = Alma()
+[?2004l[?2004h> query = """
+[?2004l[?2004h> SELECT target_name, s_ra, s_dec, member_ous_uid, proposal_id, band_list, spatial_resolution, qa2_passed
+[?2004l[?2004h> FROM ivoa.obscore
+[?2004l[?2004h> WHERE member_ous_uid = 'uid://A001/X362b/Xf41'
+[?2004l[?2004h> """
+[?2004l[?2004h> result = alma.query_tap(query)
+[?2004l[?2004h> tab = result.to_table()
+[?2004l[?2004h> print(tab)
+[?2004l[?2004h> EOF
+[?2004ltarget_name        s_ra              s_dec             member_ous_uid     proposal_id   band_list  spatial_resolution qa2_passed
+                   deg                deg                                                                arcsec                 
+----------- ----------------- -------------------- --------------------- -------------- --------- ------------------- ----------
+   HH212MMS 85.96420833332748  -1.0480966666668554 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16319729319468823          F
+   HH212MMS 85.96420833332748  -1.0480966666668554 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16319729319468823          F
+   HH212MMS 85.96420833332748  -1.0480966666668554 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16319729319468823          F
+   HH212MMS 85.96420833332748  -1.0480966666668554 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16319729319468823          F
+   HOPS-108 83.86285833332978   -5.166685833334178 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16010882945522886          F
+   HOPS-108 83.86285833332978   -5.166685833334178 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16010882945522886          F
+   HOPS-108 83.86285833332978   -5.166685833334178 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16010882945522886          F
+   HOPS-108 83.86285833332978   -5.166685833334178 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16010882945522886          F
+    HOPS-12 83.78596666666591   -5.931844166667622 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.15967381479162432          F
+    HOPS-12 83.78596666666591   -5.931844166667622 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.15967381479162432          F
+    HOPS-12 83.78596666666591   -5.931844166667622 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.15967381479162432          F
+    HOPS-12 83.78596666666591   -5.931844166667622 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.15967381479162432          F
+   HOPS-124 84.83296666666078   -7.436451388890127 uid://A001/X362b/Xf41 2023.1.00494.S         5   0.159477762446549          F
+   HOPS-124 84.83296666666078   -7.436451388890127 uid://A001/X362b/Xf41 2023.1.00494.S         5   0.159477762446549          F
+   HOPS-124 84.83296666666078   -7.436451388890127 uid://A001/X362b/Xf41 2023.1.00494.S         5   0.159477762446549          F
+   HOPS-124 84.83296666666078   -7.436451388890127 uid://A001/X362b/Xf41 2023.1.00494.S         5   0.159477762446549          F
+   HOPS-358 86.53023749999272 -0.22506416666672405 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16405596500723138          F
+        ...               ...                  ...                   ...            ...       ...                 ...        ...
+    HOPS-87 83.84758749999503    -5.00847944444528 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16009994756904278          F
+    HOPS-87 83.84758749999503    -5.00847944444528 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16009994756904278          F
+    HOPS-88 83.85819999999703   -5.095372500000832 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16015793137159143          F
+    HOPS-88 83.85819999999703   -5.095372500000832 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16015793137159143          F
+    HOPS-88 83.85819999999703   -5.095372500000832 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16015793137159143          F
+    HOPS-88 83.85819999999703   -5.095372500000832 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16015793137159143          F
+ J0423-0120 65.81583633331982  -1.3425181944402595 uid://A001/X362b/Xf41 2023.1.00494.S         5  0.1607269600062757          F
+ J0423-0120 65.81583633331982  -1.3425181944402595 uid://A001/X362b/Xf41 2023.1.00494.S         5  0.1607269600062757          F
+ J0423-0120 65.81583633331982  -1.3425181944402595 uid://A001/X362b/Xf41 2023.1.00494.S         5  0.1607269600062757          F
+ J0423-0120 65.81583633331982  -1.3425181944402595 uid://A001/X362b/Xf41 2023.1.00494.S         5  0.1607269600062757          F
+ J0517-0520 79.36712569580297   -5.344678375000855 uid://A001/X362b/Xf41 2023.1.00494.S         5  0.1602398642142723          F
+ J0517-0520 79.36712569580297   -5.344678375000855 uid://A001/X362b/Xf41 2023.1.00494.S         5  0.1602398642142723          F
+ J0517-0520 79.36712569580297   -5.344678375000855 uid://A001/X362b/Xf41 2023.1.00494.S         5  0.1602398642142723          F
+ J0517-0520 79.36712569580297   -5.344678375000855 uid://A001/X362b/Xf41 2023.1.00494.S         5  0.1602398642142723          F
+ J0529-0519  82.4730562166971   -5.328226977780867 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16005919150879033          F
+ J0529-0519  82.4730562166971   -5.328226977780867 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16005919150879033          F
+ J0529-0519  82.4730562166971   -5.328226977780867 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16005919150879033          F
+ J0529-0519  82.4730562166971   -5.328226977780867 uid://A001/X362b/Xf41 2023.1.00494.S         5 0.16005919150879033          F
+Length = 52 rows
+[?2004hroot@f1b01bdb67bf:/app# cat << 'PYEOF' > /app/final_query.py
+[?2004l[?2004h> from astroquery.alma import Alma
+[?2004l[?2004h> import numpy as np
+[?2004l[?2004h> import json
+[?2004l[?2004h> 
+[?2004l[?2004h> alma = Alma()
+[?2004l[?2004h> ra, dec = 85.96420833333333, -1.0480833333333335
+[?2004l[?2004h> radius_arcsec = 30.0
+[?2004l[?2004h> 
+[?2004l[?2004h> query = f"""
+[?2004l[?2004h> SELECT target_name, s_ra, s_dec, member_ous_uid, proposal_id, band_list,
+[?2004l[?2004h>        spatial_resolution, qa2_passed, science_observation, data_rights
+[?2004l[?2004h> FROM ivoa.obscore
+[?2004l[?2004h> WHERE CONTAINS(POINT('ICRS', s_ra, s_dec), CIRCLE('ICRS', {ra}, {dec}, {radius_arcsec/3600.0})) = 1
+[?2004l[?2004h> AND science_observation = 'T'
+[?2004l[?2004h> AND data_rights = 'Public'
+[?2004l[?2004h> """
+[?2004l[?2004h> 
+[?2004l[?2004h> result = alma.query_tap(query)
+[?2004l[?2004h> tab = result.to_table()
+[?2004l[?2004h> 
+[?2004l[?2004h> # Filter by band 6 or 7
+[?2004l[?2004h> band_mask = np.isin(tab['band_list'], ['6', '7'])
+[?2004l[?2004h> tab_band = tab[band_mask]
+[?2004l[?2004h> 
+[?2004l[?2004h> # Filter by spatial_resolution < 1.0
+[?2004l[?2004h> res_mask = tab_band['spatial_resolution'] < 1.0
+[?2004l[?2004h> tab_filt = tab_band[res_mask]
+[?2004l[?2004h> 
+[?2004l[?2004h> # Group by member_ous_uid
+[?2004l[?2004h> mous_groups = {}
+[?2004l[?2004h> for row in tab_filt:
+[?2004l[?2004h>     mous = str(row['member_ous_uid'])
+[?2004l[?2004h>     if mous not in mous_groups:
+[?2004l[?2004h>         mous_groups[mous] = {
+[?2004l[?2004h>             'member_ous_uid': mous,
+[?2004l[?2004h>             'project_code': str(row['proposal_id']),
+[?2004l[?2004h>             'alma_source_name': str(row['target_name']),
+[?2004l[?2004h>             'ra_deg': float(row['s_ra']),
+[?2004l[?2004h>             'dec_deg': float(row['s_dec']),
+[?2004l[?2004h>             'bands': set(),
+[?2004l[?2004h>             'resolutions': [],
+[?2004l[?2004h>             'qa2_status': str(row['qa2_passed'])
+[?2004l[?2004h>         }
+[?2004l[?2004h>     mous_groups[mous]['bands'].add(int(row['band_list']))
+[?2004l[?2004h>     mous_groups[mous]['resolutions'].append(float(row['spatial_resolution']))
+[?2004l[?2004h> 
+[?2004l[?2004h> observations = []
+[?2004l[?2004h> for mous, data in mous_groups.items():
+[?2004l[?2004h>     observations.append({
+[?2004l[?2004h>         'member_ous_uid': data['member_ous_uid'],
+[?2004l[?2004h>         'project_code': data['project_code'],
+[?2004l[?2004h>         'alma_source_name': data['alma_source_name'],
+[?2004l[?2004h>         'ra_deg': data['ra_deg'],
+[?2004l[?2004h>         'dec_deg': data['dec_deg'],
+[?2004l[?2004h>         'band': sorted(data['bands']),
+[?2004l[?2004h>         'best_spatial_resolution_arcsec': min(data['resolutions']),
+[?2004l[?2004h>         'qa2_status': data['qa2_status']
+[?2004l[?2004h>     })
+[?2004l[?2004h> 
+[?2004l[?2004h> observations.sort(key=lambda x: x['member_ous_uid'])
+[?2004l[?2004h> 
+[?2004l[?2004h> # Compute summary statistics
+[?2004l[?2004h> all_bands = set()
+[?2004l[?2004h> for obs in observations:
+[?2004l[?2004h>     all_bands.update(obs['band'])
+[?2004l[?2004h> all_bands = sorted(all_bands)
+[?2004l[?2004h> 
+[?2004l[?2004h> all_res = [obs['best_spatial_resolution_arcsec'] for obs in observations]
+[?2004l[?2004h> min_res = min(all_res)
+[?2004l[?2004h> max_res = max(all_res)
+[?2004l[?2004h> 
+[?2004l[?2004h> band6_count = sum(1 for obs in observations if 6 in obs['band'])
+[?2004l[?2004h> band7_count = sum(1 for obs in observations if 7 in obs['band'])
+[?2004l[?2004h> 
+[?2004l[?2004h> summary = (
+[?2004l[?2004h>     f"A total of {len(observations)} unique ALMA Member Observation Unit Sets (MOUS) "
+[?2004l[?2004h>     f"targeting HH 212 were found in Band 6 and/or Band 7 with spatial resolution better than 1 arcsecond. "
+[?2004l[?2004h>     f"Of these, {band6_count} include Band 6 data and {band7_count} include Band 7 data. "
+[?2004l[?2004h>     f"The best spatial resolution achieved ranges from {min_res:.4f} to {max_res:.4f} arcsec across the sample, "
+[?2004l[?2004h>     f"reflecting a range of ALMA configurations from moderate to very high angular resolution. "
+[?2004l[?2004h>     f"These public, science-grade observations span multiple ALMA projects and provide a rich dataset for studying "
+[?2004l[?2004h>     f"the HH 212 protostellar outflow system at sub-arcsecond scales."
+[?2004l[?2004h> )
+[?2004l[?2004h> 
+[?2004l[?2004h> output = {
+[?2004l[?2004h>     'target_name': 'HH 212',
+[?2004l[?2004h>     'resolved_ra_deg': ra,
+[?2004l[?2004h>     'resolved_dec_deg': dec,
+[?2004l[?2004h>     'search_radius_arcsec': radius_arcsec,
+[?2004l[?2004h>     'band_filter': [6, 7],
+[?2004l[?2004h>     'max_spatial_resolution_arcsec': 1.0,
+[?2004l[?2004h>     'num_observations': len(observations),
+[?2004l[?2004h>     'observations': observations,
+[?2004l[?2004h>     'summary': summary
+[?2004l[?2004h> }
+[?2004l[?2004h> 
+[?2004l[?2004h> with open('/app/output.json', 'w') as f:
+[?2004l[?2004h>     json.dump(output, f, indent=2)
+[?2004l[?2004h> 
+[?2004l[?2004h> print(f"Wrote output.json with {len(observations)} observations")
+[?2004l[?2004h> print(json.dumps(output, indent=2)[:2000])
+[?2004l[?2004h> PYEOF
+[?2004l[?2004hroot@f1b01bdb67bf:/app# python3 /app/final_query.py
+[?2004lWrote output.json with 14 observations
+{
+  "target_name": "HH 212",
+  "resolved_ra_deg": 85.96420833333333,
+  "resolved_dec_deg": -1.0480833333333335,
+  "search_radius_arcsec": 30.0,
+  "band_filter": [
+    6,
+    7
+  ],
+  "max_spatial_resolution_arcsec": 1.0,
+  "num_observations": 14,
+  "observations": [
+    {
+      "member_ous_uid": "uid://A001/X1273/X1f9",
+      "project_code": "2017.1.00044.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421125000545,
+      "dec_deg": -1.0481019444447288,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.031673634814604494,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17b8",
+      "project_code": "2017.1.00712.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421125001223,
+      "dec_deg": -1.0481019444444382,
+      "band": [
+        6
+      ],
+      "best_spatial_resolution_arcsec": 0.02278124950467702,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17ba",
+      "project_code": "2017.1.00712.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421125004338,
+      "dec_deg": -1.0481019444447166,
+      "band": [
+        6
+      ],
+      "best_spatial_resolution_arcsec": 0.14893816480549288,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1473/Xbe6",
+      "project_code": "2019.1.00086.S",
+      "alma_source_name": "HH212M",
+      "ra_deg": 85.96421250001843,
+      "dec_deg": -1.0481111111112291,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.8027872456620005,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X22",
+      "project_code": "2015.1.00037.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421124998832,
+      "dec_deg": -1.0481019444444875,
+      "band": [
+        7
+      ],
+      "best_spatial_resolution_arcsec": 0.11296986085870395,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X42",
+      "project_code": "20
+[?2004hroot@f1b01bdb67bf:/app# python3 -c "import json; d=json.load(open('/app/output.json')); print('Valid JSON'); print('Keys:', list(d.keys())); print('num_observations:', d['num_observations']); print('len(observations):', len(d['observations'])); print('unique mous:', len(set(o['member_ous_uid'] for o in d['observations'])))"
+[?2004lValid JSON
+Keys: ['target_name', 'resolved_ra_deg', 'resolved_dec_deg', 'search_radius_arcsec', 'band_filter', 'max_spatial_resolution_arcsec', 'num_observations', 'observations', 'summary']
+num_observations: 14
+len(observations): 14
+unique mous: 14
+[?2004hroot@f1b01bdb67bf:/app# cat /app/output.json | python3 -m json.tool > /dev/null && echo 'JSON is well-formed' && wc -l /app/output.json
+[?2004lJSON is well-formed
+182 /app/output.json
+[?2004hroot@f1b01bdb67bf:/app# python3 -c "import json; d=json.load(open('/app/output.json')); print(d['summary'])"
+[?2004lA total of 14 unique ALMA Member Observation Unit Sets (MOUS) targeting HH 212 were found in Band 6 and/or Band 7 with spatial resolution better than 1 arcsecond. Of these, 3 include Band 6 data and 11 include Band 7 data. The best spatial resolution achieved ranges from 0.0148 to 0.8028 arcsec across the sample, reflecting a range of ALMA configurations from moderate to very high angular resolution. These public, science-grade observations span multiple ALMA projects and provide a rich dataset for studying the HH 212 protostellar outflow system at sub-arcsecond scales.
+[?2004hroot@f1b01bdb67bf:/app# 

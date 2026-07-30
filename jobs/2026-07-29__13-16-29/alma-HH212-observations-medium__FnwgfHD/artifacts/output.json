@@ -1,0 +1,151 @@
+{
+  "target": "HH 212",
+  "search": {
+    "ra_deg": 85.96420833,
+    "dec_deg": -1.04808333,
+    "radius_arcsec": 60.0
+  },
+  "n_observations": 14,
+  "observations": [
+    {
+      "mous_id": "uid://A001/X1273/X1f9",
+      "project_code": "2017.1.00044.S",
+      "source_name": "HH_212",
+      "resolution_arcsec": 0.0317,
+      "band": [
+        7
+      ],
+      "qa2": "T"
+    },
+    {
+      "mous_id": "uid://A002/X36d874/X13",
+      "project_code": "2011.0.00647.S",
+      "source_name": "HH212",
+      "resolution_arcsec": 0.4625,
+      "band": [
+        7
+      ],
+      "qa2": "T"
+    },
+    {
+      "mous_id": "uid://A002/X36d874/X11",
+      "project_code": "2011.0.00647.S",
+      "source_name": "HH212",
+      "resolution_arcsec": 0.4708,
+      "band": [
+        7
+      ],
+      "qa2": "T"
+    },
+    {
+      "mous_id": "uid://A001/X1473/Xbe6",
+      "project_code": "2019.1.00086.S",
+      "source_name": "HH212M",
+      "resolution_arcsec": 0.8028,
+      "band": [
+        7
+      ],
+      "qa2": "T"
+    },
+    {
+      "mous_id": "uid://A001/X1284/X17b8",
+      "project_code": "2017.1.00712.S",
+      "source_name": "HH_212",
+      "resolution_arcsec": 0.0228,
+      "band": [
+        6
+      ],
+      "qa2": "T"
+    },
+    {
+      "mous_id": "uid://A001/X1284/X17ba",
+      "project_code": "2017.1.00712.S",
+      "source_name": "HH_212",
+      "resolution_arcsec": 0.1489,
+      "band": [
+        6
+      ],
+      "qa2": "T"
+    },
+    {
+      "mous_id": "uid://A001/X362b/Xf37",
+      "project_code": "2023.1.00494.S",
+      "source_name": "HH212MMS",
+      "resolution_arcsec": 0.1492,
+      "band": [
+        6
+      ],
+      "qa2": "T"
+    },
+    {
+      "mous_id": "uid://A001/X88f/X25b",
+      "project_code": "2016.1.01475.S",
+      "source_name": "HH212",
+      "resolution_arcsec": 0.338,
+      "band": [
+        7
+      ],
+      "qa2": "T"
+    },
+    {
+      "mous_id": "uid://A001/X88f/X259",
+      "project_code": "2016.1.01475.S",
+      "source_name": "HH212",
+      "resolution_arcsec": 0.0915,
+      "band": [
+        7
+      ],
+      "qa2": "T"
+    },
+    {
+      "mous_id": "uid://A002/X7b15a9/X5a",
+      "project_code": "2012.1.00122.S",
+      "source_name": "HH212",
+      "resolution_arcsec": 0.1423,
+      "band": [
+        7
+      ],
+      "qa2": "T"
+    },
+    {
+      "mous_id": "uid://A001/X2de/X22",
+      "project_code": "2015.1.00037.S",
+      "source_name": "HH_212",
+      "resolution_arcsec": 0.113,
+      "band": [
+        7
+      ],
+      "qa2": "T"
+    },
+    {
+      "mous_id": "uid://A001/X2de/X42",
+      "project_code": "2015.1.00024.S",
+      "source_name": "HH212",
+      "resolution_arcsec": 0.0148,
+      "band": [
+        7
+      ],
+      "qa2": "T"
+    },
+    {
+      "mous_id": "uid://A002/X6ac013/X11",
+      "project_code": "2012.1.00997.S",
+      "source_name": "HH212",
+      "resolution_arcsec": 0.2934,
+      "band": [
+        7
+      ],
+      "qa2": "T"
+    },
+    {
+      "mous_id": "uid://A001/X340/X1f9",
+      "project_code": "2015.1.00041.S",
+      "source_name": "HH212mms",
+      "resolution_arcsec": 0.0922,
+      "band": [
+        7
+      ],
+      "qa2": "T"
+    }
+  ]
+}

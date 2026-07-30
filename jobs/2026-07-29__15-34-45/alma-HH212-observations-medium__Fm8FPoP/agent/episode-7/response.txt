@@ -1,0 +1,15 @@
+{
+  "analysis": "The final script ran successfully, producing 14 matching MOUS observations (Band 6 or 7, spatial_resolution < 1 arcsec, Public, science observations) out of 28 total MOUS for HH 212. The output.json file was written to /app/output.json. Need to verify the file contents are valid JSON and properly formatted before completing.",
+  "plan": "Verify the output.json file exists and is valid JSON by cating it and validating with python's json module.",
+  "commands": [
+    {
+      "keystrokes": "cat /app/output.json\n",
+      "duration": 2.0
+    },
+    {
+      "keystrokes": "python3 -c \"import json; d=json.load(open('/app/output.json')); print('Valid JSON'); print('num_observations:', d['num_observations']); print('actual count:', len(d['observations']))\"\n",
+      "duration": 2.0
+    }
+  ],
+  "task_complete": false
+}

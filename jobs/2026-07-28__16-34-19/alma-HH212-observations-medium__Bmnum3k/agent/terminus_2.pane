@@ -1,0 +1,621 @@
+[?2004hroot@59b8b9cba996:/app# asciinema rec --stdin /logs/agent/recording.cast
+[?2004l[0;32masciinema: recording asciicast to /logs/agent/recording.cast[0m
+[0;32masciinema: press <ctrl-d> or type "exit" when you're done[0m
+[?2004hroot@59b8b9cba996:/app# clear
+[?2004l[H[J[3J[?2004hroot@59b8b9cba996:/app# python3 -c "import astroquery; print(astroquery.__version__)"
+[?2004l0.4.11
+[?2004hroot@59b8b9cba996:/app# python3 -c "import pyvo; print(pyvo.__version__)"
+[?2004l1.9.1
+[?2004hroot@59b8b9cba996:/app# python3 -c "from astropy.coordinates import SkyCoord; c=SkyCoord.from_name('HH 212'); print(c.ra.deg, c.dec.deg)"
+[?2004l85.96420833 -1.04808333
+[?2004hroot@59b8b9cba996:/app# python3 -c "from astroquery.alma import Alma; help(Alma.query_region)" 2>&1 | head -50
+[?2004lHelp on function query_region in module astroquery.utils.process_asyncs:
+
+query_region(self, *args, **kwargs)
+    Queries the service and returns a table object.
+
+    Query the ALMA archive with a source name and radius
+
+    Parameters
+    ----------
+    coordinates : str / `astropy.coordinates`
+        the identifier or coordinates around which to query.
+    radius : str / `~astropy.units.Quantity`, optional
+        the radius of the region
+    public : bool
+        True to return only public datasets, False to return private only,
+        None to return both
+    science : bool
+        True to return only science datasets, False to return only
+        calibration, None to return both
+    payload : dict
+        Dictionary of additional keywords.  See `help`.
+    enhanced_results : bool
+        True to return a table with quantities instead of just values. It
+        also returns the footprints as `regions` objects.
+
+    Returns
+    -------
+    table : A `~astropy.table.Table` object.
+
+[?2004hroot@59b8b9cba996:/app# cat << 'EOF' > /app/explore.py
+[?2004l[?2004h> from astroquery.alma import Alma
+[?2004l[?2004h> from astropy.coordinates import SkyCoord
+[?2004l[?2004h> import astropy.units as u
+[?2004l[?2004h> 
+[?2004l[?2004h> c = SkyCoord(85.96420833, -1.04808333, unit='deg')
+[?2004l[?2004h> tbl = Alma.query_region(c, radius=1*u.arcmin, public=True, science=True)
+[?2004l[?2004h> print(len(tbl))
+[?2004l[?2004h> print(tbl.colnames)
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@59b8b9cba996:/app# python3 /app/explore.py
+[?2004l144
+['pol_states', 'obs_publisher_did', 'obs_collection', 'facility_name', 'instrument_name', 'obs_id', 'dataproduct_type', 'calib_level', 'collections', 'target_name', 's_ra', 's_dec', 's_fov', 's_region', 's_xel1', 's_xel2', 'em_xel', 't_xel', 'pol_xel', 's_resolution', 't_min', 't_max', 't_exptime', 't_resolution', 'em_min', 'em_max', 'em_res_power', 'sensitivity_10kms', 'cont_sensitivity_bandwidth', 'pwv', 'group_ous_uid', 'member_ous_uid', 'asdm_uid', 'obs_title', 'type', 'scan_intent', 'science_observation', 'spatial_scale_max', 'qa2_passed', 'bib_reference', 'science_keyword', 'scientific_category', 'pi_userid', 'pi_name', 'spectral_resolution', 'lastModified', 'o_ucd', 'access_url', 'access_format', 'access_estsize', 'proposal_id', 'data_rights', 'gal_longitude', 'gal_latitude', 'band_list', 'em_resolution', 'bandwidth', 'antenna_arrays', 'is_mosaic', 'obs_release_date', 'spatial_resolution', 'frequency_support', 'frequency', 'velocity_resolution', 'obs_creator_name', 'pub_title', 'first_author', 'authors', 'pub_abstract', 'publication_year', 'proposal_abstract', 'schedblock_name', 'proposal_authors']
+[?2004hroot@59b8b9cba996:/app# cat << 'EOF' > /app/explore2.py
+[?2004l[?2004h> from astroquery.alma import Alma
+[?2004l[?2004h> from astropy.coordinates import SkyCoord
+[?2004l[?2004h> import astropy.units as u
+[?2004l[?2004h> 
+[?2004l[?2004h> c = SkyCoord(85.96420833, -1.04808333, unit='deg')
+[?2004l[?2004h> tbl = Alma.query_region(c, radius=1*u.arcmin, public=True, science=True)
+[?2004l[?2004h> cols = ['obs_id','member_ous_uid','proposal_id','band_list','spatial_resolution','data_rights','science_observation','s_ra','s_dec']
+[?2004l[?2004h> for col in cols:
+[?2004l[?2004h>     print(col, tbl[col][:5])
+[?2004l[?2004h> print('---unique band_list---')
+[?2004l[?2004h> print(set(tbl['band_list']))
+[?2004l[?2004h> print('---unique data_rights---')
+[?2004l[?2004h> print(set(tbl['data_rights']))
+[?2004l[?2004h> print('---unique science_observation---')
+[?2004l[?2004h> print(set(tbl['science_observation']))
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@59b8b9cba996:/app# python3 /app/explore2.py
+[?2004lobs_id                    obs_id                  
+-------------------------------------------
+ uid://A001/X1273/X1f9.source.HH_212.spw.18
+ uid://A001/X1273/X1f9.source.HH_212.spw.32
+ uid://A001/X1273/X1f9.source.HH_212.spw.24
+ uid://A001/X1273/X1f9.source.HH_212.spw.28
+uid://A001/X1465/X3b5e.source.HH_212.spw.36
+member_ous_uid     member_ous_uid    
+----------------------
+ uid://A001/X1273/X1f9
+ uid://A001/X1273/X1f9
+ uid://A001/X1273/X1f9
+ uid://A001/X1273/X1f9
+uid://A001/X1465/X3b5e
+proposal_id  proposal_id  
+--------------
+2017.1.00044.S
+2017.1.00044.S
+2017.1.00044.S
+2017.1.00044.S
+2019.1.00037.S
+band_list band_list
+---------
+        7
+        7
+        7
+        7
+        3
+spatial_resolution  spatial_resolution
+       arcsec      
+-------------------
+ 0.0316734361630697
+ 0.0316734361630697
+ 0.0316734361630697
+ 0.0316734361630697
+0.04498240697812825
+data_rights data_rights
+-----------
+     Public
+     Public
+     Public
+     Public
+     Public
+science_observation science_observation
+-------------------
+                  T
+                  T
+                  T
+                  T
+                  T
+s_ra        s_ra      
+       deg       
+-----------------
+85.96421125000545
+85.96421125000545
+85.96421125000545
+85.96421125000545
+85.96421124996728
+s_dec        s_dec       
+        deg        
+-------------------
+-1.0481019444447288
+-1.0481019444447288
+-1.0481019444447288
+-1.0481019444447288
+-1.0481019444448472
+---unique band_list---
+{np.str_('3'), np.str_('4'), np.str_('7'), np.str_('5'), np.str_('9'), np.str_('6')}
+---unique data_rights---
+{np.str_('Public')}
+---unique science_observation---
+{np.str_('T')}
+[?2004hroot@59b8b9cba996:/app# cat << 'EOF' > /app/query.py
+[?2004l[?2004h> from astroquery.alma import Alma
+[?2004l[?2004h> from astropy.coordinates import SkyCoord
+[?2004l[?2004h> import astropy.units as u
+[?2004l[?2004h> import json
+[?2004l[?2004h> from collections import defaultdict
+[?2004l[?2004h> 
+[?2004l[?2004h> c = SkyCoord(85.96420833, -1.04808333, unit='deg')
+[?2004l[?2004h> tbl = Alma.query_region(c, radius=1*u.arcmin, public=True, science=True)
+[?2004l[?2004h> print('total rows:', len(tbl))
+[?2004l[?2004h> 
+[?2004l[?2004h> # Filter band 6 or 7
+[?2004l[?2004h> mask = [ (str(b) in ('6','7')) for b in tbl['band_list'] ]
+[?2004l[?2004h> tbl6or7 = tbl[mask]
+[?2004l[?2004h> print('rows with band 6/7:', len(tbl6or7))
+[?2004l[?2004h> 
+[?2004l[?2004h> # Further filter spatial_resolution < 1
+[?2004l[?2004h> mask2 = [ (float(sr) < 1.0) for sr in tbl6or7['spatial_resolution'] ]
+[?2004l[?2004h> tbl_final = tbl6or7[mask2]
+[?2004l[?2004h> print('rows with spatial_resolution<1:', len(tbl_final))
+[?2004l[?2004h> 
+[?2004l[?2004h> # Group by member_ous_uid
+[?2004l[?2004h> groups = defaultdict(lambda: {'bands': set(), 'spatial_resolutions': set(), 'proposal_id': None, 'obs_id_examples': [], 'target_name': set(), 's_ra': None, 's_dec': None})
+[?2004l[?2004h> for row in tbl_final:
+[?2004l[?2004h>     mous = str(row['member_ous_uid'])
+[?2004l[?2004h>     g = groups[mous]
+[?2004l[?2004h>     g['bands'].add(str(row['band_list']))
+[?2004l[?2004h>     g['spatial_resolutions'].add(float(row['spatial_resolution']))
+[?2004l[?2004h>     g['proposal_id'] = str(row['proposal_id'])
+[?2004l[?2004h>     g['obs_id_examples'].append(str(row['obs_id']))
+[?2004l[?2004h>     g['target_name'].add(str(row['target_name']))
+[?2004l[?2004h>     g['s_ra'] = float(row['s_ra'])
+[?2004l[?2004h>     g['s_dec'] = float(row['s_dec'])
+[?2004l[?2004h> 
+[?2004l[?2004h> print('unique member_ous_uid count:', len(groups))
+[?2004l[?2004h> for k,v in groups.items():
+[?2004l[?2004h>     print(k, v['proposal_id'], sorted(v['bands']), sorted(v['spatial_resolutions']), v['target_name'])
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@59b8b9cba996:/app# python3 /app/query.py
+[?2004ltotal rows: 144
+rows with band 6/7: 111
+rows with spatial_resolution<1: 80
+unique member_ous_uid count: 14
+uid://A001/X1273/X1f9 2017.1.00044.S ['7'] [0.0316734361630697] {'HH_212'}
+uid://A002/X36d874/X13 2011.0.00647.S ['7'] [0.46249283249648676] {'HH212'}
+uid://A002/X36d874/X11 2011.0.00647.S ['7'] [0.47080931157879113] {'HH212'}
+uid://A001/X1473/Xbe6 2019.1.00086.S ['7'] [0.8027864728676456] {'HH212M'}
+uid://A001/X1284/X17b8 2017.1.00712.S ['6'] [0.022781354834911657] {'HH_212'}
+uid://A001/X1284/X17ba 2017.1.00712.S ['6'] [0.1489361985467903] {'HH_212'}
+uid://A001/X362b/Xf37 2023.1.00494.S ['6'] [0.14924825593190996] {'HH212MMS'}
+uid://A001/X88f/X25b 2016.1.01475.S ['7'] [0.338030740167654] {'HH212'}
+uid://A001/X88f/X259 2016.1.01475.S ['7'] [0.09152828751568182] {'HH212'}
+uid://A002/X7b15a9/X5a 2012.1.00122.S ['7'] [0.1423064091216609] {'HH212'}
+uid://A001/X2de/X22 2015.1.00037.S ['7'] [0.11296974037381813] {'HH_212'}
+uid://A001/X2de/X42 2015.1.00024.S ['7'] [0.014753635301994835] {'HH212'}
+uid://A002/X6ac013/X11 2012.1.00997.S ['7'] [0.29337548756861065] {'HH212'}
+uid://A001/X340/X1f9 2015.1.00041.S ['7'] [0.09217021640101315] {'HH212mms'}
+[?2004hroot@59b8b9cba996:/app# cat << 'EOF' > /app/check.py
+[?2004l[?2004h> from astroquery.alma import Alma
+[?2004l[?2004h> from astropy.coordinates import SkyCoord
+[?2004l[?2004h> import astropy.units as u
+[?2004l[?2004h> 
+[?2004l[?2004h> c = SkyCoord(85.96420833, -1.04808333, unit='deg')
+[?2004l[?2004h> tbl = Alma.query_region(c, radius=1*u.arcmin, public=True, science=True)
+[?2004l[?2004h> print('band_list unique values (raw):')
+[?2004l[?2004h> for v in set(tbl['band_list']):
+[?2004l[?2004h>     print(repr(v))
+[?2004l[?2004h> print('total unique member_ous_uid (unfiltered):', len(set(str(x) for x in tbl['member_ous_uid'])))
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@59b8b9cba996:/app# python3 /app/check.py
+[?2004lband_list unique values (raw):
+np.str_('4')
+np.str_('9')
+np.str_('7')
+np.str_('3')
+np.str_('6')
+np.str_('5')
+total unique member_ous_uid (unfiltered): 28
+[?2004hroot@59b8b9cba996:/app# cat << 'EOF' > /app/final.py
+[?2004l[?2004h> from astroquery.alma import Alma
+[?2004l[?2004h> from astropy.coordinates import SkyCoord
+[?2004l[?2004h> import astropy.units as u
+[?2004l[?2004h> import json
+[?2004l[?2004h> from collections import defaultdict
+[?2004l[?2004h> 
+[?2004l[?2004h> # Resolve HH 212 coordinates
+[?2004l[?2004h> c = SkyCoord.from_name('HH 212')
+[?2004l[?2004h> ra_deg = c.ra.deg
+[?2004l[?2004h> dec_deg = c.dec.deg
+[?2004l[?2004h> 
+[?2004l[?2004h> search_radius_arcmin = 1.0
+[?2004l[?2004h> 
+[?2004l[?2004h> tbl = Alma.query_region(c, radius=search_radius_arcmin*u.arcmin, public=True, science=True)
+[?2004l[?2004h> 
+[?2004l[?2004h> # Filter for Band 6 or 7
+[?2004l[?2004h> band_mask = [str(b) in ('6', '7') for b in tbl['band_list']]
+[?2004l[?2004h> tbl_band = tbl[band_mask]
+[?2004l[?2004h> 
+[?2004l[?2004h> # Filter for spatial_resolution < 1 arcsec
+[?2004l[?2004h> res_mask = [float(sr) < 1.0 for sr in tbl_band['spatial_resolution']]
+[?2004l[?2004h> tbl_final = tbl_band[res_mask]
+[?2004l[?2004h> 
+[?2004l[?2004h> # Group by member_ous_uid
+[?2004l[?2004h> groups = defaultdict(lambda: {
+[?2004l[?2004h>     'bands': set(),
+[?2004l[?2004h>     'spatial_resolutions_arcsec': set(),
+[?2004l[?2004h>     'proposal_id': None,
+[?2004l[?2004h>     'target_names': set(),
+[?2004l[?2004h>     's_ra_deg': None,
+[?2004l[?2004h>     's_dec_deg': None,
+[?2004l[?2004h>     'obs_ids': set()
+[?2004l[?2004h> })
+[?2004l[?2004h> 
+[?2004l[?2004h> for row in tbl_final:
+[?2004l[?2004h>     mous = str(row['member_ous_uid'])
+[?2004l[?2004h>     g = groups[mous]
+[?2004l[?2004h>     g['bands'].add(int(row['band_list']))
+[?2004l[?2004h>     g['spatial_resolutions_arcsec'].add(float(row['spatial_resolution']))
+[?2004l[?2004h>     g['proposal_id'] = str(row['proposal_id'])
+[?2004l[?2004h>     g['target_names'].add(str(row['target_name']))
+[?2004l[?2004h>     g['s_ra_deg'] = float(row['s_ra'])
+[?2004l[?2004h>     g['s_dec_deg'] = float(row['s_dec'])
+[?2004l[?2004h>     g['obs_ids'].add(str(row['obs_id']))
+[?2004l[?2004h> 
+[?2004l[?2004h> observations = []
+[?2004l[?2004h> for mous, g in sorted(groups.items()):
+[?2004l[?2004h>     observations.append({
+[?2004l[?2004h>         'member_ous_uid': mous,
+[?2004l[?2004h>         'project_code': g['proposal_id'],
+[?2004l[?2004h>         'bands': sorted(g['bands']),
+[?2004l[?2004h>         'spatial_resolution_arcsec': min(g['spatial_resolutions_arcsec']),
+[?2004l[?2004h>         'all_spatial_resolutions_arcsec': sorted(g['spatial_resolutions_arcsec']),
+[?2004l[?2004h>         'target_names': sorted(g['target_names']),
+[?2004l[?2004h>         's_ra_deg': g['s_ra_deg'],
+[?2004l[?2004h>         's_dec_deg': g['s_dec_deg'],
+[?2004l[?2004h>         'num_spectral_windows': len(g['obs_ids'])
+[?2004l[?2004h>     })
+[?2004l[?2004h> 
+[?2004l[?2004h> output = {
+[?2004l[?2004h>     'query_description': 'ALMA archive search for public, science observations near HH 212, Band 6 or 7, spatial_resolution < 1 arcsec',
+[?2004l[?2004h>     'target': 'HH 212',
+[?2004l[?2004h>     'resolved_coordinates': {
+[?2004l[?2004h>         'ra_deg': ra_deg,
+[?2004l[?2004h>         'dec_deg': dec_deg
+[?2004l[?2004h>     },
+[?2004l[?2004h>     'search_radius_arcmin': search_radius_arcmin,
+[?2004l[?2004h>     'filters': {
+[?2004l[?2004h>         'public': True,
+[?2004l[?2004h>         'science': True,
+[?2004l[?2004h>         'bands': [6, 7],
+[?2004l[?2004h>         'spatial_resolution_arcsec_max': 1.0
+[?2004l[?2004h>     },
+[?2004l[?2004h>     'num_observations': len(observations),
+[?2004l[?2004h>     'observations': observations
+[?2004l[?2004h> }
+[?2004l[?2004h> 
+[?2004l[?2004h> with open('/app/output.json', 'w') as f:
+[?2004l[?2004h>     json.dump(output, f, indent=2)
+[?2004l[?2004h> 
+[?2004l[?2004h> print('Wrote', len(observations), 'observations to /app/output.json')
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@59b8b9cba996:/app# python3 /app/final.py
+[?2004lWrote 14 observations to /app/output.json
+[?2004hroot@59b8b9cba996:/app# cat /app/output.json
+[?2004l{
+  "query_description": "ALMA archive search for public, science observations near HH 212, Band 6 or 7, spatial_resolution < 1 arcsec",
+  "target": "HH 212",
+  "resolved_coordinates": {
+    "ra_deg": 85.96420833,
+    "dec_deg": -1.04808333
+  },
+  "search_radius_arcmin": 1.0,
+  "filters": {
+    "public": true,
+    "science": true,
+    "bands": [
+      6,
+      7
+    ],
+    "spatial_resolution_arcsec_max": 1.0
+  },
+  "num_observations": 14,
+  "observations": [
+    {
+      "member_ous_uid": "uid://A001/X1273/X1f9",
+      "project_code": "2017.1.00044.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.0316734361630697,
+      "all_spatial_resolutions_arcsec": [
+        0.0316734361630697
+      ],
+      "target_names": [
+        "HH_212"
+      ],
+      "s_ra_deg": 85.96421125000545,
+      "s_dec_deg": -1.0481019444447288,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17b8",
+      "project_code": "2017.1.00712.S",
+      "bands": [
+        6
+      ],
+      "spatial_resolution_arcsec": 0.022781354834911657,
+      "all_spatial_resolutions_arcsec": [
+        0.022781354834911657
+      ],
+      "target_names": [
+        "HH_212"
+      ],
+      "s_ra_deg": 85.96421125001223,
+      "s_dec_deg": -1.0481019444444382,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17ba",
+      "project_code": "2017.1.00712.S",
+      "bands": [
+        6
+      ],
+      "spatial_resolution_arcsec": 0.1489361985467903,
+      "all_spatial_resolutions_arcsec": [
+        0.1489361985467903
+      ],
+      "target_names": [
+        "HH_212"
+      ],
+      "s_ra_deg": 85.96421125004338,
+      "s_dec_deg": -1.0481019444447166,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A001/X1473/Xbe6",
+      "project_code": "2019.1.00086.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.8027864728676456,
+      "all_spatial_resolutions_arcsec": [
+        0.8027864728676456
+      ],
+      "target_names": [
+        "HH212M"
+      ],
+      "s_ra_deg": 85.96421250001843,
+      "s_dec_deg": -1.0481111111112291,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X22",
+      "project_code": "2015.1.00037.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.11296974037381813,
+      "all_spatial_resolutions_arcsec": [
+        0.11296974037381813
+      ],
+      "target_names": [
+        "HH_212"
+      ],
+      "s_ra_deg": 85.96421124998832,
+      "s_dec_deg": -1.0481019444444875,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X42",
+      "project_code": "2015.1.00024.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.014753635301994835,
+      "all_spatial_resolutions_arcsec": [
+        0.014753635301994835
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.9642,
+      "s_dec_deg": -1.0480916666666666,
+      "num_spectral_windows": 6
+    },
+    {
+      "member_ous_uid": "uid://A001/X340/X1f9",
+      "project_code": "2015.1.00041.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.09217021640101315,
+      "all_spatial_resolutions_arcsec": [
+        0.09217021640101315
+      ],
+      "target_names": [
+        "HH212mms"
+      ],
+      "s_ra_deg": 85.9642125000427,
+      "s_dec_deg": -1.0481027777780914,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A001/X362b/Xf37",
+      "project_code": "2023.1.00494.S",
+      "bands": [
+        6
+      ],
+      "spatial_resolution_arcsec": 0.14924825593190996,
+      "all_spatial_resolutions_arcsec": [
+        0.14924825593190996
+      ],
+      "target_names": [
+        "HH212MMS"
+      ],
+      "s_ra_deg": 85.96420833336394,
+      "s_dec_deg": -1.048096666666971,
+      "num_spectral_windows": 8
+    },
+    {
+      "member_ous_uid": "uid://A001/X88f/X259",
+      "project_code": "2016.1.01475.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.09152828751568182,
+      "all_spatial_resolutions_arcsec": [
+        0.09152828751568182
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.96420833333109,
+      "s_dec_deg": -1.0481000000000829,
+      "num_spectral_windows": 13
+    },
+    {
+      "member_ous_uid": "uid://A001/X88f/X25b",
+      "project_code": "2016.1.01475.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.338030740167654,
+      "all_spatial_resolutions_arcsec": [
+        0.338030740167654
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.96420833338408,
+      "s_dec_deg": -1.0481000000004446,
+      "num_spectral_windows": 13
+    },
+    {
+      "member_ous_uid": "uid://A002/X36d874/X11",
+      "project_code": "2011.0.00647.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.47080931157879113,
+      "all_spatial_resolutions_arcsec": [
+        0.47080931157879113
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.96419999999999,
+      "s_dec_deg": -1.0480916666666666,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A002/X36d874/X13",
+      "project_code": "2011.0.00647.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.46249283249648676,
+      "all_spatial_resolutions_arcsec": [
+        0.46249283249648676
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.96420833333333,
+      "s_dec_deg": -1.0481,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A002/X6ac013/X11",
+      "project_code": "2012.1.00997.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.29337548756861065,
+      "all_spatial_resolutions_arcsec": [
+        0.29337548756861065
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.96420833333333,
+      "s_dec_deg": -1.0481,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A002/X7b15a9/X5a",
+      "project_code": "2012.1.00122.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.1423064091216609,
+      "all_spatial_resolutions_arcsec": [
+        0.1423064091216609
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.96439055186667,
+      "s_dec_deg": -1.048172537602811,
+      "num_spectral_windows": 4
+    }
+  ]
+}[?2004hroot@59b8b9cba996:/app# cat << 'EOF' > /app/verify.py
+[?2004l[?2004h> import pyvo
+[?2004l[?2004h> from astropy.coordinates import SkyCoord
+[?2004l[?2004h> import astropy.units as u
+[?2004l[?2004h> 
+[?2004l[?2004h> c = SkyCoord.from_name('HH 212')
+[?2004l[?2004h> print('Coords:', c.ra.deg, c.dec.deg)
+[?2004l[?2004h> 
+[?2004l[?2004h> service = pyvo.dal.TAPService('https://almascience.eso.org/tap')
+[?2004l[?2004h> 
+[?2004l[?2004h> query = f"""
+[?2004l[?2004h> SELECT member_ous_uid, proposal_id, band_list, spatial_resolution, target_name, s_ra, s_dec, science_observation, data_rights
+[?2004l[?2004h> FROM ivoa.obscore
+[?2004l[?2004h> WHERE CONTAINS(POINT('ICRS', s_ra, s_dec), CIRCLE('ICRS', {c.ra.deg}, {c.dec.deg}, 0.0167)) = 1
+[?2004l[?2004h> AND science_observation = 'T'
+[?2004l[?2004h> AND data_rights = 'Public'
+[?2004l[?2004h> """
+[?2004l[?2004h> 
+[?2004l[?2004h> result = service.search(query)
+[?2004l[?2004h> tbl = result.to_table()
+[?2004l[?2004h> print('Total rows:', len(tbl))
+[?2004l[?2004h> 
+[?2004l[?2004h> # Filter band 6/7 and spatial_resolution<1
+[?2004l[?2004h> mask = [(str(b) in ('6','7')) and (float(sr) < 1.0) for b, sr in zip(tbl['band_list'], tbl['spatial_resolution'])]
+[?2004l[?2004h> tbl_f = tbl[mask]
+[?2004l[?2004h> print('Filtered rows:', len(tbl_f))
+[?2004l[?2004h> mous_set = set(str(x) for x in tbl_f['member_ous_uid'])
+[?2004l[?2004h> print('Unique member_ous_uid:', len(mous_set))
+[?2004l[?2004h> for m in sorted(mous_set):
+[?2004l[?2004h>     print(m)
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@59b8b9cba996:/app# python3 /app/verify.py
+[?2004lCoords: 85.96420833 -1.04808333
+Total rows: 144
+Filtered rows: 80
+Unique member_ous_uid: 14
+uid://A001/X1273/X1f9
+uid://A001/X1284/X17b8
+uid://A001/X1284/X17ba
+uid://A001/X1473/Xbe6
+uid://A001/X2de/X22
+uid://A001/X2de/X42
+uid://A001/X340/X1f9
+uid://A001/X362b/Xf37
+uid://A001/X88f/X259
+uid://A001/X88f/X25b
+uid://A002/X36d874/X11
+uid://A002/X36d874/X13
+uid://A002/X6ac013/X11
+uid://A002/X7b15a9/X5a
+[?2004hroot@59b8b9cba996:/app# python3 -c "import json; d=json.load(open('/app/output.json')); print('Valid JSON. Observations:', len(d['observations'])); print('Unique MOUS:', len(set(o['member_ous_uid'] for o in d['observations'])))"
+[?2004lValid JSON. Observations: 14
+Unique MOUS: 14
+[?2004hroot@59b8b9cba996:/app# ls -la /app/output.json
+[?2004l-rw-r--r-- 1 root root 6469 Jul 28 20:37 /app/output.json
+[?2004hroot@59b8b9cba996:/app# 

@@ -1,0 +1,11 @@
+{
+  "analysis": "Alma.query_region supports coordinates, radius, public, and science parameters. Now I'll write a script to perform the actual query and inspect the returned columns.",
+  "plan": "Query the ALMA archive for HH 212 position with a radius (start with 30 arcsec), public=True, science=True. Print the column names and first few rows to understand structure before filtering.",
+  "commands": [
+    {
+      "keystrokes": "cat > /app/explore.py << 'EOF'\nfrom astroquery.alma import Alma\nfrom astropy.coordinates import SkyCoord\nimport astropy.units as u\n\nc = SkyCoord(85.96420833, -1.04808333, unit='deg')\nalma = Alma()\nresult = alma.query_region(c, radius=30*u.arcsec, public=True, science=True)\nprint(type(result))\nprint(len(result))\nprint(result.colnames)\nEOF\npython3 /app/explore.py\n",
+      "duration": 30.0
+    }
+  ],
+  "task_complete": false
+}

@@ -1,0 +1,32 @@
+{
+    "id": "6112429a-3d7b-452c-907f-2150f793cd0c",
+    "started_at": "2026-07-27T18:13:12.950600",
+    "finished_at": "2026-07-27T18:13:58.376642",
+    "n_total_trials": 1,
+    "stats": {
+        "n_trials": 1,
+        "n_errors": 1,
+        "evals": {
+            "terminus-2__claude-sonnet-5__adhoc": {
+                "n_trials": 0,
+                "n_errors": 1,
+                "metrics": [
+                    {
+                        "mean": 0.0
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {},
+                "exception_stats": {
+                    "BadRequestError": [
+                        "alma-HH212-observations__nQiPgyb"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 0,
+        "cost_usd": null
+    }
+}

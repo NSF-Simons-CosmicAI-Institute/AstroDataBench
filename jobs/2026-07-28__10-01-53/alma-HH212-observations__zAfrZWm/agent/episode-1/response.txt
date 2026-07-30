@@ -1,0 +1,10 @@
+{
+  "analysis": "astroquery 0.4.11 and pyvo 1.9.1 are installed. Now I need to resolve HH 212 coordinates and query the ALMA archive.",
+  "plan": "First resolve HH 212 coordinates using astroquery's name resolver (Sesame). Then explore the ALMA TAP service to understand available columns and test a query.",
+  "commands": [
+    {
+      "keystrokes": "python3 << 'EOF'\nfrom astroquery.simbad import Simbad\nresult = Simbad.query_object('HH 212')\nprint(result)\nEOF\n",
+      "duration": 5.0
+    }
+  ]
+}

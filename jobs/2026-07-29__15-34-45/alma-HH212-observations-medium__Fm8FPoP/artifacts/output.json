@@ -1,0 +1,142 @@
+{
+  "target": "HH 212",
+  "query_criteria": {
+    "public": true,
+    "science_observation": true,
+    "bands": [
+      "6",
+      "7"
+    ],
+    "spatial_resolution_arcsec_max": 1.0,
+    "note": "spatial_resolution is the ObsCore synthesized beam size column, one row per member_ous_uid (MOUS)"
+  },
+  "num_observations": 14,
+  "observations": [
+    {
+      "member_ous_uid": "uid://A001/X1273/X1f9",
+      "project_code": "2017.1.00044.S",
+      "band": "7",
+      "spatial_resolution_arcsec": 0.0317,
+      "spatial_resolution_min": 0.0317,
+      "spatial_resolution_max": 0.0317,
+      "target_name": "HH_212"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17b8",
+      "project_code": "2017.1.00712.S",
+      "band": "6",
+      "spatial_resolution_arcsec": 0.0228,
+      "spatial_resolution_min": 0.0228,
+      "spatial_resolution_max": 0.0228,
+      "target_name": "HH_212"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17ba",
+      "project_code": "2017.1.00712.S",
+      "band": "6",
+      "spatial_resolution_arcsec": 0.1489,
+      "spatial_resolution_min": 0.1489,
+      "spatial_resolution_max": 0.1489,
+      "target_name": "HH_212"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1473/Xbe6",
+      "project_code": "2019.1.00086.S",
+      "band": "7",
+      "spatial_resolution_arcsec": 0.8028,
+      "spatial_resolution_min": 0.8028,
+      "spatial_resolution_max": 0.8028,
+      "target_name": "HH212M"
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X22",
+      "project_code": "2015.1.00037.S",
+      "band": "7",
+      "spatial_resolution_arcsec": 0.113,
+      "spatial_resolution_min": 0.113,
+      "spatial_resolution_max": 0.113,
+      "target_name": "HH_212"
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X42",
+      "project_code": "2015.1.00024.S",
+      "band": "7",
+      "spatial_resolution_arcsec": 0.0148,
+      "spatial_resolution_min": 0.0148,
+      "spatial_resolution_max": 0.0148,
+      "target_name": "HH212"
+    },
+    {
+      "member_ous_uid": "uid://A001/X340/X1f9",
+      "project_code": "2015.1.00041.S",
+      "band": "7",
+      "spatial_resolution_arcsec": 0.0922,
+      "spatial_resolution_min": 0.0922,
+      "spatial_resolution_max": 0.0922,
+      "target_name": "HH212mms"
+    },
+    {
+      "member_ous_uid": "uid://A001/X362b/Xf37",
+      "project_code": "2023.1.00494.S",
+      "band": "6",
+      "spatial_resolution_arcsec": 0.1492,
+      "spatial_resolution_min": 0.1492,
+      "spatial_resolution_max": 0.1492,
+      "target_name": "HH212MMS"
+    },
+    {
+      "member_ous_uid": "uid://A001/X88f/X259",
+      "project_code": "2016.1.01475.S",
+      "band": "7",
+      "spatial_resolution_arcsec": 0.0915,
+      "spatial_resolution_min": 0.0915,
+      "spatial_resolution_max": 0.0915,
+      "target_name": "HH212"
+    },
+    {
+      "member_ous_uid": "uid://A001/X88f/X25b",
+      "project_code": "2016.1.01475.S",
+      "band": "7",
+      "spatial_resolution_arcsec": 0.338,
+      "spatial_resolution_min": 0.338,
+      "spatial_resolution_max": 0.338,
+      "target_name": "HH212"
+    },
+    {
+      "member_ous_uid": "uid://A002/X36d874/X11",
+      "project_code": "2011.0.00647.S",
+      "band": "7",
+      "spatial_resolution_arcsec": 0.4708,
+      "spatial_resolution_min": 0.4708,
+      "spatial_resolution_max": 0.4708,
+      "target_name": "HH212"
+    },
+    {
+      "member_ous_uid": "uid://A002/X36d874/X13",
+      "project_code": "2011.0.00647.S",
+      "band": "7",
+      "spatial_resolution_arcsec": 0.4625,
+      "spatial_resolution_min": 0.4625,
+      "spatial_resolution_max": 0.4625,
+      "target_name": "HH212"
+    },
+    {
+      "member_ous_uid": "uid://A002/X6ac013/X11",
+      "project_code": "2012.1.00997.S",
+      "band": "7",
+      "spatial_resolution_arcsec": 0.2934,
+      "spatial_resolution_min": 0.2934,
+      "spatial_resolution_max": 0.2934,
+      "target_name": "HH212"
+    },
+    {
+      "member_ous_uid": "uid://A002/X7b15a9/X5a",
+      "project_code": "2012.1.00122.S",
+      "band": "7",
+      "spatial_resolution_arcsec": 0.1423,
+      "spatial_resolution_min": 0.1423,
+      "spatial_resolution_max": 0.1423,
+      "target_name": "HH212"
+    }
+  ]
+}

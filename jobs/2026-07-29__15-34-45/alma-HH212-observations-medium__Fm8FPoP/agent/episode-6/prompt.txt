@@ -1,0 +1,103 @@
+New Terminal Output:
+
+root@da5c80f7d77e:/app# cat << 'EOF' > /app/final.py
+> from astroquery.alma import Alma
+> import numpy as np
+> from collections import defaultdict
+> import json
+>
+> Alma.archive_url = 'https://almascience.org'
+> result = Alma.query_object('HH 212')
+>
+> groups = defaultdict(list)
+> for row in result:
+>     groups[row['member_ous_uid']].append(row)
+>
+> observations = []
+> for uid, rows in groups.items():
+>     rights = set(str(r['data_rights']) for r in rows)
+>     sci = set(str(r['science_observation']) for r in rows)
+>     if rights != {'Public'}:
+>         continue
+>     if sci != {'T'}:
+>         continue
+>     bands = set(str(r['band_list']) for r in rows)
+>     if len(bands) != 1:
+>         print('WARNING multiple bands for', uid, bands)
+>     band = list(bands)[0]
+>     if band not in ('6','7'):
+>         continue
+>     resolutions = [float(r['spatial_resolution']) for r in rows]
+>     max_res = max(resolutions)
+>     min_res = min(resolutions)
+>     avg_res = sum(resolutions)/len(resolutions)
+>     if max_res >= 1.0:
+>         continue
+>     proposals = set(str(r['proposal_id']) for r in rows)
+>     targets = set(str(r['target_name']) for r in rows)
+>     obs = {
+>         'member_ous_uid': uid,
+>         'project_code': list(proposals)[0] if len(proposals)==1 else list(proposals),
+>         'band': band,
+>         'spatial_resolution_arcsec': round(avg_res, 4),
+>         'spatial_resolution_min': round(min_res,4),
+>         'spatial_resolution_max': round(max_res,4),
+>         'target_name': list(targets)[0] if len(targets)==1 else list(targets),
+>     }
+>     observations.append(obs)
+>
+> observations.sort(key=lambda o: o['member_ous_uid'])
+>
+> output = {
+>     'target': 'HH 212',
+>     'query_criteria': {
+>         'public': True,
+>         'science_observation': True,
+>         'bands': ['6','7'],
+>         'spatial_resolution_arcsec_max': 1.0,
+>         'note': 'spatial_resolution is the ObsCore synthesized beam size column, one row per member_ous_uid (MOUS)'
+>     },
+>     'num_observations': len(observations),
+>     'observations': observations
+> }
+>
+> with open('/app/output.json','w') as f:
+>     json.dump(output, f, indent=2)
+>
+> print('Total MOUS groups:', len(groups))
+> print('Matching observations:', len(observations))
+> for o in observations:
+>     print(o)
+> EOF
+root@da5c80f7d77e:/app# python3 /app/final.py
+Total MOUS groups: 28
+Matching observations: 14
+{'member_ous_uid': np.str_('uid://A001/X1273/X1f9'), 'project_code': '2017.1.00044.S', 'band': '7', 'spatial_resolution_arcsec': 0.0317, 'spatial_resolution_min
+': 0.0317, 'spatial_resolution_max': 0.0317, 'target_name': 'HH_212'}
+{'member_ous_uid': np.str_('uid://A001/X1284/X17b8'), 'project_code': '2017.1.00712.S', 'band': '6', 'spatial_resolution_arcsec': 0.0228, 'spatial_resolution_mi
+n': 0.0228, 'spatial_resolution_max': 0.0228, 'target_name': 'HH_212'}
+{'member_ous_uid': np.str_('uid://A001/X1284/X17ba'), 'project_code': '2017.1.00712.S', 'band': '6', 'spatial_resolution_arcsec': 0.1489, 'spatial_resolution_mi
+n': 0.1489, 'spatial_resolution_max': 0.1489, 'target_name': 'HH_212'}
+{'member_ous_uid': np.str_('uid://A001/X1473/Xbe6'), 'project_code': '2019.1.00086.S', 'band': '7', 'spatial_resolution_arcsec': 0.8028, 'spatial_resolution_min
+': 0.8028, 'spatial_resolution_max': 0.8028, 'target_name': 'HH212M'}
+{'member_ous_uid': np.str_('uid://A001/X2de/X22'), 'project_code': '2015.1.00037.S', 'band': '7', 'spatial_resolution_arcsec': 0.113, 'spatial_resolution_min':
+0.113, 'spatial_resolution_max': 0.113, 'target_name': 'HH_212'}
+{'member_ous_uid': np.str_('uid://A001/X2de/X42'), 'project_code': '2015.1.00024.S', 'band': '7', 'spatial_resolution_arcsec': 0.0148, 'spatial_resolution_min':
+ 0.0148, 'spatial_resolution_max': 0.0148, 'target_name': 'HH212'}
+{'member_ous_uid': np.str_('uid://A001/X340/X1f9'), 'project_code': '2015.1.00041.S', 'band': '7', 'spatial_resolution_arcsec': 0.0922, 'spatial_resolution_min'
+: 0.0922, 'spatial_resolution_max': 0.0922, 'target_name': 'HH212mms'}
+{'member_ous_uid': np.str_('uid://A001/X362b/Xf37'), 'project_code': '2023.1.00494.S', 'band': '6', 'spatial_resolution_arcsec': 0.1492, 'spatial_resolution_min
+': 0.1492, 'spatial_resolution_max': 0.1492, 'target_name': 'HH212MMS'}
+{'member_ous_uid': np.str_('uid://A001/X88f/X259'), 'project_code': '2016.1.01475.S', 'band': '7', 'spatial_resolution_arcsec': 0.0915, 'spatial_resolution_min'
+: 0.0915, 'spatial_resolution_max': 0.0915, 'target_name': 'HH212'}
+{'member_ous_uid': np.str_('uid://A001/X88f/X25b'), 'project_code': '2016.1.01475.S', 'band': '7', 'spatial_resolution_arcsec': 0.338, 'spatial_resolution_min':
+ 0.338, 'spatial_resolution_max': 0.338, 'target_name': 'HH212'}
+{'member_ous_uid': np.str_('uid://A002/X36d874/X11'), 'project_code': '2011.0.00647.S', 'band': '7', 'spatial_resolution_arcsec': 0.4708, 'spatial_resolution_mi
+n': 0.4708, 'spatial_resolution_max': 0.4708, 'target_name': 'HH212'}
+{'member_ous_uid': np.str_('uid://A002/X36d874/X13'), 'project_code': '2011.0.00647.S', 'band': '7', 'spatial_resolution_arcsec': 0.4625, 'spatial_resolution_mi
+n': 0.4625, 'spatial_resolution_max': 0.4625, 'target_name': 'HH212'}
+{'member_ous_uid': np.str_('uid://A002/X6ac013/X11'), 'project_code': '2012.1.00997.S', 'band': '7', 'spatial_resolution_arcsec': 0.2934, 'spatial_resolution_mi
+n': 0.2934, 'spatial_resolution_max': 0.2934, 'target_name': 'HH212'}
+{'member_ous_uid': np.str_('uid://A002/X7b15a9/X5a'), 'project_code': '2012.1.00122.S', 'band': '7', 'spatial_resolution_arcsec': 0.1423, 'spatial_resolution_mi
+n': 0.1423, 'spatial_resolution_max': 0.1423, 'target_name': 'HH212'}
+root@da5c80f7d77e:/app#

@@ -1,0 +1,15 @@
+{
+  "analysis": "The output.json file is valid JSON with all required keys, contains 14 unique MOUS observations (num_observations matches len(observations) and unique count), confirming correct deduplication. The task appears complete: coordinates resolved via SIMBAD, ALMA TAP query performed with position search, filtered by band 6/7 and spatial_resolution<1, grouped by member_ous_uid, and written to /app/output.json with the exact required schema.",
+  "plan": "Do a final check of the complete file content to ensure everything is properly formatted, then confirm task completion.",
+  "commands": [
+    {
+      "keystrokes": "cat /app/output.json | python3 -m json.tool > /dev/null && echo 'JSON is well-formed' && wc -l /app/output.json\n",
+      "duration": 3.0
+    },
+    {
+      "keystrokes": "python3 -c \"import json; d=json.load(open('/app/output.json')); print(d['summary'])\"\n",
+      "duration": 3.0
+    }
+  ],
+  "task_complete": true
+}

@@ -1,0 +1,20 @@
+New Terminal Output:
+
+root@0923ce879be9:/app# cat > /app/explore4.py << 'EOF'
+> from astroquery.alma import Alma
+> from astropy.coordinates import SkyCoord
+> import astropy.units as u
+>
+> c = SkyCoord(85.96420833, -1.04808333, unit='deg')
+> alma = Alma()
+> for r in [10, 20, 30, 60, 120]:
+>     result = alma.query_region(c, radius=r*u.arcsec, public=True, science=True)
+>     print(r, len(result), len(set(result['member_ous_uid'])))
+> EOF
+root@0923ce879be9:/app# python3 /app/explore4.py
+10 144 28
+20 144 28
+30 144 28
+60 144 28
+120 144 28
+root@0923ce879be9:/app#

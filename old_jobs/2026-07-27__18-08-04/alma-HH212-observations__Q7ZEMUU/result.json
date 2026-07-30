@@ -1,0 +1,100 @@
+{
+    "id": "338ba2ac-3bd5-4472-b4e9-c2ed3fa38790",
+    "task_name": "STABLE/alma-HH212-observations",
+    "trial_name": "alma-HH212-observations__Q7ZEMUU",
+    "trial_uri": "file:///Users/zoietelkamp/Library/Mobile%20Documents/com~apple~CloudDocs/Research/CosmicAI/benchmark/jobs/2026-07-27__18-08-04/alma-HH212-observations__Q7ZEMUU",
+    "task_id": {
+        "path": "alma-HH212-observations"
+    },
+    "source": null,
+    "task_checksum": "b59d018b0d2375716ed14fd6ee746dcf3b3aeee6ea7d7cf27a730caf6cf8f339",
+    "config": {
+        "task": {
+            "path": "alma-HH212-observations",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "alma-HH212-observations__Q7ZEMUU",
+        "trials_dir": "jobs/2026-07-27__18-08-04",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "oracle",
+            "import_path": null,
+            "model_name": null,
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "a6638688-5fad-4382-b213-a7e0807756f7"
+    },
+    "agent_info": {
+        "name": "oracle",
+        "version": "1.0.0",
+        "model_info": null
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-07-27T22:08:05.993444Z",
+    "finished_at": "2026-07-27T22:08:37.625575Z",
+    "environment_setup": {
+        "started_at": "2026-07-27T22:08:06.017634Z",
+        "finished_at": "2026-07-27T22:08:11.504859Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-07-27T22:08:11.504920Z",
+        "finished_at": "2026-07-27T22:08:11.504971Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-07-27T22:08:11.505033Z",
+        "finished_at": "2026-07-27T22:08:16.292195Z"
+    },
+    "verifier": {
+        "started_at": "2026-07-27T22:08:16.378887Z",
+        "finished_at": "2026-07-27T22:08:27.115119Z"
+    },
+    "step_results": null
+}

@@ -1,0 +1,41 @@
+New Terminal Output:
+root@da5c80f7d77e:/app# python3 -c "import astroquery; print(astroquery.__version__)"
+0.4.11
+root@da5c80f7d77e:/app# python3 -c "from astroquery.alma import Alma; print(Alma)"
+<astroquery.alma.core.AlmaClass object at 0xffff87c88590>
+root@da5c80f7d77e:/app#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

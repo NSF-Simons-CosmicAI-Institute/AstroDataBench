@@ -1,0 +1,41 @@
+New Terminal Output:
+root@f1b01bdb67bf:/app# python3 -c "import astroquery, pyvo; print(astroquery.__version__, pyvo.__version__)"
+0.4.11 1.9.1
+root@f1b01bdb67bf:/app#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

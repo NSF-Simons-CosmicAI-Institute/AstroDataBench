@@ -1,0 +1,17 @@
+The direct TAP query cross-validates perfectly with the astroquery.alma results - same 144 total rows, 80 filtered rows, and identical 14 unique member_ous_uid values. The output.json file is verified correct.
+
+{
+  "analysis": "Cross-validation successful! The direct pyvo TAP query against the ALMA ObsCore table returns identical results to the astroquery.alma.Alma.query_region approach: 144 total rows, 80 rows after band/resolution filtering, and exactly the same 14 unique member_ous_uid values. This confirms the output.json file is accurate and complete. The task requirements have been met:\n- Used ALMA Science Archive (via TAP/ObsCore)\n- Searched by resolved coordinates of HH 212 (85.96420833, -1.04808333) with explicit radius (1 arcmin / 0.0167 deg)\n- Filtered for public, science observations\n- Filtered for Band 6 or 7\n- Filtered for spatial_resolution < 1 arcsec\n- Deduplicated by member_ous_uid (one row per MOUS in output)\n- Included project code, band(s), and spatial resolution for each observation\n\nThe output.json file contains 14 observations, each with member_ous_uid, project_code, bands, spatial_resolution_arcsec, and additional useful metadata.",
+  "plan": "The task is complete. Let me do a final verification that the output.json file is valid JSON and properly saved.",
+  "commands": [
+    {
+      "keystrokes": "python3 -c \"import json; d=json.load(open('/app/output.json')); print('Valid JSON. Observations:', len(d['observations'])); print('Unique MOUS:', len(set(o['member_ous_uid'] for o in d['observations'])))\"\n",
+      "duration": 3.0
+    },
+    {
+      "keystrokes": "ls -la /app/output.json\n",
+      "duration": 2.0
+    }
+  ],
+  "task_complete": true
+}

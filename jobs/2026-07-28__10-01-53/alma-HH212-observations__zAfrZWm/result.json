@@ -1,0 +1,126 @@
+{
+    "id": "949f20f5-f521-4f32-ac0d-4f60bb5fe51d",
+    "task_name": "STABLE/alma-HH212-observations",
+    "trial_name": "alma-HH212-observations__zAfrZWm",
+    "trial_uri": "file:///Users/zoietelkamp/Library/Mobile%20Documents/com~apple~CloudDocs/Research/CosmicAI/benchmark/jobs/2026-07-28__10-01-53/alma-HH212-observations__zAfrZWm",
+    "task_id": {
+        "path": "alma-HH212-observations"
+    },
+    "source": null,
+    "task_checksum": "7fb89c37e457db44b764656fc235627ad862af4bbfdab3ab829e830daba8bfbb",
+    "config": {
+        "task": {
+            "path": "alma-HH212-observations",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "alma-HH212-observations__zAfrZWm",
+        "trials_dir": "jobs/2026-07-28__10-01-53",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "anthropic/claude-sonnet-5",
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "temperature": 1
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "527666d6-474c-4363-b98a-9bd5035f7e77"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "claude-sonnet-5",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 177296,
+        "n_cache_tokens": 153626,
+        "n_output_tokens": 11218,
+        "cost_usd": 0.20207070000000002,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 16,
+            "api_request_times_msec": [
+                5231.043815612793,
+                3243.617057800293,
+                3334.972143173218,
+                5081.9666385650635,
+                7213.570117950439,
+                2053.3721446990967,
+                7940.498828887939,
+                4381.44588470459,
+                22479.878187179565,
+                14373.991966247559,
+                14504.540920257568,
+                5800.677061080933,
+                19031.67200088501,
+                4334.027051925659,
+                5521.509885787964,
+                6360.904932022095
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-07-28T14:01:54.160242Z",
+    "finished_at": "2026-07-28T14:07:14.652113Z",
+    "environment_setup": {
+        "started_at": "2026-07-28T14:01:54.177877Z",
+        "finished_at": "2026-07-28T14:01:56.022091Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-07-28T14:01:56.022160Z",
+        "finished_at": "2026-07-28T14:02:04.170565Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-07-28T14:02:04.170698Z",
+        "finished_at": "2026-07-28T14:06:46.429378Z"
+    },
+    "verifier": {
+        "started_at": "2026-07-28T14:06:46.534369Z",
+        "finished_at": "2026-07-28T14:07:04.081117Z"
+    },
+    "step_results": null
+}

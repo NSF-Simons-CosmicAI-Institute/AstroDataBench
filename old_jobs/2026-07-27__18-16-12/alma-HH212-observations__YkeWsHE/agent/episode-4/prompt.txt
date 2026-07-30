@@ -1,0 +1,33 @@
+New Terminal Output:
+
+root@444bbc37f763:/app# python3 -c "from astroquery.alma import Alma; help(Alma.query_region)"
+Help on function query_region in module astroquery.utils.process_asyncs:
+
+query_region(self, *args, **kwargs)
+    Queries the service and returns a table object.
+
+    Query the ALMA archive with a source name and radius
+
+    Parameters
+    ----------
+    coordinates : str / `astropy.coordinates`
+        the identifier or coordinates around which to query.
+    radius : str / `~astropy.units.Quantity`, optional
+        the radius of the region
+    public : bool
+        True to return only public datasets, False to return private only,
+        None to return both
+    science : bool
+        True to return only science datasets, False to return only
+        calibration, None to return both
+    payload : dict
+        Dictionary of additional keywords.  See `help`.
+    enhanced_results : bool
+        True to return a table with quantities instead of just values. It
+        also returns the footprints as `regions` objects.
+
+    Returns
+    -------
+    table : A `~astropy.table.Table` object.
+
+root@444bbc37f763:/app#

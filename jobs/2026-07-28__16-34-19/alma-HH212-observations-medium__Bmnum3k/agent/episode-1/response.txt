@@ -1,0 +1,10 @@
+{
+  "analysis": "astroquery 0.4.11 and pyvo 1.9.1 are installed. The SkyCoord.from_name('HH 212') command is running - it needs network access to resolve the name via CDS/Sesame.",
+  "plan": "Wait for the coordinate resolution to complete. Then proceed to build the ALMA query using astroquery.alma or pyvo TAP directly against ObsCore.",
+  "commands": [
+    {
+      "keystrokes": "",
+      "duration": 10.0
+    }
+  ]
+}

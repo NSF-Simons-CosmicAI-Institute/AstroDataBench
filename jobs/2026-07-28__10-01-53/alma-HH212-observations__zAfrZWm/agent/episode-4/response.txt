@@ -1,0 +1,10 @@
+{
+  "analysis": "Got the full ObsCore column list. Key columns: target_name, s_ra, s_dec, member_ous_uid, proposal_id, band_list, spatial_resolution, qa2_passed, science_observation, data_rights. Now I'll build a full query with positional cone search and filters.",
+  "plan": "Query using ADQL with CONTAINS/POINT for cone search around HH 212 coordinates with a reasonable radius (e.g., 30 arcsec), filtering for science_observation='T', data_rights='Public', band_list containing 6 or 7, spatial_resolution < 1. Then group by member_ous_uid in Python.",
+  "commands": [
+    {
+      "keystrokes": "python3 << 'EOF'\nfrom astroquery.alma import Alma\nalma = Alma()\nra, dec = 85.96420833333333, -1.0480833333333335\nradius = 30.0  # arcsec\nquery = f\"\"\"\nSELECT target_name, s_ra, s_dec, member_ous_uid, proposal_id, band_list, spatial_resolution, qa2_passed, science_observation, data_rights\nFROM ivoa.obscore\nWHERE CONTAINS(POINT('ICRS', s_ra, s_dec), CIRCLE('ICRS', {ra}, {dec}, {radius/3600.0})) = 1\n\"\"\"\nresult = alma.query_tap(query)\ntab = result.to_table()\nprint(len(tab))\nprint(tab)\nEOF\n",
+      "duration": 15.0
+    }
+  ]
+}

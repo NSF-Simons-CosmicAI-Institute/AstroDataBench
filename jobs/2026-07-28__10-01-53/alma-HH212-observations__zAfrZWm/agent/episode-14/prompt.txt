@@ -1,0 +1,12 @@
+New Terminal Output:
+
+root@f1b01bdb67bf:/app# python3 -c "import json; d=json.load(open('/app/output.json')); print('Valid JSON'); print('Keys:', list(d.keys())); print('num_observat
+ions:', d['num_observations']); print('len(observations):', len(d['observations'])); print('unique mous:', len(set(o['member_ous_uid'] for o in d['observations'
+])))"
+Valid JSON
+Keys: ['target_name', 'resolved_ra_deg', 'resolved_dec_deg', 'search_radius_arcsec', 'band_filter', 'max_spatial_resolution_arcsec', 'num_observations', 'observ
+ations', 'summary']
+num_observations: 14
+len(observations): 14
+unique mous: 14
+root@f1b01bdb67bf:/app#

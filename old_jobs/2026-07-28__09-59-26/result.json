@@ -1,0 +1,32 @@
+{
+    "id": "fc1ddfbe-52e1-4b88-95ae-622bb2a530a4",
+    "started_at": "2026-07-28T09:59:26.966381",
+    "finished_at": "2026-07-28T10:00:12.310254",
+    "n_total_trials": 1,
+    "stats": {
+        "n_trials": 1,
+        "n_errors": 1,
+        "evals": {
+            "terminus-2__clause-sonnet-5__adhoc": {
+                "n_trials": 0,
+                "n_errors": 1,
+                "metrics": [
+                    {
+                        "mean": 0.0
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {},
+                "exception_stats": {
+                    "NotFoundError": [
+                        "alma-HH212-observations__r2yNXeY"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 0,
+        "cost_usd": null
+    }
+}

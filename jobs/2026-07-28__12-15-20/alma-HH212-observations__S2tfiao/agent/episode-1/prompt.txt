@@ -1,0 +1,41 @@
+New Terminal Output:
+root@c6ffb4bc816b:/app# python3 -c "import astroquery; print(astroquery.__version__)"
+0.4.11
+root@c6ffb4bc816b:/app# python3 -c "import pyvo; print(pyvo.__version__)"
+1.9.1
+root@c6ffb4bc816b:/app# python3 -c "from astropy.coordinates import SkyCoord; c = SkyCoord.from_name('HH 212'); print(c.ra.deg, c.dec.deg)"
+85.96420833 -1.04808333
+root@c6ffb4bc816b:/app#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

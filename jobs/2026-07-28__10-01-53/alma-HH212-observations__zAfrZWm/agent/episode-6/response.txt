@@ -1,0 +1,10 @@
+{
+  "analysis": "Query returned 137 rows for cone search within 30 arcsec. Data includes multiple MOUS. Now I need to see the band_list column format and build the full filtering/aggregation script.",
+  "plan": "Inspect band_list values, then write complete Python script to filter by band 6/7, spatial_resolution<1, aggregate by member_ous_uid taking min resolution and unique bands, and write output.json.",
+  "commands": [
+    {
+      "keystrokes": "python3 << 'EOF'\nfrom astroquery.alma import Alma\nalma = Alma()\nra, dec = 85.96420833333333, -1.0480833333333335\nradius = 30.0\nquery = f\"\"\"\nSELECT target_name, s_ra, s_dec, member_ous_uid, proposal_id, band_list, spatial_resolution, qa2_passed, science_observation, data_rights\nFROM ivoa.obscore\nWHERE CONTAINS(POINT('ICRS', s_ra, s_dec), CIRCLE('ICRS', {ra}, {dec}, {radius/3600.0})) = 1\n\"\"\"\nresult = alma.query_tap(query)\ntab = result.to_table()\nimport numpy as np\nprint(set(tab['band_list']))\nprint(set(tab['science_observation']))\nprint(set(tab['data_rights']))\nEOF\n",
+      "duration": 15.0
+    }
+  ]
+}

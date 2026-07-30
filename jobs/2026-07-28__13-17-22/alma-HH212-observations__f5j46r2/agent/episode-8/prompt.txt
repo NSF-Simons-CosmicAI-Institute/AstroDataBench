@@ -1,0 +1,31 @@
+New Terminal Output:
+
+root@0923ce879be9:/app# cat > /app/explore5.py << 'EOF'
+> from astroquery.alma import Alma
+> from astropy.coordinates import SkyCoord
+> import astropy.units as u
+> import numpy as np
+>
+> c = SkyCoord(85.96420833, -1.04808333, unit='deg')
+> alma = Alma()
+> result = alma.query_region(c, radius=30*u.arcsec, public=True, science=True)
+>
+> # check per-MOUS consistency
+> import collections
+> mous_groups = collections.defaultdict(list)
+> for row in result:
+>     mous_groups[row['member_ous_uid']].append(row)
+>
+> for mous, rows in list(mous_groups.items())[:5]:
+>     bands = set(r['band_list'] for r in rows)
+>     qa2 = set(r['qa2_passed'] for r in rows)
+>     targets = set(r['target_name'] for r in rows)
+>     print(mous, bands, qa2, targets, len(rows))
+> EOF
+root@0923ce879be9:/app# python3 /app/explore5.py
+uid://A001/X1273/X1f9 {np.str_('7')} {np.str_('T')} {np.str_('HH_212')} 4
+uid://A001/X1465/X3b5e {np.str_('3')} {np.str_('T')} {np.str_('HH_212')} 4
+uid://A002/X36d874/Xf {np.str_('9')} {np.str_('T')} {np.str_('HH212')} 4
+uid://A002/X36d874/X13 {np.str_('7')} {np.str_('T')} {np.str_('HH212')} 4
+uid://A002/X36d874/X11 {np.str_('7')} {np.str_('T')} {np.str_('HH212')} 4
+root@0923ce879be9:/app#

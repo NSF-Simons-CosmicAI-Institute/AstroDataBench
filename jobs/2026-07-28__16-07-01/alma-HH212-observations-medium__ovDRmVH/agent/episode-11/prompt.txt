@@ -1,0 +1,39 @@
+Previous response had warnings:
+WARNINGS: - Extra text detected before JSON object
+
+New Terminal Output:
+
+root@44351a46cfad:/app# cat /app/output.json | python3 -m json.tool | tail -30
+            "project_code": "2011.0.00647.S",
+            "target_name": "HH212",
+            "bands": [
+                "7"
+            ],
+            "spatial_resolution_arcsec": 0.46249283249648676,
+            "obs_id": "uid://A002/X36d874/X13.source.HH212.spw.17"
+        },
+        {
+            "member_ous_uid": "uid://A002/X6ac013/X11",
+            "project_code": "2012.1.00997.S",
+            "target_name": "HH212",
+            "bands": [
+                "7"
+            ],
+            "spatial_resolution_arcsec": 0.29337548756861065,
+            "obs_id": "uid://A002/X6ac013/X11.source.HH212.spw.17"
+        },
+        {
+            "member_ous_uid": "uid://A002/X7b15a9/X5a",
+            "project_code": "2012.1.00122.S",
+            "target_name": "HH212",
+            "bands": [
+                "7"
+            ],
+            "spatial_resolution_arcsec": 0.1423064091216609,
+            "obs_id": "uid://A002/X7b15a9/X5a.source.HH212.spw.17"
+        }
+    ]
+}
+root@44351a46cfad:/app# wc -l /app/output.json
+159 /app/output.json
+root@44351a46cfad:/app#

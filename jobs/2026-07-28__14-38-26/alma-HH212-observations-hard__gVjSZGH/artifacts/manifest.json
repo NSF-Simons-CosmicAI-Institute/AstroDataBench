@@ -1,0 +1,8 @@
+[
+  {
+    "source": "/app/answer.md",
+    "destination": "artifacts/answer.md",
+    "type": "file",
+    "status": "ok"
+  }
+]

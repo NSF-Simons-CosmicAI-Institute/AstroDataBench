@@ -1,0 +1,8 @@
+[
+  {
+    "source": "/app/output.json",
+    "destination": "artifacts/output.json",
+    "type": "file",
+    "status": "failed"
+  }
+]

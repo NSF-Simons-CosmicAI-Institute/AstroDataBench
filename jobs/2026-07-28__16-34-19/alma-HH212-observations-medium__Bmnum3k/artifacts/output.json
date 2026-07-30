@@ -1,0 +1,259 @@
+{
+  "query_description": "ALMA archive search for public, science observations near HH 212, Band 6 or 7, spatial_resolution < 1 arcsec",
+  "target": "HH 212",
+  "resolved_coordinates": {
+    "ra_deg": 85.96420833,
+    "dec_deg": -1.04808333
+  },
+  "search_radius_arcmin": 1.0,
+  "filters": {
+    "public": true,
+    "science": true,
+    "bands": [
+      6,
+      7
+    ],
+    "spatial_resolution_arcsec_max": 1.0
+  },
+  "num_observations": 14,
+  "observations": [
+    {
+      "member_ous_uid": "uid://A001/X1273/X1f9",
+      "project_code": "2017.1.00044.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.0316734361630697,
+      "all_spatial_resolutions_arcsec": [
+        0.0316734361630697
+      ],
+      "target_names": [
+        "HH_212"
+      ],
+      "s_ra_deg": 85.96421125000545,
+      "s_dec_deg": -1.0481019444447288,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17b8",
+      "project_code": "2017.1.00712.S",
+      "bands": [
+        6
+      ],
+      "spatial_resolution_arcsec": 0.022781354834911657,
+      "all_spatial_resolutions_arcsec": [
+        0.022781354834911657
+      ],
+      "target_names": [
+        "HH_212"
+      ],
+      "s_ra_deg": 85.96421125001223,
+      "s_dec_deg": -1.0481019444444382,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17ba",
+      "project_code": "2017.1.00712.S",
+      "bands": [
+        6
+      ],
+      "spatial_resolution_arcsec": 0.1489361985467903,
+      "all_spatial_resolutions_arcsec": [
+        0.1489361985467903
+      ],
+      "target_names": [
+        "HH_212"
+      ],
+      "s_ra_deg": 85.96421125004338,
+      "s_dec_deg": -1.0481019444447166,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A001/X1473/Xbe6",
+      "project_code": "2019.1.00086.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.8027864728676456,
+      "all_spatial_resolutions_arcsec": [
+        0.8027864728676456
+      ],
+      "target_names": [
+        "HH212M"
+      ],
+      "s_ra_deg": 85.96421250001843,
+      "s_dec_deg": -1.0481111111112291,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X22",
+      "project_code": "2015.1.00037.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.11296974037381813,
+      "all_spatial_resolutions_arcsec": [
+        0.11296974037381813
+      ],
+      "target_names": [
+        "HH_212"
+      ],
+      "s_ra_deg": 85.96421124998832,
+      "s_dec_deg": -1.0481019444444875,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X42",
+      "project_code": "2015.1.00024.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.014753635301994835,
+      "all_spatial_resolutions_arcsec": [
+        0.014753635301994835
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.9642,
+      "s_dec_deg": -1.0480916666666666,
+      "num_spectral_windows": 6
+    },
+    {
+      "member_ous_uid": "uid://A001/X340/X1f9",
+      "project_code": "2015.1.00041.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.09217021640101315,
+      "all_spatial_resolutions_arcsec": [
+        0.09217021640101315
+      ],
+      "target_names": [
+        "HH212mms"
+      ],
+      "s_ra_deg": 85.9642125000427,
+      "s_dec_deg": -1.0481027777780914,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A001/X362b/Xf37",
+      "project_code": "2023.1.00494.S",
+      "bands": [
+        6
+      ],
+      "spatial_resolution_arcsec": 0.14924825593190996,
+      "all_spatial_resolutions_arcsec": [
+        0.14924825593190996
+      ],
+      "target_names": [
+        "HH212MMS"
+      ],
+      "s_ra_deg": 85.96420833336394,
+      "s_dec_deg": -1.048096666666971,
+      "num_spectral_windows": 8
+    },
+    {
+      "member_ous_uid": "uid://A001/X88f/X259",
+      "project_code": "2016.1.01475.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.09152828751568182,
+      "all_spatial_resolutions_arcsec": [
+        0.09152828751568182
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.96420833333109,
+      "s_dec_deg": -1.0481000000000829,
+      "num_spectral_windows": 13
+    },
+    {
+      "member_ous_uid": "uid://A001/X88f/X25b",
+      "project_code": "2016.1.01475.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.338030740167654,
+      "all_spatial_resolutions_arcsec": [
+        0.338030740167654
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.96420833338408,
+      "s_dec_deg": -1.0481000000004446,
+      "num_spectral_windows": 13
+    },
+    {
+      "member_ous_uid": "uid://A002/X36d874/X11",
+      "project_code": "2011.0.00647.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.47080931157879113,
+      "all_spatial_resolutions_arcsec": [
+        0.47080931157879113
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.96419999999999,
+      "s_dec_deg": -1.0480916666666666,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A002/X36d874/X13",
+      "project_code": "2011.0.00647.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.46249283249648676,
+      "all_spatial_resolutions_arcsec": [
+        0.46249283249648676
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.96420833333333,
+      "s_dec_deg": -1.0481,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A002/X6ac013/X11",
+      "project_code": "2012.1.00997.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.29337548756861065,
+      "all_spatial_resolutions_arcsec": [
+        0.29337548756861065
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.96420833333333,
+      "s_dec_deg": -1.0481,
+      "num_spectral_windows": 4
+    },
+    {
+      "member_ous_uid": "uid://A002/X7b15a9/X5a",
+      "project_code": "2012.1.00122.S",
+      "bands": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.1423064091216609,
+      "all_spatial_resolutions_arcsec": [
+        0.1423064091216609
+      ],
+      "target_names": [
+        "HH212"
+      ],
+      "s_ra_deg": 85.96439055186667,
+      "s_dec_deg": -1.048172537602811,
+      "num_spectral_windows": 4
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+New Terminal Output:
+
+root@444bbc37f763:/app# python3 << 'EOF'
+> from astroquery.alma import Alma
+> from astropy.coordinates import SkyCoord
+> import astropy.units as u
+>
+> c = SkyCoord(85.96420833, -1.04808333, unit='deg')
+> result = Alma.query_region(c, radius=10*u.arcsec, public=True, science=True)
+> print(type(result))
+> print(len(result))
+> print(result.colnames)
+> EOF
+<class 'astropy.table.table.Table'>
+144
+['pol_states', 'obs_publisher_did', 'obs_collection', 'facility_name', 'instrument_name', 'obs_id', 'dataproduct_type', 'calib_level', 'collections', 'target_na
+me', 's_ra', 's_dec', 's_fov', 's_region', 's_xel1', 's_xel2', 'em_xel', 't_xel', 'pol_xel', 's_resolution', 't_min', 't_max', 't_exptime', 't_resolution', 'em_
+min', 'em_max', 'em_res_power', 'sensitivity_10kms', 'cont_sensitivity_bandwidth', 'pwv', 'group_ous_uid', 'member_ous_uid', 'asdm_uid', 'obs_title', 'type', 's
+can_intent', 'science_observation', 'spatial_scale_max', 'qa2_passed', 'bib_reference', 'science_keyword', 'scientific_category', 'pi_userid', 'pi_name', 'spect
+ral_resolution', 'lastModified', 'o_ucd', 'access_url', 'access_format', 'access_estsize', 'proposal_id', 'data_rights', 'gal_longitude', 'gal_latitude', 'band_
+list', 'em_resolution', 'bandwidth', 'antenna_arrays', 'is_mosaic', 'obs_release_date', 'spatial_resolution', 'frequency_support', 'frequency', 'velocity_resolu
+tion', 'obs_creator_name', 'pub_title', 'first_author', 'authors', 'pub_abstract', 'publication_year', 'proposal_abstract', 'schedblock_name', 'proposal_authors
+']
+root@444bbc37f763:/app#

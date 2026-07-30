@@ -1,0 +1,10 @@
+{
+  "analysis": "Command is still running - waiting for output.",
+  "plan": "Wait for the query to complete and see results.",
+  "commands": [
+    {
+      "keystrokes": "",
+      "duration": 15.0
+    }
+  ]
+}

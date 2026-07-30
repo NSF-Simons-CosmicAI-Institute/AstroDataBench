@@ -1,0 +1,7 @@
+{
+  "analysis": "Data structure confirmed: target_name='HH_212', band_list is per-row band number, spatial_resolution in arcsec, member_ous_uid identifies MOUS, proposal_id is project code, qa2_passed is T/F string. Coordinates match well (85.9642, -1.0481). Now I have enough info to build the full filtering script.",
+  "plan": "Write a complete Python script that: 1) queries ALMA with radius covering the region (use larger radius to be safe, e.g. 30 arcsec), 2) filters science_observation, public, band in [6,7], spatial_resolution<1.0, 3) groups by member_ous_uid taking min spatial_resolution and first values for other fields, 4) writes output.json.",
+  "commands": [
+    {"keystrokes": "python3 << 'EOF'\nfrom astroquery.alma import Alma\nfrom astropy.coordinates import SkyCoord\nimport astropy.units as u\n\nc = SkyCoord(85.96420833, -1.04808333, unit='deg')\nresult = Alma.query_region(c, radius=30*u.arcsec, public=True, science=True)\nprint(len(result))\nimport numpy as np\nprint(set(result['band_list']))\nprint(set(result['qa2_passed']))\nprint(len(set(result['member_ous_uid'])))\nEOF\n", "duration": 15.0}
+  ]
+}

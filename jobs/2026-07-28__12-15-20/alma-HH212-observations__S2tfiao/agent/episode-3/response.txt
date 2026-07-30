@@ -1,0 +1,10 @@
+{
+  "analysis": "Now understand data structure: each row represents a science_observation with target_name, s_ra/s_dec, member_ous_uid, band_list (integer), spatial_resolution (float, arcsec), qa2_passed ('T'/'F'), science_observation ('T'/'F'), data_rights ('Public'/'Proprietary'), proposal_id. Need to filter rows: data_rights=='Public', science_observation=='T', band_list in {6,7}, spatial_resolution<1.0 Then group by member_ous_uid, taking best (min) spatial_resolution, collecting all bands for that MOUS, and other info.",
+  "plan": "Write a full Python script to perform the query, apply filters, group by member_ous_uid, build the observations list according to schema, and write output.json. First check unique bands per MOUS to understand if grouping needs multiple bands, then execute full script.",
+  "commands": [
+    {
+      "keystrokes": "python3 << 'EOF'\nfrom astroquery.alma import Alma\nimport astropy.units as u\nfrom astropy.coordinates import SkyCoord\nimport numpy as np\nAlma.archive_url = 'https://almascience.eso.org'\nc = SkyCoord(85.96420833, -1.04808333, unit='deg')\nresult = Alma.query_region(c, radius=30*u.arcsec)\nprint(set(result['band_list'].data.tolist()))\nprint(set(result['science_observation'].data.tolist()))\nprint(set(result['data_rights'].data.tolist()))\nprint(set(result['qa2_passed'].data.tolist()))\nmous_bands = {}\nfor row in result:\n    m = row['member_ous_uid']\n    mous_bands.setdefault(m, set()).add(row['band_list'])\nfor k,v in mous_bands.items():\n    print(k, v)\nEOF\n",
+      "duration": 15.0
+    }
+  ]
+}

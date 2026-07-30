@@ -1,0 +1,6 @@
+Skipping image OS validation for hb__stable-alma-hh212-observations: docker inspect returned 1
+Unknown Error in LLM interaction: litellm.NotFoundError: AnthropicException - {"type":"error","error":{"type":"not_found_error","message":"model: clause-sonnet-5"},"request_id":"req_011CdUZQ9XcJCtHkdnkNZeYj"}
+Unknown Error in LLM interaction: litellm.NotFoundError: AnthropicException - {"type":"error","error":{"type":"not_found_error","message":"model: clause-sonnet-5"},"request_id":"req_011CdUZQnSNkDEy7mKHX44B7"}
+Unknown Error in LLM interaction: litellm.NotFoundError: AnthropicException - {"type":"error","error":{"type":"not_found_error","message":"model: clause-sonnet-5"},"request_id":"req_011CdUZRRbH7JTJxc36KuPCY"}
+Trajectory dumped to jobs/2026-07-28__09-47-05/alma-HH212-observations__sMH5yoC/agent/trajectory.json
+Trial alma-HH212-observations__sMH5yoC failed: litellm.NotFoundError: AnthropicException - {"type":"error","error":{"type":"not_found_error","message":"model: clause-sonnet-5"},"request_id":"req_011CdUZRRbH7JTJxc36KuPCY"}

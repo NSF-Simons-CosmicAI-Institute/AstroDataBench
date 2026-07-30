@@ -1,0 +1,32 @@
+{
+    "id": "b000c9a0-6ee9-420a-9258-f691a32a1c13",
+    "started_at": "2026-07-28T15:02:06.593936",
+    "finished_at": "2026-07-28T15:02:43.278811",
+    "n_total_trials": 1,
+    "stats": {
+        "n_trials": 1,
+        "n_errors": 1,
+        "evals": {
+            "oracle__adhoc": {
+                "n_trials": 0,
+                "n_errors": 1,
+                "metrics": [
+                    {
+                        "mean": 0.0
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {},
+                "exception_stats": {
+                    "RewardFileNotFoundError": [
+                        "alma-HH212-observations-hard__MSXLrFb"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null
+    }
+}

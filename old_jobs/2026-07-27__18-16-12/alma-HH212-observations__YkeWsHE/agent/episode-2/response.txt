@@ -1,0 +1,7 @@
+{
+  "analysis": "Successfully resolved HH 212 coordinates: RA=85.96420833, Dec=-1.04808333 degrees. Now need to query ALMA archive using these coordinates.",
+  "plan": "Explore astroquery.alma.Alma class methods to find the right query approach - likely query_region or direct TAP query. Check available columns in ObsCore table.",
+  "commands": [
+    {"keystrokes": "python3 -c \"from astroquery.alma import Alma; print([m for m in dir(Alma) if not m.startswith('_')])\"\n", "duration": 3.0}
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "analysis": "Alma class has query_region, query_tap methods. Need to understand their signatures and the ObsCore schema columns available.",
+  "plan": "Check help() and query_region signature, then attempt a query_tap with ADQL to get ObsCore columns directly, which gives most control over filtering.",
+  "commands": [
+    {"keystrokes": "python3 -c \"from astroquery.alma import Alma; help(Alma.query_region)\"\n", "duration": 3.0}
+  ]
+}

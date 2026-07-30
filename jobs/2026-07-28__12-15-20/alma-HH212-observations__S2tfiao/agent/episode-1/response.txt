@@ -1,0 +1,14 @@
+{
+  "analysis": "Coordinates resolved successfully: RA=85.96420833, Dec=-1.04808333. Astroquery 0.4.11 and pyvo 1.9.1 are installed. Now I need to query the ALMA archive using these coordinates with a search radius, filtering by band and spatial resolution, then group by member_ous_uid.",
+  "plan": "Test astroquery.alma.Alma module capabilities - check available service URLs and try a basic query_region call to understand the returned columns (especially member_ous_uid, band, spatial_resolution, qa2_passed, proposal_id, target_name).",
+  "commands": [
+    {
+      "keystrokes": "python3 -c \"from astroquery.alma import Alma; print(Alma.archive_url)\"\n",
+      "duration": 5.0
+    },
+    {
+      "keystrokes": "python3 << 'EOF'\nfrom astroquery.alma import Alma\nimport astropy.units as u\nfrom astropy.coordinates import SkyCoord\nAlma.archive_url = 'https://almascience.eso.org'\nc = SkyCoord(85.96420833, -1.04808333, unit='deg')\nresult = Alma.query_region(c, radius=30*u.arcsec)\nprint(len(result))\nprint(result.colnames)\nEOF\n",
+      "duration": 30.0
+    }
+  ]
+}

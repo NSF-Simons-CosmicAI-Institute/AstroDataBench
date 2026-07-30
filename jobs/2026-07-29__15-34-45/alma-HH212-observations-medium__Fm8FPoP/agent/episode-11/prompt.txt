@@ -1,0 +1,19 @@
+New Terminal Output:
+
+root@da5c80f7d77e:/app# python3 -c "import inspect; from astroquery.alma import Alma; print(inspect.getsource(Alma.query_object))" 2>&1 | head -40
+        @class_or_instance
+        def newmethod(self, *args, **kwargs):
+            verbose = kwargs.pop('verbose', False)
+
+            response = getattr(self, async_method_name)(*args, **kwargs)
+            if kwargs.get('get_query_payload') or kwargs.get('field_help'):
+                return response
+            # mast is doing something weird by stacking the responses into a list while also using async_to_sync
+            # so we have to check for that here until it's refactored
+            if isinstance(response, Response):
+                response.raise_for_status()
+            result = self._parse_result(response, verbose=verbose)
+            self.table = result
+            return result
+
+root@da5c80f7d77e:/app#

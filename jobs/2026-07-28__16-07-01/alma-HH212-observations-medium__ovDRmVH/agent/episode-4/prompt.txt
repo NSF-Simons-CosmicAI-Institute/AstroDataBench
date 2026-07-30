@@ -1,0 +1,60 @@
+New Terminal Output:
+
+root@44351a46cfad:/app# python3 << 'EOF'
+> from astroquery.alma import Alma
+> import astropy.units as u
+> from astropy.coordinates import SkyCoord
+>
+> coord = SkyCoord(ra=85.96420833333333, dec=-1.0480833333333335, unit='deg')
+> alma = Alma()
+> result = alma.query_region(coord, radius=30*u.arcsec)
+>
+> print('data_rights values:', set(result['data_rights']))
+> print('science_observation values:', set(result['science_observation']))
+> print('band_list sample:', result['band_list'][:10])
+> print('spatial_resolution sample:', result['spatial_resolution'][:10])
+> print('member_ous_uid sample:', result['member_ous_uid'][:5])
+> print('proposal_id sample:', result['proposal_id'][:5])
+> EOF
+data_rights values: {np.str_('Public')}
+science_observation values: {np.str_('T')}
+band_list sample: band_list
+---------
+        7
+        7
+        7
+        7
+        3
+        3
+        3
+        3
+        9
+        9
+spatial_resolution sample:  spatial_resolution
+       arcsec
+-------------------
+ 0.0316734361630697
+ 0.0316734361630697
+ 0.0316734361630697
+ 0.0316734361630697
+0.04498240697812825
+0.04498240697812825
+0.04498240697812825
+0.04498240697812825
+0.22987265569859888
+0.22987265569859888
+member_ous_uid sample:     member_ous_uid
+----------------------
+ uid://A001/X1273/X1f9
+ uid://A001/X1273/X1f9
+ uid://A001/X1273/X1f9
+ uid://A001/X1273/X1f9
+uid://A001/X1465/X3b5e
+proposal_id sample:  proposal_id
+--------------
+2017.1.00044.S
+2017.1.00044.S
+2017.1.00044.S
+2017.1.00044.S
+2019.1.00037.S
+root@44351a46cfad:/app#

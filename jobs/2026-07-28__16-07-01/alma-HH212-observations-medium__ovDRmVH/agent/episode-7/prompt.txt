@@ -1,0 +1,15 @@
+New Terminal Output:
+
+root@44351a46cfad:/app# python3 << 'EOF'
+> from astroquery.alma import Alma
+> import astropy.units as u
+> from astropy.coordinates import SkyCoord
+>
+> coord = SkyCoord(ra=85.96420833333333, dec=-1.0480833333333335, unit='deg')
+> alma = Alma()
+> result = alma.query_region(coord, radius=30*u.arcsec)
+>
+> print('unique band_list values:', set(result['band_list']))
+> EOF
+unique band_list values: {np.str_('6'), np.str_('7'), np.str_('4'), np.str_('9'), np.str_('3'), np.str_('5')}
+root@44351a46cfad:/app#

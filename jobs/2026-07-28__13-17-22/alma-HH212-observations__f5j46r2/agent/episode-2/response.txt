@@ -1,0 +1,11 @@
+{
+  "analysis": "Successfully resolved HH 212 coordinates: RA=85.96420833, Dec=-1.04808333 (deg). This matches known catalog values for HH 212 (05:43:51.4 -01:02:53). Now need to query the ALMA archive using these coordinates.",
+  "plan": "Explore astroquery.alma.Alma class to see available query methods for positional search (query_region or similar). Then perform the actual query with a reasonable radius (e.g., 30 arcsec or 60 arcsec) and inspect the columns returned.",
+  "commands": [
+    {
+      "keystrokes": "python3 -c \"from astroquery.alma import Alma; help(Alma.query_region)\" | head -50\n",
+      "duration": 5.0
+    }
+  ],
+  "task_complete": false
+}

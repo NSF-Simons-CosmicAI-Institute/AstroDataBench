@@ -1,0 +1,11 @@
+{
+  "analysis": "The decorator wraps the actual async method. Need to check query_object_async source to see the real default parameters for public/science, and also verify how the query is constructed (whether it uses name resolution via SkyCoord or does a direct name-based TAP query).",
+  "plan": "Inspect query_object_async source code to confirm default parameter values.",
+  "commands": [
+    {
+      "keystrokes": "python3 -c \"import inspect; from astroquery.alma import Alma; print(inspect.getsource(Alma.query_object_async))\" 2>&1 | head -60\n",
+      "duration": 3.0
+    }
+  ],
+  "task_complete": false
+}

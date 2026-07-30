@@ -1,0 +1,123 @@
+{
+    "id": "5dab68e8-2cab-41a8-bf36-af0970bc90eb",
+    "task_name": "STABLE/alma-HH212-observations",
+    "trial_name": "alma-HH212-observations-medium__Bmnum3k",
+    "trial_uri": "file:///Users/zoietelkamp/Library/Mobile%20Documents/com~apple~CloudDocs/Research/CosmicAI/benchmark/jobs/2026-07-28__16-34-19/alma-HH212-observations-medium__Bmnum3k",
+    "task_id": {
+        "path": "alma-HH212-observations-medium"
+    },
+    "source": null,
+    "task_checksum": "eae4cdfb9780e6974f1e5376fe5037eec039fa484f6ee4b328c4fe8920f1dda2",
+    "config": {
+        "task": {
+            "path": "alma-HH212-observations-medium",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "alma-HH212-observations-medium__Bmnum3k",
+        "trials_dir": "jobs/2026-07-28__16-34-19",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "terminus-2",
+            "import_path": null,
+            "model_name": "anthropic/claude-sonnet-5",
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "temperature": 1
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "mounts_json": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "8356c18e-36f7-4baa-82c1-5dfd06a8129e"
+    },
+    "agent_info": {
+        "name": "terminus-2",
+        "version": "2.0.0",
+        "model_info": {
+            "name": "claude-sonnet-5",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 119424,
+        "n_cache_tokens": 100797,
+        "n_output_tokens": 10584,
+        "cost_usd": 0.17255990000000004,
+        "rollout_details": [],
+        "metadata": {
+            "n_episodes": 13,
+            "api_request_times_msec": [
+                11490.972757339478,
+                4006.4401626586914,
+                6466.259002685547,
+                6558.549642562866,
+                8000.577926635742,
+                14411.805152893066,
+                20329.910039901733,
+                24795.652151107788,
+                6912.860870361328,
+                10177.797794342041,
+                7666.093111038208,
+                8010.36810874939,
+                6553.299188613892
+            ],
+            "summarization_count": 0
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-07-28T20:34:20.546771Z",
+    "finished_at": "2026-07-28T20:40:03.946562Z",
+    "environment_setup": {
+        "started_at": "2026-07-28T20:34:20.564479Z",
+        "finished_at": "2026-07-28T20:34:22.581449Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-07-28T20:34:22.581526Z",
+        "finished_at": "2026-07-28T20:34:28.462222Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-07-28T20:34:28.462339Z",
+        "finished_at": "2026-07-28T20:39:27.791559Z"
+    },
+    "verifier": {
+        "started_at": "2026-07-28T20:39:27.892735Z",
+        "finished_at": "2026-07-28T20:39:53.161944Z"
+    },
+    "step_results": null
+}

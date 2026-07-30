@@ -1,0 +1,15 @@
+Current terminal state:
+New Terminal Output:
+
+root@f1b01bdb67bf:/app# cat /app/output.json | python3 -m json.tool > /dev/null && echo 'JSON is well-formed' && wc -l /app/output.json
+JSON is well-formed
+182 /app/output.json
+root@f1b01bdb67bf:/app# python3 -c "import json; d=json.load(open('/app/output.json')); print(d['summary'])"
+A total of 14 unique ALMA Member Observation Unit Sets (MOUS) targeting HH 212 were found in Band 6 and/or Band 7 with spatial resolution better than 1 arcsecon
+d. Of these, 3 include Band 6 data and 11 include Band 7 data. The best spatial resolution achieved ranges from 0.0148 to 0.8028 arcsec across the sample, refle
+cting a range of ALMA configurations from moderate to very high angular resolution. These public, science-grade observations span multiple ALMA projects and pro
+vide a rich dataset for studying the HH 212 protostellar outflow system at sub-arcsecond scales.
+root@f1b01bdb67bf:/app#
+
+
+Are you sure you want to mark the task as complete? This will trigger your solution to be graded and you won't be able to make any further corrections. If so, include "task_complete": true in your JSON response again.

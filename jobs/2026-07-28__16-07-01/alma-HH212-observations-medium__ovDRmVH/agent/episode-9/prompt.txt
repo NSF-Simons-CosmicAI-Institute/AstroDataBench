@@ -1,0 +1,61 @@
+Previous response had warnings:
+WARNINGS: - Extra text detected before JSON object
+
+New Terminal Output:
+
+root@44351a46cfad:/app# cat /app/output.json | python3 -m json.tool | head -50
+{
+    "target": "HH 212",
+    "search_coordinates": {
+        "ra_deg": 85.96420833333333,
+        "dec_deg": -1.0480833333333335
+    },
+    "search_radius_arcsec": 30,
+    "filters": {
+        "data_rights": "Public",
+        "science_observation": true,
+        "bands": [
+            "6",
+            "7"
+        ],
+        "spatial_resolution_max_arcsec": 1.0
+    },
+    "num_observations": 14,
+    "observations": [
+        {
+            "member_ous_uid": "uid://A001/X1273/X1f9",
+            "project_code": "2017.1.00044.S",
+            "target_name": "HH_212",
+            "bands": [
+                "7"
+            ],
+            "spatial_resolution_arcsec": 0.0316734361630697,
+            "obs_id": "uid://A001/X1273/X1f9.source.HH_212.spw.28"
+        },
+        {
+            "member_ous_uid": "uid://A001/X1284/X17b8",
+            "project_code": "2017.1.00712.S",
+            "target_name": "HH_212",
+            "bands": [
+                "6"
+            ],
+            "spatial_resolution_arcsec": 0.022781354834911657,
+            "obs_id": "uid://A001/X1284/X17b8.source.HH_212.spw.31"
+        },
+        {
+            "member_ous_uid": "uid://A001/X1284/X17ba",
+            "project_code": "2017.1.00712.S",
+            "target_name": "HH_212",
+            "bands": [
+                "6"
+            ],
+            "spatial_resolution_arcsec": 0.1489361985467903,
+            "obs_id": "uid://A001/X1284/X17ba.source.HH_212.spw.31"
+        },
+        {
+            "member_ous_uid": "uid://A001/X1473/Xbe6",
+root@44351a46cfad:/app# python3 -c "import json; d=json.load(open('/app/output.json')); print('num_observations:', d['num_observations']); print('unique mous:',
+ len(set(o['member_ous_uid'] for o in d['observations'])))"
+num_observations: 14
+unique mous: 14
+root@44351a46cfad:/app#

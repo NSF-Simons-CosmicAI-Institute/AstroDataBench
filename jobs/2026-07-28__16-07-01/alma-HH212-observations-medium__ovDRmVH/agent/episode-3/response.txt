@@ -1,0 +1,10 @@
+{
+  "analysis": "Query returned 144 rows with relevant columns including data_rights, science_observation, band_list, spatial_resolution, member_ous_uid, proposal_id. Now need to filter for public, science observations, Band 6/7, and spatial_resolution < 1 arcsec.",
+  "plan": "Inspect the data_rights, science_observation, band_list values to understand filtering criteria. Then apply filters and group by member_ous_uid to get unique observations.",
+  "commands": [
+    {
+      "keystrokes": "python3 << 'EOF'\nfrom astroquery.alma import Alma\nimport astropy.units as u\nfrom astropy.coordinates import SkyCoord\n\ncoord = SkyCoord(ra=85.96420833333333, dec=-1.0480833333333335, unit='deg')\nalma = Alma()\nresult = alma.query_region(coord, radius=30*u.arcsec)\n\nprint('data_rights values:', set(result['data_rights']))\nprint('science_observation values:', set(result['science_observation']))\nprint('band_list sample:', result['band_list'][:10])\nprint('spatial_resolution sample:', result['spatial_resolution'][:10])\nprint('member_ous_uid sample:', result['member_ous_uid'][:5])\nprint('proposal_id sample:', result['proposal_id'][:5])\nEOF\n",
+      "duration": 10.0
+    }
+  ]
+}

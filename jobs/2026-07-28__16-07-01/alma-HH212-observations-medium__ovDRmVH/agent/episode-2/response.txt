@@ -1,0 +1,10 @@
+{
+  "analysis": "Successfully resolved HH 212 coordinates via Simbad: RA=85.964208, Dec=-1.048083 degrees. Now need to query the ALMA archive for observations at this position.",
+  "plan": "Use astroquery.alma.Alma to query the region around these coordinates with a reasonable radius (e.g., 30 arcsec), then filter results for public, science, band 6/7, spatial_resolution < 1 arcsec, and group by member_ous_uid.",
+  "commands": [
+    {
+      "keystrokes": "python3 << 'EOF'\nfrom astroquery.alma import Alma\nimport astropy.units as u\nfrom astropy.coordinates import SkyCoord\n\ncoord = SkyCoord(ra=85.96420833333333, dec=-1.0480833333333335, unit='deg')\nprint(coord)\n\nalma = Alma()\nresult = alma.query_region(coord, radius=30*u.arcsec)\nprint(len(result))\nprint(result.colnames)\nEOF\n",
+      "duration": 15.0
+    }
+  ]
+}

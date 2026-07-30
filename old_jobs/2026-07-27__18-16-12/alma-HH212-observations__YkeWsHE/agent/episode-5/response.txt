@@ -1,0 +1,7 @@
+{
+  "analysis": "query_region has public and science boolean parameters, exactly what's needed. Now I understand the API - need to call query_region with coordinates, radius, public=True, science=True.",
+  "plan": "Test query_region with HH 212 coordinates and a reasonable radius (e.g., 10 arcsec) to see what columns are returned, then refine filtering for band and spatial_resolution.",
+  "commands": [
+    {"keystrokes": "python3 << 'EOF'\nfrom astroquery.alma import Alma\nfrom astropy.coordinates import SkyCoord\nimport astropy.units as u\n\nc = SkyCoord(85.96420833, -1.04808333, unit='deg')\nresult = Alma.query_region(c, radius=10*u.arcsec, public=True, science=True)\nprint(type(result))\nprint(len(result))\nprint(result.colnames)\nEOF\n", "duration": 15.0}
+  ]
+}

@@ -1,0 +1,12 @@
+Let me verify that band_list doesn't contain multi-band strings (e.g., "3 6") which my exact match filter would miss.
+
+{
+  "analysis": "Found 14 unique member_ous_uid matching band 6/7 and spatial_resolution<1 arcsec. Need to verify band_list format doesn't contain multi-band entries (e.g. '3 6') that my exact-match filter on '6'/'7' might miss, and confirm total unique MOUS count in unfiltered data for sanity check.",
+  "plan": "Check unique values of band_list across ALL 144 rows to see if any contain multiple bands as a single string. Also check full member_ous_uid count and compare against filtered set.",
+  "commands": [
+    {
+      "keystrokes": "cat << 'EOF' > /app/check.py\nfrom astroquery.alma import Alma\nfrom astropy.coordinates import SkyCoord\nimport astropy.units as u\n\nc = SkyCoord(85.96420833, -1.04808333, unit='deg')\ntbl = Alma.query_region(c, radius=1*u.arcmin, public=True, science=True)\nprint('band_list unique values (raw):')\nfor v in set(tbl['band_list']):\n    print(repr(v))\nprint('total unique member_ous_uid (unfiltered):', len(set(str(x) for x in tbl['member_ous_uid'])))\nEOF\npython3 /app/check.py\n",
+      "duration": 10.0
+    }
+  ]
+}
