@@ -1,0 +1,17 @@
+New Terminal Output:
+
+root@e45942edb307:/app# python3 -c "
+> from astropy.table import Table
+> t = Table.read('/app/raw_results.ecsv')
+> print('calib_level values:', set(t['calib_level']))
+> print('data_rights values:', set(t['data_rights']))
+> print('science_observation values:', set(t['science_observation']))
+> print('Number of raw rows:', len(t))
+> print('Number of unique member_ous_uid (all bands/res):', len(set(t['member_ous_uid'])))
+> "
+calib_level values: {np.int32(2)}
+data_rights values: {np.str_('Public')}
+science_observation values: {np.str_('T')}
+Number of raw rows: 137
+Number of unique member_ous_uid (all bands/res): 27
+root@e45942edb307:/app#

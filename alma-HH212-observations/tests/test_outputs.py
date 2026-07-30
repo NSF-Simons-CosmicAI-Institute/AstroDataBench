@@ -19,7 +19,7 @@ from astroquery.alma import Alma
 
 REQUIRED_ROW_FIELDS = [
     "member_ous_uid", "project_code", "alma_source_name", "ra_deg", "dec_deg",
-    "band", "best_spatial_resolution_arcsec", "qa2_status",
+    "band", "spatial_resolution_arcsec", "qa2_status",
 ]
 
 REQUIRED_TOP_LEVEL_FIELDS = [
@@ -154,13 +154,13 @@ def test_every_row_matches_band_filter(agent_output):
 
 
 def test_every_row_meets_resolution_constraint(agent_output):
-    """Check that every observation row has best_spatial_resolution_arcsec < MAX_RESOLUTION_ARCSEC
+    """Check that every observation row has spatial_resolution_arcsec < MAX_RESOLUTION_ARCSEC
     """
 
     for row in agent_output["observations"]:
-        res = row["best_spatial_resolution_arcsec"]
+        res = row["spatial_resolution_arcsec"]
         assert 0 < res < MAX_RESOLUTION_ARCSEC, (
-            f"Row for {row['alma_source_name']} has best_spatial_resolution_arcsec="
+            f"Row for {row['alma_source_name']} has spatial_resolution_arcsec="
             f"{res}, which violates the <{MAX_RESOLUTION_ARCSEC} arcsec constraint"
         )
 

@@ -1,0 +1,26 @@
+Previous response had warnings:
+WARNINGS: - Extra text detected before JSON object
+
+New Terminal Output:
+
+root@e45942edb307:/app# python3 -c "
+> import json
+> d = json.load(open('/app/output.json'))
+> assert d['target_name'] == 'HH 212'
+> assert isinstance(d['resolved_ra_deg'], float)
+> assert isinstance(d['resolved_dec_deg'], float)
+> assert isinstance(d['search_radius_arcsec'], float)
+> assert d['band_filter'] == [6,7]
+> assert d['max_spatial_resolution_arcsec'] == 1.0
+> assert d['num_observations'] == len(d['observations'])
+> uids = [o['member_ous_uid'] for o in d['observations']]
+> assert len(uids) == len(set(uids)), 'duplicate uids!'
+> for o in d['observations']:
+>     assert all(b in (6,7) for b in o['band'])
+>     assert o['spatial_resolution_arcsec'] < 1.0
+> print('All validations passed!')
+> print('num_observations:', d['num_observations'])
+> "
+All validations passed!
+num_observations: 14
+root@e45942edb307:/app#

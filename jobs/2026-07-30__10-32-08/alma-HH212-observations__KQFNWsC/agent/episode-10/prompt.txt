@@ -1,0 +1,117 @@
+New Terminal Output:
+
+root@e45942edb307:/app# python3 -c "import json; d=json.load(open('/app/output.json')); print(json.dumps(d, indent=2)[:3000])"
+{
+  "target_name": "HH 212",
+  "resolved_ra_deg": 85.96420833,
+  "resolved_dec_deg": -1.04808333,
+  "search_radius_arcsec": 30.0,
+  "band_filter": [
+    6,
+    7
+  ],
+  "max_spatial_resolution_arcsec": 1.0,
+  "num_observations": 14,
+  "observations": [
+    {
+      "member_ous_uid": "uid://A001/X1273/X1f9",
+      "project_code": "2017.1.00044.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421125000545,
+      "dec_deg": -1.0481019444447288,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.0316734361630697,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17b8",
+      "project_code": "2017.1.00712.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421125001223,
+      "dec_deg": -1.0481019444444382,
+      "band": [
+        6
+      ],
+      "spatial_resolution_arcsec": 0.022781354834911657,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17ba",
+      "project_code": "2017.1.00712.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421125004338,
+      "dec_deg": -1.0481019444447166,
+      "band": [
+        6
+      ],
+      "spatial_resolution_arcsec": 0.1489361985467903,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1473/Xbe6",
+      "project_code": "2019.1.00086.S",
+      "alma_source_name": "HH212M",
+      "ra_deg": 85.96421250001843,
+      "dec_deg": -1.0481111111112291,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.8027864728676456,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X22",
+      "project_code": "2015.1.00037.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421124998832,
+      "dec_deg": -1.0481019444444875,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.11296974037381813,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X42",
+      "project_code": "2015.1.00024.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.9642,
+      "dec_deg": -1.0480916666666666,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.014753635301994835,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X340/X1f9",
+      "project_code": "2015.1.00041.S",
+      "alma_source_name": "HH212mms",
+      "ra_deg": 85.9642125000427,
+      "dec_deg": -1.0481027777780914,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.09217021640101315,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X362b/Xf37",
+      "project_code": "2023.1.00494.S",
+      "alma_source_name": "HH212MMS",
+      "ra_deg": 85.96420833336394,
+      "dec_deg": -1.048096666666971,
+      "band": [
+        6
+      ],
+      "spatial_resolution_arcsec": 0.14924825593190996,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X88f/X259",
+      "project_code": "2016.1.01475.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.9642
+root@e45942edb307:/app#

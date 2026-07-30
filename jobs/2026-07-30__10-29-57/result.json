@@ -1,0 +1,34 @@
+{
+    "id": "1e1d02c2-2d0e-43bb-bcf3-519aee66b6df",
+    "started_at": "2026-07-30T10:29:57.440801",
+    "finished_at": "2026-07-30T10:30:34.694109",
+    "n_total_trials": 1,
+    "stats": {
+        "n_trials": 1,
+        "n_errors": 0,
+        "evals": {
+            "oracle__adhoc": {
+                "n_trials": 1,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 1.0
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "alma-HH212-observations__tZfYBBU"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            }
+        },
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null
+    }
+}

@@ -1,0 +1,40 @@
+New Terminal Output:
+
+root@e45942edb307:/app# python3 << 'EOF'
+> from astropy.table import Table
+> import collections
+> t = Table.read('/app/raw_results.ecsv')
+> d = collections.defaultdict(set)
+> for row in t:
+>     d[row['member_ous_uid']].add(str(row['band_list']))
+> for k,v in d.items():
+>     print(k, v)
+> EOF
+uid://A001/X1273/X1f9 {'7'}
+uid://A001/X1465/X3b5e {'3'}
+uid://A002/X36d874/Xf {'9'}
+uid://A002/X36d874/X13 {'7'}
+uid://A002/X36d874/X11 {'7'}
+uid://A001/X1473/Xbe6 {'7'}
+uid://A001/X1288/Xfb9 {'7'}
+uid://A001/X1288/Xff2 {'7'}
+uid://A001/X1288/Xf93 {'7'}
+uid://A001/X1288/Xfa6 {'7'}
+uid://A001/X1288/Xfdf {'7'}
+uid://A001/X1288/Xfcc {'7'}
+uid://A001/X1284/X17b8 {'6'}
+uid://A001/X1284/X17be {'3'}
+uid://A001/X1284/X17ba {'6'}
+uid://A001/X362b/Xf37 {'6'}
+uid://A001/X362b/Xf41 {'5'}
+uid://A001/X88f/X25b {'7'}
+uid://A001/X88f/X259 {'7'}
+uid://A001/X3788/X624b {'3'}
+uid://A002/X7b15a9/X5a {'7'}
+uid://A002/X7b15a9/X5e {'9'}
+uid://A001/X2de/X22 {'7'}
+uid://A001/X2de/X42 {'7'}
+uid://A002/X6ac013/X11 {'7'}
+uid://A001/X196/X9f {'4'}
+uid://A001/X340/X1f9 {'7'}
+root@e45942edb307:/app#

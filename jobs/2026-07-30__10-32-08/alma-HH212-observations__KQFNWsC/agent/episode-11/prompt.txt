@@ -1,0 +1,80 @@
+Previous response had warnings:
+WARNINGS: - Extra text detected before JSON object
+
+New Terminal Output:
+
+root@e45942edb307:/app# python3 -c "import json; d=json.load(open('/app/output.json')); print(json.dumps(d, indent=2)[3000:6000])"
+0833333109,
+      "dec_deg": -1.0481000000000829,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.09152828751568182,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X88f/X25b",
+      "project_code": "2016.1.01475.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96420833338408,
+      "dec_deg": -1.0481000000004446,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.338030740167654,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A002/X36d874/X11",
+      "project_code": "2011.0.00647.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96419999999999,
+      "dec_deg": -1.0480916666666666,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.47080931157879113,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A002/X36d874/X13",
+      "project_code": "2011.0.00647.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96420833333333,
+      "dec_deg": -1.0481,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.46249283249648676,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A002/X6ac013/X11",
+      "project_code": "2012.1.00997.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96420833333333,
+      "dec_deg": -1.0481,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.29337548756861065,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A002/X7b15a9/X5a",
+      "project_code": "2012.1.00122.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96439055186667,
+      "dec_deg": -1.048172537602811,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.1423064091216609,
+      "qa2_status": "T"
+    }
+  ],
+  "summary": "A total of 14 unique ALMA Member Observation Unit Sets (MOUS) targeting HH 212 were found in Band(s) [6, 7] with spatial resolution under 1 arcsec
+ond. Spatial resolutions range from 0.015 to 0.803 arcsec. These public science observations were identified via a 30 arcsec positional search around the resolv
+ed coordinates of HH 212 (RA=85.96421, Dec=-1.04808). The observations span multiple ALMA projects and include both Band 6 and Band 7 data where available."
+}
+root@e45942edb307:/app#

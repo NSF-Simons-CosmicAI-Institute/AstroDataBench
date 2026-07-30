@@ -1,0 +1,71 @@
+New Terminal Output:
+
+root@e45942edb307:/app# python3 << 'EOF'
+> from astropy.table import Table
+> t = Table.read('/app/raw_results.ecsv')
+> print(t.colnames)
+> print(t['band_list'][:10])
+> print(t['spatial_resolution'][:10])
+> print(t['member_ous_uid'][:10])
+> print(t['target_name'][:10])
+> print(set(t['target_name']))
+> EOF
+['pol_states', 'obs_publisher_did', 'obs_collection', 'facility_name', 'instrument_name', 'obs_id', 'dataproduct_type', 'calib_level', 'collections', 'target_na
+me', 's_ra', 's_dec', 's_fov', 's_region', 's_xel1', 's_xel2', 'em_xel', 't_xel', 'pol_xel', 's_resolution', 't_min', 't_max', 't_exptime', 't_resolution', 'em_
+min', 'em_max', 'em_res_power', 'sensitivity_10kms', 'cont_sensitivity_bandwidth', 'pwv', 'group_ous_uid', 'member_ous_uid', 'asdm_uid', 'obs_title', 'type', 's
+can_intent', 'science_observation', 'spatial_scale_max', 'qa2_passed', 'bib_reference', 'science_keyword', 'scientific_category', 'pi_userid', 'pi_name', 'spect
+ral_resolution', 'lastModified', 'o_ucd', 'access_url', 'access_format', 'access_estsize', 'proposal_id', 'data_rights', 'gal_longitude', 'gal_latitude', 'band_
+list', 'em_resolution', 'bandwidth', 'antenna_arrays', 'is_mosaic', 'obs_release_date', 'spatial_resolution', 'frequency_support', 'frequency', 'velocity_resolu
+tion', 'obs_creator_name', 'pub_title', 'first_author', 'authors', 'pub_abstract', 'publication_year', 'proposal_abstract', 'schedblock_name', 'proposal_authors
+']
+band_list
+---------
+        7
+        7
+        7
+        7
+        3
+        3
+        3
+        3
+        9
+        9
+ spatial_resolution
+       arcsec
+-------------------
+ 0.0316734361630697
+ 0.0316734361630697
+ 0.0316734361630697
+ 0.0316734361630697
+0.04498240697812825
+0.04498240697812825
+0.04498240697812825
+0.04498240697812825
+0.22987265569859888
+0.22987265569859888
+    member_ous_uid
+----------------------
+ uid://A001/X1273/X1f9
+ uid://A001/X1273/X1f9
+ uid://A001/X1273/X1f9
+ uid://A001/X1273/X1f9
+uid://A001/X1465/X3b5e
+uid://A001/X1465/X3b5e
+uid://A001/X1465/X3b5e
+uid://A001/X1465/X3b5e
+ uid://A002/X36d874/Xf
+ uid://A002/X36d874/Xf
+target_name
+-----------
+     HH_212
+     HH_212
+     HH_212
+     HH_212
+     HH_212
+     HH_212
+     HH_212
+     HH_212
+      HH212
+      HH212
+{np.str_('HH212mms'), np.str_('HH_212'), np.str_('HH212'), np.str_('HH212MMS'), np.str_('HH212M')}
+root@e45942edb307:/app#

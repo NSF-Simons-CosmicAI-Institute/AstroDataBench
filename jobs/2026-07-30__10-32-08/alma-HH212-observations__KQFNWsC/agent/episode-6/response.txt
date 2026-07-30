@@ -1,0 +1,11 @@
+{
+  "analysis": "Data structure confirmed. band_list column contains single band numbers per spectral window row (though could have multiple bands separated by space in other cases). member_ous_uid identifies each MOUS. target_name has variants like HH_212, HH212, HH212MMS, HH212mms, HH212M - all matched via position search within 30 arcsec radius. Now need to build the final aggregation: filter rows where any band in band_list is 6 or 7, spatial_resolution<1, group by member_ous_uid.",
+  "plan": "Write a comprehensive Python script that: 1) loads the raw table, 2) filters science_observation and data_rights already done via query, 3) filters bands 6/7, 4) filters spatial_resolution<1, 5) groups by member_ous_uid taking first row's metadata (project_code, target_name, ra, dec, qa2_status), aggregates band list across all rows for that MOUS, and spatial_resolution (which should be same MOUS-level value based on data - let's check if spatial_resolution varies within same MOUS), 6) build final JSON output.",
+  "commands": [
+    {
+      "keystrokes": "python3 << 'EOF'\nfrom astropy.table import Table\nimport numpy as np\nt = Table.read('/app/raw_results.ecsv')\n# check band_list unique values\nprint('unique band_list values:', set(t['band_list']))\n# check spatial_resolution variance within same member_ous_uid\nimport collections\nd = collections.defaultdict(set)\nfor row in t:\n    d[row['member_ous_uid']].add(row['spatial_resolution'])\nfor k,v in d.items():\n    print(k, v)\nEOF\n",
+      "duration": 5.0
+    }
+  ],
+  "task_complete": false
+}

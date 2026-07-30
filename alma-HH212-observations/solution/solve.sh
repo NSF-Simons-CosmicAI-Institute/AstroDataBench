@@ -33,7 +33,7 @@ tbl = tbl[tbl["spatial_resolution"] < MAX_RESOLUTION_ARCSEC]
 
 # NOTE: ObsCore/TAP returns one row per spectral window, so a single Member OUS
 # (MOUS) can appear as several rows. Group by member_ous_uid so each physical 
-observation appears once, not once per spectral window
+#observation appears once, not once per spectral window
 groups = defaultdict(list)
 for row in tbl:
     groups[str(row["member_ous_uid"])].append(row)
@@ -49,12 +49,12 @@ for mous_uid, rows in groups.items():
         "ra_deg": float(rows[0]["s_ra"]),
         "dec_deg": float(rows[0]["s_dec"]),
         "band": bands,
-        "best_spatial_resolution_arcsec": min(resolutions),
+        "spatial_resolution_arcsec": min(resolutions),
         "qa2_status": str(rows[0]["qa2_passed"]),
     })
 
 all_bands = sorted({b for obs in observations for b in obs["band"]})
-all_resolutions = [obs["best_spatial_resolution_arcsec"] for obs in observations]
+all_resolutions = [obs["spatial_resolution_arcsec"] for obs in observations]
 
 report = {
     "target_name": "HH 212",

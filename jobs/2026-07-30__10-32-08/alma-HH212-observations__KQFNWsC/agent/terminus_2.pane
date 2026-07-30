@@ -1,0 +1,567 @@
+[?2004hroot@e45942edb307:/app# asciinema rec --stdin /logs/agent/recording.cast
+[?2004l[0;32masciinema: recording asciicast to /logs/agent/recording.cast[0m
+[0;32masciinema: press <ctrl-d> or type "exit" when you're done[0m
+[?2004hroot@e45942edb307:/app# clear
+[?2004l[H[J[3J[?2004hroot@e45942edb307:/app# python3 -c "import astroquery; print(astroquery.__version__)"
+[?2004l0.4.11
+[?2004hroot@e45942edb307:/app# python3 -c "import pyvo; print(pyvo.__version__)"
+[?2004l1.9.1
+[?2004hroot@e45942edb307:/app# python3 -c "from astropy.coordinates import SkyCoord; c = SkyCoord.from_name('HH 212'); print(c.ra.deg, c.dec.deg)"
+[?2004l85.96420833 -1.04808333
+[?2004hroot@e45942edb307:/app# python3 -c "from astroquery.alma import Alma; print([m for m in dir(Alma) if not m.startswith('_')])"
+[?2004l['TIMEOUT', 'USERNAME', 'archive_url', 'auth', 'authenticated', 'cache_location', 'clear_cache', 'cycle0_table', 'datalink', 'datalink_url', 'download_and_extract_files', 'download_files', 'get_adhoc_service_access_url', 'get_adhoc_service_parameter', 'get_cycle0_uid_contents', 'get_data_info', 'get_files_from_tarballs', 'get_project_metadata', 'help', 'help_tap', 'is_datalink_adhoc_service', 'is_proprietary', 'login', 'name', 'query', 'query_async', 'query_object', 'query_object_async', 'query_region', 'query_region_async', 'query_sia', 'query_tap', 'reset_cache_location', 'retrieve_data_from_uid', 'sia', 'sia_url', 'tap', 'tap_url']
+[?2004hroot@e45942edb307:/app# python3 -c "from astroquery.alma import Alma; Alma.help_tap()" 2>&1 | head -100
+[?2004lTable to query is "voa.ObsCore".
+For example: "select top 1 * from ivoa.ObsCore"
+The scheme of the table is as follows.
+
+  Name                 Type            Unit       Description
+------------------------------------------------------------------------------------------
+  obs_publisher_did    char(33*)                  publisher dataset identifier
+  obs_collection       char(4)                    short name for the data collection
+  facility_name        char(3)                    telescope name
+  instrument_name      char(4)                    instrument name
+  obs_id               char(64*)                  internal dataset identifier
+  dataproduct_type     char(5*)                   type of product
+  calib_level          int                        calibration level (2 or 3). 2 if product_type = MOUS, 3 if product_type = GOUS
+  collections          char(128*)                 Indicates that there are external products
+  target_name          char(256*)                 name of intended target
+  s_ra                 double          deg        RA of central coordinates
+  s_dec                double          deg        DEC of central coordinates
+  s_fov                double          deg        size of the region covered (~diameter of minimum bounding circle)
+  s_region             char(*)                    region bounded by observation
+  s_xel1               int                        Number of elements along the first spatial axis
+  s_xel2               int                        Number of elements along the second spatial axis
+  em_xel               int                        Number of elements along the spectral axis
+  t_xel                int                        Number of elements along the time axis
+  pol_xel              int                        Number of polarization samples
+  s_resolution         double          arcsec     typical spatial resolution
+  t_min                double          d          start time of observation (MJD)
+  t_max                double          d          end time of observation (MJD)
+  t_exptime            double          s          exposure time of observation
+  t_resolution         double          s          typical temporal resolution
+  em_min               double          m          start spectral coordinate value
+  em_max               double          m          stop spectral coordinate value
+  em_res_power         double                     typical spectral resolution
+  pol_states           char(64*)                  polarization states present in the data
+  o_ucd                char(35)                   UCD describing the observable axis (pixel values)
+  access_url           char(72*)                  URL to download the data
+  access_format        char(9)                    Content format of the data
+  access_estsize       int             kbyte      Estimated size of datasets in kilobytes
+  proposal_id          char(64*)                  Identifier of proposal to which NO observation belongs.
+  data_rights          char(11)                   Access to data.
+  gal_longitude        double          deg        Galactic longitude of the observation for RA/Dec. Estimated using PyEphem and RA/Dec.
+  gal_latitude         double          deg        Galactic latitude of the observation for RA/Dec. Estimated using PyEphem and RA/Dec.
+  band_list            char(30*)                  Space delimited list of bands
+  em_resolution        double          m          Estimated frequency resolution from all the spectral windows, using median values of channel widths.
+  bandwidth            double          Hz         Total Bandwidth
+  antenna_arrays       char(660*)                 Blank-separated list of Pad:Antenna pairs, i.e., A109:DV09 J504:DV02 J505:DV05 for antennas DV09, DV02 and DV05 sitting on pads A109, J504, and J505, respectively.
+  is_mosaic            char(1)                    Flag to indicate if this ASDM represents a mosaic or not.
+  obs_release_date     char(*)                    timestamp of date the data becomes publicly available
+  spatial_resolution   double          arcsec     Average of the maximum and minimum spatial resolution values of all spectral windows
+  frequency_support    char(4000*)     GHz        All frequency ranges used by the field
+  frequency            double          GHz        Observed (tuned) reference frequency on the sky.
+  velocity_resolution  double          m/s        Estimated velocity resolution from all the spectral windows, from frequency resolution.
+  obs_creator_name     char(256*)                 case-insensitive partial match over the full PI name. Wildcards can be used
+  pub_title            char(256*)                 Case insensitive search through the title of the publication.
+  first_author         char(256*)                 The first author as provided by <a href="http://telbib.eso.org">telbib.eso.org</a>.
+  authors              char(4000*)                Full list of first author and all co-authors
+  pub_abstract         char(4000*)                Case insensitive text search through the abstract of the publication.
+  publication_year     int                        The year the publication did appear in the printed version of the refereed journal.
+  proposal_abstract    char(4000*)                Text search on the proposal abstract. Only abstracts will be returned which contain the given text. The search is case-insensitive.
+  schedblock_name      char(128*)                 Name of the Scheduling Block used as a template for executing the ASDM containing this Field.
+  proposal_authors     char(2000*)                Full name of CoIs .
+  sensitivity_10kms    double          mJy/beam   Estimated noise in an nominal 10km/s bandwidth. Note this is an indication only, it does not include the effects of flagging or Hanning smoothing, and a 10km/s bandwidth may not be achievable with the data as taken.
+  cont_sensitivity_bandwidth double          mJy/beam   Estimated noise in the aggregated continuum bandwidth. Note this is an indication only, it does not include the effects of flagging or dynamic range limitations.
+  pwv                  float           mm         Estimated precipitable water vapour from the XML_CALWVR_ENTITIES table.
+  group_ous_uid        char(64*)                  Group OUS ID
+  member_ous_uid       char(64*)                  Member OUS ID
+  asdm_uid             char(32*)                  UID of the ASDM containing this Field.
+  obs_title            char(256*)                 Case-insensitive search over the project title
+  type                 char(16*)                  Type flags.
+  scan_intent          char(256*)                 Scan intent list for the observed field.
+  science_observation  char(1)                    Flag to indicate whether this is a science observation.
+  spatial_scale_max    double          arcsec     Due to the fact that radio antennas can not be placed infinitely close, measurements do have a smallest separation which translates into a maximal angular distance beyond which features can not be resolved reliably any more. Adding observations with the ALMA Total Power array can add those missing largest scales.
+  qa2_passed           char(1)                    Quality Assessment 2 status: does the Member / Group OUS fulfil the PI's requirements?
+  bib_reference        char(4000*)                Bibliography code
+  science_keyword      char(200*)                 None
+  scientific_category  char(200*)                 None
+  pi_userid            char(256*)                 None
+  pi_name              char(256*)                 None
+  spectral_resolution  double          kHz        None
+  lastModified         char(32*)                  Time stamp of last modification of the metadata
+[?2004hroot@e45942edb307:/app# cat << 'EOF' > /app/query.py
+[?2004l[?2004h> from astroquery.alma import Alma
+[?2004l[?2004h> import pyvo
+[?2004l[?2004h> 
+[?2004l[?2004h> ra = 85.96420833
+[?2004l[?2004h> dec = -1.04808333
+[?2004l[?2004h> radius = 30.0  # arcsec
+[?2004l[?2004h> 
+[?2004l[?2004h> query = f"""
+[?2004l[?2004h> SELECT *
+[?2004l[?2004h> FROM ivoa.ObsCore
+[?2004l[?2004h> WHERE CONTAINS(POINT('ICRS', s_ra, s_dec), CIRCLE('ICRS', {ra}, {dec}, {radius/3600.0})) = 1
+[?2004l[?2004h> AND science_observation = 'T'
+[?2004l[?2004h> AND data_rights = 'Public'
+[?2004l[?2004h> """
+[?2004l[?2004h> 
+[?2004l[?2004h> result = Alma.query_tap(query)
+[?2004l[?2004h> table = result.to_table()
+[?2004l[?2004h> print(len(table))
+[?2004l[?2004h> table.write('/app/raw_results.ecsv', overwrite=True)
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@e45942edb307:/app# python3 /app/query.py
+[?2004l137
+[?2004hroot@e45942edb307:/app# python3 << 'EOF'
+[?2004l[?2004h> from astropy.table import Table
+[?2004l[?2004h> t = Table.read('/app/raw_results.ecsv')
+[?2004l[?2004h> print(t.colnames)
+[?2004l[?2004h> print(t['band_list'][:10])
+[?2004l[?2004h> print(t['spatial_resolution'][:10])
+[?2004l[?2004h> print(t['member_ous_uid'][:10])
+[?2004l[?2004h> print(t['target_name'][:10])
+[?2004l[?2004h> print(set(t['target_name']))
+[?2004l[?2004h> EOF
+[?2004l['pol_states', 'obs_publisher_did', 'obs_collection', 'facility_name', 'instrument_name', 'obs_id', 'dataproduct_type', 'calib_level', 'collections', 'target_name', 's_ra', 's_dec', 's_fov', 's_region', 's_xel1', 's_xel2', 'em_xel', 't_xel', 'pol_xel', 's_resolution', 't_min', 't_max', 't_exptime', 't_resolution', 'em_min', 'em_max', 'em_res_power', 'sensitivity_10kms', 'cont_sensitivity_bandwidth', 'pwv', 'group_ous_uid', 'member_ous_uid', 'asdm_uid', 'obs_title', 'type', 'scan_intent', 'science_observation', 'spatial_scale_max', 'qa2_passed', 'bib_reference', 'science_keyword', 'scientific_category', 'pi_userid', 'pi_name', 'spectral_resolution', 'lastModified', 'o_ucd', 'access_url', 'access_format', 'access_estsize', 'proposal_id', 'data_rights', 'gal_longitude', 'gal_latitude', 'band_list', 'em_resolution', 'bandwidth', 'antenna_arrays', 'is_mosaic', 'obs_release_date', 'spatial_resolution', 'frequency_support', 'frequency', 'velocity_resolution', 'obs_creator_name', 'pub_title', 'first_author', 'authors', 'pub_abstract', 'publication_year', 'proposal_abstract', 'schedblock_name', 'proposal_authors']
+band_list
+---------
+        7
+        7
+        7
+        7
+        3
+        3
+        3
+        3
+        9
+        9
+ spatial_resolution
+       arcsec      
+-------------------
+ 0.0316734361630697
+ 0.0316734361630697
+ 0.0316734361630697
+ 0.0316734361630697
+0.04498240697812825
+0.04498240697812825
+0.04498240697812825
+0.04498240697812825
+0.22987265569859888
+0.22987265569859888
+    member_ous_uid    
+----------------------
+ uid://A001/X1273/X1f9
+ uid://A001/X1273/X1f9
+ uid://A001/X1273/X1f9
+ uid://A001/X1273/X1f9
+uid://A001/X1465/X3b5e
+uid://A001/X1465/X3b5e
+uid://A001/X1465/X3b5e
+uid://A001/X1465/X3b5e
+ uid://A002/X36d874/Xf
+ uid://A002/X36d874/Xf
+target_name
+-----------
+     HH_212
+     HH_212
+     HH_212
+     HH_212
+     HH_212
+     HH_212
+     HH_212
+     HH_212
+      HH212
+      HH212
+{np.str_('HH212mms'), np.str_('HH_212'), np.str_('HH212'), np.str_('HH212MMS'), np.str_('HH212M')}
+[?2004hroot@e45942edb307:/app# python3 << 'EOF'
+[?2004l[?2004h> from astropy.table import Table
+[?2004l[?2004h> import numpy as np
+[?2004l[?2004h> t = Table.read('/app/raw_results.ecsv')
+[?2004l[?2004h> # check band_list unique values
+[?2004l[?2004h> print('unique band_list values:', set(t['band_list']))
+[?2004l[?2004h> # check spatial_resolution variance within same member_ous_uid
+[?2004l[?2004h> import collections
+[?2004l[?2004h> d = collections.defaultdict(set)
+[?2004l[?2004h> for row in t:
+[?2004l[?2004h>     d[row['member_ous_uid']].add(row['spatial_resolution'])
+[?2004l[?2004h> for k,v in d.items():
+[?2004l[?2004h>     print(k, v)
+[?2004l[?2004h> EOF
+[?2004lunique band_list values: {np.str_('9'), np.str_('6'), np.str_('5'), np.str_('7'), np.str_('3'), np.str_('4')}
+uid://A001/X1273/X1f9 {np.float64(0.0316734361630697)}
+uid://A001/X1465/X3b5e {np.float64(0.04498240697812825)}
+uid://A002/X36d874/Xf {np.float64(0.22987265569859888)}
+uid://A002/X36d874/X13 {np.float64(0.46249283249648676)}
+uid://A002/X36d874/X11 {np.float64(0.47080931157879113)}
+uid://A001/X1473/Xbe6 {np.float64(0.8027864728676456)}
+uid://A001/X1288/Xfb9 {np.float64(3.3831345418841425)}
+uid://A001/X1288/Xff2 {np.float64(3.926430180069447)}
+uid://A001/X1288/Xf93 {np.float64(3.1948546200914683)}
+uid://A001/X1288/Xfa6 {np.float64(3.315204280875174)}
+uid://A001/X1288/Xfdf {np.float64(3.6997308927309396)}
+uid://A001/X1288/Xfcc {np.float64(3.9753611025206195)}
+uid://A001/X1284/X17b8 {np.float64(0.022781354834911657)}
+uid://A001/X1284/X17be {np.float64(0.0456924590743368)}
+uid://A001/X1284/X17ba {np.float64(0.1489361985467903)}
+uid://A001/X362b/Xf37 {np.float64(0.14924825593190996)}
+uid://A001/X362b/Xf41 {np.float64(0.1631972480276877)}
+uid://A001/X88f/X25b {np.float64(0.338030740167654)}
+uid://A001/X88f/X259 {np.float64(0.09152828751568182)}
+uid://A001/X3788/X624b {np.float64(10.98349050231547), np.float64(10.985676982453333)}
+uid://A002/X7b15a9/X5a {np.float64(0.1423064091216609)}
+uid://A002/X7b15a9/X5e {np.float64(0.06404245507798866)}
+uid://A001/X2de/X22 {np.float64(0.11296974037381813)}
+uid://A001/X2de/X42 {np.float64(0.014753635301994835)}
+uid://A002/X6ac013/X11 {np.float64(0.29337548756861065)}
+uid://A001/X196/X9f {np.float64(1.5447235053010457)}
+uid://A001/X340/X1f9 {np.float64(0.09217021640101315)}
+[?2004hroot@e45942edb307:/app# python3 << 'EOF'
+[?2004l[?2004h> from astropy.table import Table
+[?2004l[?2004h> import collections
+[?2004l[?2004h> t = Table.read('/app/raw_results.ecsv')
+[?2004l[?2004h> d = collections.defaultdict(set)
+[?2004l[?2004h> for row in t:
+[?2004l[?2004h>     d[row['member_ous_uid']].add(str(row['band_list']))
+[?2004l[?2004h> for k,v in d.items():
+[?2004l[?2004h>     print(k, v)
+[?2004l[?2004h> EOF
+[?2004luid://A001/X1273/X1f9 {'7'}
+uid://A001/X1465/X3b5e {'3'}
+uid://A002/X36d874/Xf {'9'}
+uid://A002/X36d874/X13 {'7'}
+uid://A002/X36d874/X11 {'7'}
+uid://A001/X1473/Xbe6 {'7'}
+uid://A001/X1288/Xfb9 {'7'}
+uid://A001/X1288/Xff2 {'7'}
+uid://A001/X1288/Xf93 {'7'}
+uid://A001/X1288/Xfa6 {'7'}
+uid://A001/X1288/Xfdf {'7'}
+uid://A001/X1288/Xfcc {'7'}
+uid://A001/X1284/X17b8 {'6'}
+uid://A001/X1284/X17be {'3'}
+uid://A001/X1284/X17ba {'6'}
+uid://A001/X362b/Xf37 {'6'}
+uid://A001/X362b/Xf41 {'5'}
+uid://A001/X88f/X25b {'7'}
+uid://A001/X88f/X259 {'7'}
+uid://A001/X3788/X624b {'3'}
+uid://A002/X7b15a9/X5a {'7'}
+uid://A002/X7b15a9/X5e {'9'}
+uid://A001/X2de/X22 {'7'}
+uid://A001/X2de/X42 {'7'}
+uid://A002/X6ac013/X11 {'7'}
+uid://A001/X196/X9f {'4'}
+uid://A001/X340/X1f9 {'7'}
+[?2004hroot@e45942edb307:/app# cat << 'EOF' > /app/build_output.py
+[?2004l[?2004h> import json
+[?2004l[?2004h> from astropy.table import Table
+[?2004l[?2004h> import numpy as np
+[?2004l[?2004h> 
+[?2004l[?2004h> ra = 85.96420833
+[?2004l[?2004h> dec = -1.04808333
+[?2004l[?2004h> radius = 30.0
+[?2004l[?2004h> 
+[?2004l[?2004h> t = Table.read('/app/raw_results.ecsv')
+[?2004l[?2004h> 
+[?2004l[?2004h> # Filter band 6/7 and spatial_resolution < 1.0
+[?2004l[?2004h> mask = np.array([
+[?2004l[?2004h>     (int(row['band_list']) in (6,7)) and (float(row['spatial_resolution']) < 1.0)
+[?2004l[?2004h>     for row in t
+[?2004l[?2004h> ])
+[?2004l[?2004h> filtered = t[mask]
+[?2004l[?2004h> 
+[?2004l[?2004h> print('Filtered rows:', len(filtered))
+[?2004l[?2004h> print('Unique MOUS:', len(set(filtered['member_ous_uid'])))
+[?2004l[?2004h> 
+[?2004l[?2004h> mous_groups = {}
+[?2004l[?2004h> for row in filtered:
+[?2004l[?2004h>     uid = row['member_ous_uid']
+[?2004l[?2004h>     if uid not in mous_groups:
+[?2004l[?2004h>         mous_groups[uid] = {
+[?2004l[?2004h>             'member_ous_uid': uid,
+[?2004l[?2004h>             'project_code': str(row['proposal_id']),
+[?2004l[?2004h>             'alma_source_name': str(row['target_name']),
+[?2004l[?2004h>             'ra_deg': float(row['s_ra']),
+[?2004l[?2004h>             'dec_deg': float(row['s_dec']),
+[?2004l[?2004h>             'bands': set(),
+[?2004l[?2004h>             'spatial_resolution_arcsec': float(row['spatial_resolution']),
+[?2004l[?2004h>             'qa2_status': str(row['qa2_passed'])
+[?2004l[?2004h>         }
+[?2004l[?2004h>     mous_groups[uid]['bands'].add(int(row['band_list']))
+[?2004l[?2004h> 
+[?2004l[?2004h> observations = []
+[?2004l[?2004h> for uid, g in mous_groups.items():
+[?2004l[?2004h>     observations.append({
+[?2004l[?2004h>         'member_ous_uid': g['member_ous_uid'],
+[?2004l[?2004h>         'project_code': g['project_code'],
+[?2004l[?2004h>         'alma_source_name': g['alma_source_name'],
+[?2004l[?2004h>         'ra_deg': g['ra_deg'],
+[?2004l[?2004h>         'dec_deg': g['dec_deg'],
+[?2004l[?2004h>         'band': sorted(g['bands']),
+[?2004l[?2004h>         'spatial_resolution_arcsec': g['spatial_resolution_arcsec'],
+[?2004l[?2004h>         'qa2_status': g['qa2_status']
+[?2004l[?2004h>     })
+[?2004l[?2004h> 
+[?2004l[?2004h> # sort by member_ous_uid for reproducibility
+[?2004l[?2004h> observations.sort(key=lambda x: x['member_ous_uid'])
+[?2004l[?2004h> 
+[?2004l[?2004h> num_obs = len(observations)
+[?2004l[?2004h> bands_seen = sorted(set(b for o in observations for b in o['band']))
+[?2004l[?2004h> res_values = [o['spatial_resolution_arcsec'] for o in observations]
+[?2004l[?2004h> res_min = min(res_values) if res_values else None
+[?2004l[?2004h> res_max = max(res_values) if res_values else None
+[?2004l[?2004h> 
+[?2004l[?2004h> summary = (
+[?2004l[?2004h>     f"A total of {num_obs} unique ALMA Member Observation Unit Sets (MOUS) targeting HH 212 "
+[?2004l[?2004h>     f"were found in Band(s) {bands_seen} with spatial resolution under 1 arcsecond. "
+[?2004l[?2004h>     f"Spatial resolutions range from {res_min:.3f} to {res_max:.3f} arcsec. "
+[?2004l[?2004h>     f"These public science observations were identified via a {radius:.0f} arcsec positional search "
+[?2004l[?2004h>     f"around the resolved coordinates of HH 212 (RA={ra:.5f}, Dec={dec:.5f}). "
+[?2004l[?2004h>     f"The observations span multiple ALMA projects and include both Band 6 and Band 7 data where available."
+[?2004l[?2004h> )
+[?2004l[?2004h> 
+[?2004l[?2004h> output = {
+[?2004l[?2004h>     'target_name': 'HH 212',
+[?2004l[?2004h>     'resolved_ra_deg': ra,
+[?2004l[?2004h>     'resolved_dec_deg': dec,
+[?2004l[?2004h>     'search_radius_arcsec': radius,
+[?2004l[?2004h>     'band_filter': [6,7],
+[?2004l[?2004h>     'max_spatial_resolution_arcsec': 1.0,
+[?2004l[?2004h>     'num_observations': num_obs,
+[?2004l[?2004h>     'observations': observations,
+[?2004l[?2004h>     'summary': summary
+[?2004l[?2004h> }
+[?2004l[?2004h> 
+[?2004l[?2004h> with open('/app/output.json', 'w') as f:
+[?2004l[?2004h>     json.dump(output, f, indent=2)
+[?2004l[?2004h> 
+[?2004l[?2004h> print('Wrote output.json with', num_obs, 'observations')
+[?2004l[?2004h> EOF
+[?2004l[?2004hroot@e45942edb307:/app# python3 /app/build_output.py
+[?2004lFiltered rows: 80
+Unique MOUS: 14
+Wrote output.json with 14 observations
+[?2004hroot@e45942edb307:/app# python3 -c "import json; d=json.load(open('/app/output.json')); print(json.dumps(d, indent=2)[:3000])"
+[?2004l{
+  "target_name": "HH 212",
+  "resolved_ra_deg": 85.96420833,
+  "resolved_dec_deg": -1.04808333,
+  "search_radius_arcsec": 30.0,
+  "band_filter": [
+    6,
+    7
+  ],
+  "max_spatial_resolution_arcsec": 1.0,
+  "num_observations": 14,
+  "observations": [
+    {
+      "member_ous_uid": "uid://A001/X1273/X1f9",
+      "project_code": "2017.1.00044.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421125000545,
+      "dec_deg": -1.0481019444447288,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.0316734361630697,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17b8",
+      "project_code": "2017.1.00712.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421125001223,
+      "dec_deg": -1.0481019444444382,
+      "band": [
+        6
+      ],
+      "spatial_resolution_arcsec": 0.022781354834911657,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1284/X17ba",
+      "project_code": "2017.1.00712.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421125004338,
+      "dec_deg": -1.0481019444447166,
+      "band": [
+        6
+      ],
+      "spatial_resolution_arcsec": 0.1489361985467903,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X1473/Xbe6",
+      "project_code": "2019.1.00086.S",
+      "alma_source_name": "HH212M",
+      "ra_deg": 85.96421250001843,
+      "dec_deg": -1.0481111111112291,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.8027864728676456,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X22",
+      "project_code": "2015.1.00037.S",
+      "alma_source_name": "HH_212",
+      "ra_deg": 85.96421124998832,
+      "dec_deg": -1.0481019444444875,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.11296974037381813,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X2de/X42",
+      "project_code": "2015.1.00024.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.9642,
+      "dec_deg": -1.0480916666666666,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.014753635301994835,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X340/X1f9",
+      "project_code": "2015.1.00041.S",
+      "alma_source_name": "HH212mms",
+      "ra_deg": 85.9642125000427,
+      "dec_deg": -1.0481027777780914,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.09217021640101315,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X362b/Xf37",
+      "project_code": "2023.1.00494.S",
+      "alma_source_name": "HH212MMS",
+      "ra_deg": 85.96420833336394,
+      "dec_deg": -1.048096666666971,
+      "band": [
+        6
+      ],
+      "spatial_resolution_arcsec": 0.14924825593190996,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X88f/X259",
+      "project_code": "2016.1.01475.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.9642
+[?2004hroot@e45942edb307:/app# python3 -c "import json; d=json.load(open('/app/output.json')); print(json.dumps(d, indent=2)[3000:6000])"
+[?2004l0833333109,
+      "dec_deg": -1.0481000000000829,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.09152828751568182,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A001/X88f/X25b",
+      "project_code": "2016.1.01475.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96420833338408,
+      "dec_deg": -1.0481000000004446,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.338030740167654,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A002/X36d874/X11",
+      "project_code": "2011.0.00647.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96419999999999,
+      "dec_deg": -1.0480916666666666,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.47080931157879113,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A002/X36d874/X13",
+      "project_code": "2011.0.00647.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96420833333333,
+      "dec_deg": -1.0481,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.46249283249648676,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A002/X6ac013/X11",
+      "project_code": "2012.1.00997.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96420833333333,
+      "dec_deg": -1.0481,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.29337548756861065,
+      "qa2_status": "T"
+    },
+    {
+      "member_ous_uid": "uid://A002/X7b15a9/X5a",
+      "project_code": "2012.1.00122.S",
+      "alma_source_name": "HH212",
+      "ra_deg": 85.96439055186667,
+      "dec_deg": -1.048172537602811,
+      "band": [
+        7
+      ],
+      "spatial_resolution_arcsec": 0.1423064091216609,
+      "qa2_status": "T"
+    }
+  ],
+  "summary": "A total of 14 unique ALMA Member Observation Unit Sets (MOUS) targeting HH 212 were found in Band(s) [6, 7] with spatial resolution under 1 arcsecond. Spatial resolutions range from 0.015 to 0.803 arcsec. These public science observations were identified via a 30 arcsec positional search around the resolved coordinates of HH 212 (RA=85.96421, Dec=-1.04808). The observations span multiple ALMA projects and include both Band 6 and Band 7 data where available."
+}
+[?2004hroot@e45942edb307:/app# python3 -c "
+[?2004l[?2004h> import json
+[?2004l[?2004h> d = json.load(open('/app/output.json'))
+[?2004l[?2004h> assert d['target_name'] == 'HH 212'
+[?2004l[?2004h> assert isinstance(d['resolved_ra_deg'], float)
+[?2004l[?2004h> assert isinstance(d['resolved_dec_deg'], float)
+[?2004l[?2004h> assert isinstance(d['search_radius_arcsec'], float)
+[?2004l[?2004h> assert d['band_filter'] == [6,7]
+[?2004l[?2004h> assert d['max_spatial_resolution_arcsec'] == 1.0
+[?2004l[?2004h> assert d['num_observations'] == len(d['observations'])
+[?2004l[?2004h> uids = [o['member_ous_uid'] for o in d['observations']]
+[?2004l[?2004h> assert len(uids) == len(set(uids)), 'duplicate uids!'
+[?2004l[?2004h> for o in d['observations']:
+[?2004l[?2004h>     assert all(b in (6,7) for b in o['band'])
+[?2004l[?2004h>     assert o['spatial_resolution_arcsec'] < 1.0
+[?2004l[?2004h> print('All validations passed!')
+[?2004l[?2004h> print('num_observations:', d['num_observations'])
+[?2004l[?2004h> "
+[?2004lAll validations passed!
+num_observations: 14
+[?2004hroot@e45942edb307:/app# cat /app/output.json | python3 -m json.tool > /dev/null && echo 'Valid JSON confirmed'
+[?2004lValid JSON confirmed
+[?2004hroot@e45942edb307:/app# python3 -c "
+[?2004l[?2004h> from astropy.table import Table
+[?2004l[?2004h> t = Table.read('/app/raw_results.ecsv')
+[?2004l[?2004h> print('calib_level values:', set(t['calib_level']))
+[?2004l[?2004h> print('data_rights values:', set(t['data_rights']))
+[?2004l[?2004h> print('science_observation values:', set(t['science_observation']))
+[?2004l[?2004h> print('Number of raw rows:', len(t))
+[?2004l[?2004h> print('Number of unique member_ous_uid (all bands/res):', len(set(t['member_ous_uid'])))
+[?2004l[?2004h> "
+[?2004lcalib_level values: {np.int32(2)}
+data_rights values: {np.str_('Public')}
+science_observation values: {np.str_('T')}
+Number of raw rows: 137
+Number of unique member_ous_uid (all bands/res): 27
+[?2004hroot@e45942edb307:/app# 

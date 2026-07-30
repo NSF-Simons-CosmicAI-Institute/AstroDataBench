@@ -1,0 +1,11 @@
+{
+  "analysis": "astroquery 0.4.11 and pyvo 1.9.1 are installed. Now I need to resolve HH 212 coordinates and query the ALMA archive.",
+  "plan": "First resolve coordinates using astropy's SkyCoord.from_name (Sesame resolver) for HH 212. Then explore astroquery.alma.Alma to query the archive by position.",
+  "commands": [
+    {
+      "keystrokes": "python3 -c \"from astropy.coordinates import SkyCoord; c = SkyCoord.from_name('HH 212'); print(c.ra.deg, c.dec.deg)\"\n",
+      "duration": 10.0
+    }
+  ],
+  "task_complete": false
+}

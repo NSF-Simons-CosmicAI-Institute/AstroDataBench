@@ -1,0 +1,13 @@
+All 14 observations are present with complete, valid data. The output.json file is properly formatted with all required fields.
+
+{
+  "analysis": "The output.json file is complete and valid. It contains 14 unique MOUS observations, all correctly filtered for Band 6/7 and spatial_resolution < 1.0 arcsec, resolved from a positional search around HH 212. Each observation has all required fields: member_ous_uid, project_code, alma_source_name, ra_deg, dec_deg, band (list), spatial_resolution_arcsec, and qa2_status. The summary is well-formed with correct statistics (14 observations, bands 6&7, resolution range 0.015-0.803 arcsec). The top-level fields (target_name, resolved_ra_deg, resolved_dec_deg, search_radius_arcsec, band_filter, max_spatial_resolution_arcsec, num_observations) are all present and correctly typed.",
+  "plan": "The task appears complete. Let me do a final validation check to ensure the JSON is syntactically perfect and all data types match the schema (floats vs ints, etc.), then confirm task completion.",
+  "commands": [
+    {
+      "keystrokes": "python3 -c \"\nimport json\nd = json.load(open('/app/output.json'))\nassert d['target_name'] == 'HH 212'\nassert isinstance(d['resolved_ra_deg'], float)\nassert isinstance(d['resolved_dec_deg'], float)\nassert isinstance(d['search_radius_arcsec'], float)\nassert d['band_filter'] == [6,7]\nassert d['max_spatial_resolution_arcsec'] == 1.0\nassert d['num_observations'] == len(d['observations'])\nuids = [o['member_ous_uid'] for o in d['observations']]\nassert len(uids) == len(set(uids)), 'duplicate uids!'\nfor o in d['observations']:\n    assert all(b in (6,7) for b in o['band'])\n    assert o['spatial_resolution_arcsec'] < 1.0\nprint('All validations passed!')\nprint('num_observations:', d['num_observations'])\n\"\n",
+      "duration": 3.0
+    }
+  ],
+  "task_complete": false
+}

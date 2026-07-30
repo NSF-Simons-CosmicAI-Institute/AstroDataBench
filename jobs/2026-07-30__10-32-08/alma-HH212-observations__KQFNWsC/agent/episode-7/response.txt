@@ -1,0 +1,11 @@
+{
+  "analysis": "Confirmed spatial_resolution is essentially constant per member_ous_uid (one has tiny variation ~10.983 vs 10.985, likely negligible from floating point representation across spw rows). band_list has single band per row. Now checking bands per MOUS to see if multiple different bands occur within same MOUS.",
+  "plan": "Check band variety per MOUS, then write final aggregation script applying filters (band 6/7, spatial_resolution<1) and building the output JSON.",
+  "commands": [
+    {
+      "keystrokes": "python3 << 'EOF'\nfrom astropy.table import Table\nimport collections\nt = Table.read('/app/raw_results.ecsv')\nd = collections.defaultdict(set)\nfor row in t:\n    d[row['member_ous_uid']].add(str(row['band_list']))\nfor k,v in d.items():\n    print(k, v)\nEOF\n",
+      "duration": 5.0
+    }
+  ],
+  "task_complete": false
+}

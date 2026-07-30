@@ -1,0 +1,11 @@
+{
+  "analysis": "Alma class has query_region, query_tap methods. Let's use query_tap with ADQL for full control over ObsCore columns, since the task requires specific filtering on spatial_resolution, band, science_observation, etc.",
+  "plan": "Check Alma.help_tap() to see the ObsCore column names available, then construct an ADQL query using CONTAINS/POINT for positional search, plus filters for science_observation='T', data_rights='Public', band_list, spatial_resolution<1.",
+  "commands": [
+    {
+      "keystrokes": "python3 -c \"from astroquery.alma import Alma; Alma.help_tap()\" 2>&1 | head -100\n",
+      "duration": 10.0
+    }
+  ],
+  "task_complete": false
+}

@@ -1,0 +1,254 @@
+Get:1 http://deb.debian.org/debian trixie InRelease [140 kB]
+Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+Get:4 http://deb.debian.org/debian trixie/main arm64 Packages [9607 kB]
+Get:5 http://deb.debian.org/debian trixie-updates/main arm64 Packages [4424 B]
+Get:6 http://deb.debian.org/debian-security trixie-security/main arm64 Packages [230 kB]
+Fetched 10.1 MB in 3s (3829 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (8.14.1-2+deb13u4).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+downloading uv 0.9.7 aarch64-unknown-linux-gnu
+no checksums to verify
+installing to /root/.local/bin
+  uv
+  uvx
+everything's installed!
+
+To add $HOME/.local/bin to your PATH, either restart your shell or run:
+
+    source $HOME/.local/bin/env (sh, bash, zsh)
+    source $HOME/.local/bin/env.fish (fish)
+Downloading astropy (9.9MiB)
+Downloading cryptography (4.5MiB)
+Downloading astropy-iers-data (1.9MiB)
+Downloading pygments (1.2MiB)
+Downloading numpy (14.5MiB)
+Downloading astroquery (10.6MiB)
+Downloading pyvo (1.1MiB)
+ Downloading pyvo
+ Downloading pygments
+ Downloading astropy-iers-data
+ Downloading cryptography
+ Downloading astropy
+ Downloading astroquery
+ Downloading numpy
+Installed 34 packages in 88ms
+============================= test session starts ==============================
+platform linux -- Python 3.13.14, pytest-8.4.1, pluggy-1.6.0
+rootdir: /tests
+plugins: json-ctrf-0.3.5
+collected 12 items
+
+../tests/test_outputs.py EEEEEEEEEEEE                                    [100%]
+
+==================================== ERRORS ====================================
+________________________ ERROR at setup of test_schema _________________________
+
+    @pytest.fixture(scope="module")
+    def agent_output():
+        """" Fixture to load the agent's output.json file (which should have been produced
+        in /app/output.json)
+        """
+    
+        path = Path("/app/output.json")
+>       assert path.exists(), "Agent did not produce /app/output.json"
+E       AssertionError: Agent did not produce /app/output.json
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/output.json').exists
+
+/tests/test_outputs.py:45: AssertionError
+______________________ ERROR at setup of test_row_schema _______________________
+
+    @pytest.fixture(scope="module")
+    def agent_output():
+        """" Fixture to load the agent's output.json file (which should have been produced
+        in /app/output.json)
+        """
+    
+        path = Path("/app/output.json")
+>       assert path.exists(), "Agent did not produce /app/output.json"
+E       AssertionError: Agent did not produce /app/output.json
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/output.json').exists
+
+/tests/test_outputs.py:45: AssertionError
+___________________ ERROR at setup of test_one_row_per_mous ____________________
+
+    @pytest.fixture(scope="module")
+    def agent_output():
+        """" Fixture to load the agent's output.json file (which should have been produced
+        in /app/output.json)
+        """
+    
+        path = Path("/app/output.json")
+>       assert path.exists(), "Agent did not produce /app/output.json"
+E       AssertionError: Agent did not produce /app/output.json
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/output.json').exists
+
+/tests/test_outputs.py:45: AssertionError
+___________________ ERROR at setup of test_resolved_position ___________________
+
+    @pytest.fixture(scope="module")
+    def agent_output():
+        """" Fixture to load the agent's output.json file (which should have been produced
+        in /app/output.json)
+        """
+    
+        path = Path("/app/output.json")
+>       assert path.exists(), "Agent did not produce /app/output.json"
+E       AssertionError: Agent did not produce /app/output.json
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/output.json').exists
+
+/tests/test_outputs.py:45: AssertionError
+_____________________ ERROR at setup of test_search_radius _____________________
+
+    @pytest.fixture(scope="module")
+    def agent_output():
+        """" Fixture to load the agent's output.json file (which should have been produced
+        in /app/output.json)
+        """
+    
+        path = Path("/app/output.json")
+>       assert path.exists(), "Agent did not produce /app/output.json"
+E       AssertionError: Agent did not produce /app/output.json
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/output.json').exists
+
+/tests/test_outputs.py:45: AssertionError
+____________ ERROR at setup of test_declared_filters_match_request _____________
+
+    @pytest.fixture(scope="module")
+    def agent_output():
+        """" Fixture to load the agent's output.json file (which should have been produced
+        in /app/output.json)
+        """
+    
+        path = Path("/app/output.json")
+>       assert path.exists(), "Agent did not produce /app/output.json"
+E       AssertionError: Agent did not produce /app/output.json
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/output.json').exists
+
+/tests/test_outputs.py:45: AssertionError
+_____________ ERROR at setup of test_every_row_matches_band_filter _____________
+
+    @pytest.fixture(scope="module")
+    def agent_output():
+        """" Fixture to load the agent's output.json file (which should have been produced
+        in /app/output.json)
+        """
+    
+        path = Path("/app/output.json")
+>       assert path.exists(), "Agent did not produce /app/output.json"
+E       AssertionError: Agent did not produce /app/output.json
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/output.json').exists
+
+/tests/test_outputs.py:45: AssertionError
+_________ ERROR at setup of test_every_row_meets_resolution_constraint _________
+
+    @pytest.fixture(scope="module")
+    def agent_output():
+        """" Fixture to load the agent's output.json file (which should have been produced
+        in /app/output.json)
+        """
+    
+        path = Path("/app/output.json")
+>       assert path.exists(), "Agent did not produce /app/output.json"
+E       AssertionError: Agent did not produce /app/output.json
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/output.json').exists
+
+/tests/test_outputs.py:45: AssertionError
+__________ ERROR at setup of test_observation_count_within_tolerance ___________
+
+    @pytest.fixture(scope="module")
+    def agent_output():
+        """" Fixture to load the agent's output.json file (which should have been produced
+        in /app/output.json)
+        """
+    
+        path = Path("/app/output.json")
+>       assert path.exists(), "Agent did not produce /app/output.json"
+E       AssertionError: Agent did not produce /app/output.json
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/output.json').exists
+
+/tests/test_outputs.py:45: AssertionError
+_______________ ERROR at setup of test_positions_are_near_target _______________
+
+    @pytest.fixture(scope="module")
+    def agent_output():
+        """" Fixture to load the agent's output.json file (which should have been produced
+        in /app/output.json)
+        """
+    
+        path = Path("/app/output.json")
+>       assert path.exists(), "Agent did not produce /app/output.json"
+E       AssertionError: Agent did not produce /app/output.json
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/output.json').exists
+
+/tests/test_outputs.py:45: AssertionError
+______________________ ERROR at setup of test_qa2_status _______________________
+
+    @pytest.fixture(scope="module")
+    def agent_output():
+        """" Fixture to load the agent's output.json file (which should have been produced
+        in /app/output.json)
+        """
+    
+        path = Path("/app/output.json")
+>       assert path.exists(), "Agent did not produce /app/output.json"
+E       AssertionError: Agent did not produce /app/output.json
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/output.json').exists
+
+/tests/test_outputs.py:45: AssertionError
+_________________ ERROR at setup of test_summary_is_nontrivial _________________
+
+    @pytest.fixture(scope="module")
+    def agent_output():
+        """" Fixture to load the agent's output.json file (which should have been produced
+        in /app/output.json)
+        """
+    
+        path = Path("/app/output.json")
+>       assert path.exists(), "Agent did not produce /app/output.json"
+E       AssertionError: Agent did not produce /app/output.json
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/output.json').exists
+
+/tests/test_outputs.py:45: AssertionError
+=========================== short test summary info ============================
+ERROR ../tests/test_outputs.py::test_schema - AssertionError: Agent did not p...
+ERROR ../tests/test_outputs.py::test_row_schema - AssertionError: Agent did n...
+ERROR ../tests/test_outputs.py::test_one_row_per_mous - AssertionError: Agent...
+ERROR ../tests/test_outputs.py::test_resolved_position - AssertionError: Agen...
+ERROR ../tests/test_outputs.py::test_search_radius - AssertionError: Agent di...
+ERROR ../tests/test_outputs.py::test_declared_filters_match_request - Asserti...
+ERROR ../tests/test_outputs.py::test_every_row_matches_band_filter - Assertio...
+ERROR ../tests/test_outputs.py::test_every_row_meets_resolution_constraint - ...
+ERROR ../tests/test_outputs.py::test_observation_count_within_tolerance - Ass...
+ERROR ../tests/test_outputs.py::test_positions_are_near_target - AssertionErr...
+ERROR ../tests/test_outputs.py::test_qa2_status - AssertionError: Agent did n...
+ERROR ../tests/test_outputs.py::test_summary_is_nontrivial - AssertionError: ...
+============================== 12 errors in 1.14s ==============================

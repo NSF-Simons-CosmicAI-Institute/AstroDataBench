@@ -9,16 +9,12 @@ targeting the object HH 212, with the following constraints:
   represents the synthesized beam size in arcsec, not a distance-dependent
   linear/physical resolution)
 
-<!--NOTE: Removing for testing: Instead of searching by name, resolve the coordinates of HH 212 and search by
-position with an explicit radius.  -->
+
 Note that the archive's TAP/ObsCore interface returns one row per spectral window, 
 so a single observation can appear as several rows. For this task, "one observation" 
-means one Member Observation Unit Set (MOUS), which is identified by the `member_ous_uid` 
-column. 
+means one Member Observation Unit Set (MOUS), which is identified by the `member_ous_uid` column. 
 
 <!-- NOTE: intentionally not specifying spatial or angular resolution due to naming ambiguity in the ObsCore schema -->
-Write your findings to `/app/output.json` as a JSON object. Report the number of observationsfound and report, for each matching observation, at minimum: the project code, the band(s), and the resolution (in arcseconds). Field names and overall structure are up to you.
+Write your findings to `/app/output.json` as a JSON object. Report the number of observations found and report, for each matching observation, at minimum: the project code, the band(s), and the resolution (in arcseconds). Field names and overall structure are up to you.
 
-Exactly one row in "observations" per distinct member_ous_uid. You have internet access to the
-ALMA archive (almascience.org / almascience.nrao.edu / almascience.eso.org) and PyPI. `astroquery`
-and `pyvo` are already installed.
+Exactly one row in "observations" per distinct member_ous_uid. You have internet access to the ALMA archive (almascience.org / almascience.nrao.edu / almascience.eso.org).

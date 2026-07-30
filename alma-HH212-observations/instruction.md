@@ -33,7 +33,7 @@ Write your findings to `/app/output.json` with this exact schema:
       "ra_deg": <float>,
       "dec_deg": <float>,
       "band": [<int>, ...],              // ALMA band(s) for this observation
-      "best_spatial_resolution_arcsec": <float>, // best (minimum) value across this MOUS's spectral windows
+      "spatial_resolution_arcsec": <float>, // observation resolution in arcseconds
       "qa2_status": "<str>"                // qa2_passed
     },
     ...
@@ -41,6 +41,5 @@ Write your findings to `/app/output.json` with this exact schema:
   "summary": "<3-5 sentence natural-language summary of what's available: how many observations, which bands, resolution range>"
 }
 
-Exactly one row in "observations" per distinct member_ous_uid. You have internet access to the
-ALMA archive (almascience.org / almascience.nrao.edu / almascience.eso.org) and PyPI. `astroquery`
+Exactly one row in "observations" per distinct member_ous_uid. You have internet access to the ALMA archive (almascience.org / almascience.nrao.edu / almascience.eso.org) and PyPI. `astroquery`
 and `pyvo` are already installed.
