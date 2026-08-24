@@ -1,0 +1,90 @@
+id: multiwav_source_match
+category: cross-regime
+prompt: |
+  I found a compact radio source in an ALMA continuum map. I want to identify its optical counterpart using NOIRLab's
+  Astro Data Lab. What steps should I follow, and what could go wrong with just using a nearest neighbor match?
+checklist:
+  - id: coordinates
+    text: States that the first step is determining the object coordinates/position in 
+          the ALMA image and mentions at least one valid method for achieving this (e.g., 
+          fitting a 2D Gaussian to the continuum emission).
+    weight: 1.0
+  - id: catalog_selection
+    text: Explains that the user needs to determine which Astro Data Lab survey catalog(s) 
+          to query and makes recommendations for accomplishing this (e.g., using Astro Data 
+          Lab’s discovery tools, checking survey coverage tables when available, etc.)
+    weight: 1.0
+  - id: object_type
+    text:  Includes some mention that different catalogs/surveys cover different kinds of 
+          objects/information and relates this back to the choice in which catalog(s) to query.
+    # Mentions that if the object type is known or suspected (e.g., resolved stellar 
+    #       population, background extragalactic source, etc.), this should also inform catalog
+    #       choice; OR mentions that some Data Lab catalogs are built for specific science cases; 
+    #       OR gives examples of datalab catalog names and what 
+    weight: 0.5
+  # - id: nsc_dr2
+  #   text: Mentions that NSC DR2 is a reasonable general-purpose default catalog choice. 
+  #   weight: 0.5
+  - id: cone_search
+    text: Explains that the user can perform a cone search against the chosen Astro Data Lab 
+          catalog, centered on the ALMA continuum position and with a radius informed by 
+          uncertainties in both the ALMA continuum position and optical catalog.
+    weight: 0.75
+  - id: SQL
+    text: Specifies that the Astro Data Lab catalog query can be performed using SQL/ADQL. 
+    weight: 0.5
+  - id: nearest_neighbor_issues
+    text: States that the nearest-neighbor method (picking the closest catalog object to the
+          continuum position) can lead to inaccurate matches (e.g., in crowded fields or for
+          faint ALMA detections with larger uncertainty). 
+    weight: 1.0
+  - id: mapping_uncertainty
+    text: Includes some explanation that there may not be a 1:1 mapping between the ALMA continuum
+          and optical sources (e.g., the compact ALMA source may correspond to a larger / more 
+          extended optical structure instead of a single point source match). 
+    weight: 0.75
+  - id: positional_uncertainty
+    text: Notes that both ALMA continuum positions and optical catalogs have uncertainties / astrometric
+          errors, and a nearest-neighbor match ignores this.
+    weight: 0.75
+  - id: selection
+    text: Mentions at least one statistical method of selecting the most likely match when multiple
+          optical sources fall within the specified cone search (e.g., the likelihood ratio method 
+          of Sutherland & Saunders 1992).
+          # and explains that the final selection should apply a 
+          # threshold or reliability criterion to that method's output, adopting the candidate only 
+          # if meets the threshold, rather than always picking the top-ranked candidate regardless
+          # of score.
+    weight: 0.75
+  - id: no_optical_match
+    text: Notes that some sources may not display any optical emission / counterpart (e.g., deeply 
+          embedded protostars, optically obscured galaxies, etc.) despite a clear detection in the 
+          ALMA continuum data. 
+    weight: 0.75
+rubric:
+  - name: accuracy
+    description: "Is everything stated in the response factually correct, including claims, terms, and
+                  reasoning? This should be scored independently of checklist coverage, meaning an
+                  answer can satisfy every checklist item and still contain an unrelated factual error,
+                  a misapplied term, or an incorrect description, and any such error should lower this
+                  score even if it doesn't affect whether the answer satisfies the checklist."
+    scale: 5
+    weight: 0.5
+  - name: caveating
+    description: "Does the response express an appropriate level of confidence about its own claims
+                  (avoiding overconfident assertions on points that are wrong or genuinely uncertain),
+                  and does it hedge or flag uncertainty about its own statements when scientifically
+                  warranted? This assesses the model's self-assessed confidence in what it asserts,
+                  not whether the response describes a concept, process, or result that is itself
+                  inherently ambiguous or non-unique. Score this independently of checklist coverage
+                  and of whether the underlying content is correct."
+    scale: 5
+    weight: 0.25
+  - name: clarity
+    description: "Is the response well-organized, appropriately detailed, and easy to act on, with enough
+                  detail for a non-expert to follow and apply it without being overly verbose? A response
+                  can be complete and accurate while still being disorganized, overly verbose, or too
+                  generic to be useful; this score should capture that quality independent of content
+                  correctness or coverage."
+    scale: 5
+    weight: 0.25

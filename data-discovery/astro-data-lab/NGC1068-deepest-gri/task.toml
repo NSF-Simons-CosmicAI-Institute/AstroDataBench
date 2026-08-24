@@ -1,0 +1,42 @@
+schema_version = "1.2"
+artifacts = ["/app/output.json"]
+
+[task]
+name = "STABLE/NGC1068-deepest-gri"
+description = "Find deepest available g, r, i stacked images on Astro Data Lab"
+authors = []
+keywords = ["datalab", "query"]
+
+[metadata] # metadata that isn't actually used in the running / grading
+difficulty_explanation = "easy"
+category = "astro-data-lab"
+
+[environment] # Used at build time (before the agent and verifier run) to set the container conditions
+build_timeout_sec = 600.0
+network_mode = "public"
+os = "linux"
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0
+mcp_servers = []
+ANTHROPIC_API_KEY = "${ANTHROPIC_API_KEY}"
+
+[agent] # Controls sandbox conditions as the agent is running (overrides the environment baseline only during the agent's turn)
+timeout_sec = 600.0
+network_mode = "allowlist"
+allowed_hosts = [
+  "datalab.noirlab.edu", "*datalab.noirlab.edu",
+  "pypi.org", "files.pythonhosted.org",
+]
+
+[verifier] # Controls conditions for verification (test.sh)
+timeout_sec = 600.0
+network_mode = "allowlist"
+allowed_hosts = [
+  "datalab.noirlab.edu", "*datalab.noirlab.edu",
+]
+
+#[environment.env]
+
+#[solution.env]

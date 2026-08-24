@@ -1,0 +1,17 @@
+# Default configuration for the domain-knowledge benchmark.
+# Any of these can be overridden with CLI flags on run.py / grade.py / run_benchmark.sh.
+
+candidate_model: claude-sonnet-5
+judge_model: claude-opus-5
+
+# Max tokens for the candidate model's answer and the judge's grading call.
+candidate_max_tokens: 2048
+judge_max_tokens: 4096
+
+# Default scoring weights, used unless a task defines its own `scoring:` block.
+scoring:
+  checklist_weight: 0.6
+  rubric_weight: 0.4
+
+tasks_dir: tasks
+results_dir: results

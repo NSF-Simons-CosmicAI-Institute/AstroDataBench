@@ -1,0 +1,78 @@
+id: radio-synthesized-beam
+category: radio
+prompt: |
+  In radio interferometry, what is the "synthesized beam," and what determines
+  its size and shape?
+checklist:
+  - id: definition
+    text: >-
+      Defines the synthesized beam as the effective point spread function
+      (PSF) of an interferometric array, formed by Fourier transforming the
+      sampled uv-coverage (the set of baseline vectors observed).
+    summary: The synthesized beam is the array's effective PSF, from Fourier-transforming the uv-coverage.
+    weight: 1.0
+  - id: baseline_dependence
+    text: >-
+      States that the beam size is set by the array's maximum baseline
+      (longer baselines -> finer/narrower beam, i.e. higher angular
+      resolution) and observing wavelength (resolution scales as
+      wavelength / baseline).
+    summary: Beam size is set by the max baseline and observing wavelength.
+    weight: 1.0
+  - id: uv_coverage_shape
+    text: >-
+      Explains that the beam's shape (not just its size) is determined by the
+      distribution/density of uv-coverage. Incomplete or non-uniform
+      uv-coverage produces sidelobes and a non-Gaussian, often elongated
+      "dirty beam."
+    summary: Beam shape depends on uv-coverage density; sparse coverage produces sidelobes.
+    weight: 1.0
+  - id: weighting
+    text: >-
+      Mentions that visibility weighting schemes (e.g. natural vs. uniform
+      weighting) trade off resolution against sensitivity/sidelobe level and
+      thus also affect the synthesized beam.
+    summary: Visibility weighting schemes trade resolution against sensitivity/sidelobes.
+    weight: 0.5
+  - id: clean_beam
+    text: >-
+      Distinguishes the "dirty beam" (raw PSF with sidelobes) from the
+      "clean beam" (idealized Gaussian fit used to restore a CLEANed image).
+    summary: Distinguishes the raw "dirty beam" from the idealized Gaussian "clean beam."
+    weight: 0.5
+rubric:
+  - name: accuracy
+    description: >-
+      Is everything stated in the response factually correct, including
+      claims, terms, and reasoning? This should be scored independently of
+      checklist coverage, meaning an answer can satisfy every checklist item
+      and still contain an unrelated factual error, a misapplied term, or an
+      incorrect description, and any such error should lower this score even
+      if it doesn't affect whether the answer satisfies the checklist.
+    scale: 5
+    weight: 0.5
+  - name: caveating
+    description: >-
+      Does the response express an appropriate level of confidence about its
+      own claims (avoiding overconfident assertions on points that are wrong
+      or genuinely uncertain), and does it hedge or flag uncertainty about
+      its own statements when scientifically warranted? This assesses the
+      model's self-assessed confidence in what it asserts -- not whether the
+      response describes a concept, process, or result that is itself
+      inherently ambiguous or non-unique. Score this independently of
+      checklist coverage and of whether the underlying content is correct.
+    scale: 5
+    weight: 0.25
+  - name: clarity
+    description: >-
+      Is the response well-organized, appropriately detailed, and easy to act
+      on, with enough detail for a non-expert to follow and apply it without
+      being overly verbose? A response can be complete and accurate while
+      still being disorganized, overly verbose, or too generic to be useful;
+      this score should capture that quality independent of content
+      correctness or coverage.
+    scale: 5
+    weight: 0.25
+scoring:
+  checklist_weight: 0.6
+  rubric_weight: 0.4
