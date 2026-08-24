@@ -1,2 +1,0 @@
-Skipping image OS validation for hb__stable-alma-hh212-observations-hard: docker inspect returned 1
-Trial alma-HH212-observations-hard__MSXLrFb failed: No reward file found at jobs/2026-07-28__15-02-06/alma-HH212-observations-hard__MSXLrFb/verifier/reward.txt or jobs/2026-07-28__15-02-06/alma-HH212-observations-hard__MSXLrFb/verifier/reward.json

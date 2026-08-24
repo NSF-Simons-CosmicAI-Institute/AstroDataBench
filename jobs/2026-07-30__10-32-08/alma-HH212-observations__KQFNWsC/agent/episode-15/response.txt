@@ -1,6 +1,0 @@
-{
-  "analysis": "I have thoroughly validated the output.json file: it contains 14 unique MOUS observations for HH 212, correctly filtered by Band 6/7 and spatial_resolution<1.0 arcsec, derived from a positional search (30 arcsec radius) around the resolved coordinates (RA=85.96420833, Dec=-1.04808333). All data integrity checks passed: calib_level=2 (MOUS-level only, avoiding GOUS duplication), data_rights='Public', science_observation='T' filters were correctly applied at the query level. The JSON schema matches exactly what was requested, with proper data types, no duplicate UIDs, and a coherent natural-language summary.",
-  "plan": "Task is complete and verified. No further action needed.",
-  "commands": [],
-  "task_complete": true
-}

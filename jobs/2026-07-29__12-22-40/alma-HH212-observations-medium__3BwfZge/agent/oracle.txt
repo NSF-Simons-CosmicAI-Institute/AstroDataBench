@@ -1,4 +1,0 @@
-  File "<stdin>", line 30
-    observation appears once, not once per spectral window
-                ^^^^^^^
-SyntaxError: invalid syntax

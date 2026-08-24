@@ -1,7 +1,0 @@
-New Terminal Output:
-
-root@0923ce879be9:/app# python3 -c "import json; d=json.load(open('/app/output.json')); print('Valid JSON'); print('num_observations:', d['num_observations']);
-print('len(observations):', len(d['observations'])); assert d['num_observations']==len(d['observations']); print('Match!'); print('Keys:', list(d.keys())); prin
-t('Obs keys:', list(d['observations'][0].keys()))"
-bash: !': event not found
-root@0923ce879be9:/app#

@@ -1,7 +1,0 @@
-{
-  "analysis": "Query successful with 144 rows returned. Found key columns: target_name, s_ra, s_dec, band_list, spatial_resolution, member_ous_uid, proposal_id, qa2_passed, science_observation. Need to inspect actual values to understand data types and filtering logic.",
-  "plan": "Print sample rows to understand band_list format (string vs list), spatial_resolution units, qa2_passed values, and target_name values to confirm we're getting HH 212 data.",
-  "commands": [
-    {"keystrokes": "python3 << 'EOF'\nfrom astroquery.alma import Alma\nfrom astropy.coordinates import SkyCoord\nimport astropy.units as u\n\nc = SkyCoord(85.96420833, -1.04808333, unit='deg')\nresult = Alma.query_region(c, radius=10*u.arcsec, public=True, science=True)\nfor col in ['target_name','band_list','spatial_resolution','member_ous_uid','proposal_id','qa2_passed','s_ra','s_dec']:\n    print(col, result[col][:5])\nEOF\n", "duration": 10.0}
-  ]
-}

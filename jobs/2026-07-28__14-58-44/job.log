@@ -1,4 +1,0 @@
-Skipping image OS validation for hb__stable-alma-hh212-observations-hard: docker inspect returned 1
-Trial alma-HH212-observations-hard__GHwyLPQ failed: No reward file found at jobs/2026-07-28__14-58-44/alma-HH212-observations-hard__GHwyLPQ/verifier/reward.txt or jobs/2026-07-28__14-58-44/alma-HH212-observations-hard__GHwyLPQ/verifier/reward.json
-Exception RewardFileNotFoundError is in exclude_exceptions, not retrying
-Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached

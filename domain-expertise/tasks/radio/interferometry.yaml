@@ -1,0 +1,122 @@
+# References used: https://almascience.nrao.edu/about-alma/alma-basics
+id: interferometry
+category: radio
+prompt: |
+  What does it mean that ALMA is an interferometer not a single dish, and 
+  what are the benefits and limitations in what I can image?
+checklist:
+  - id: Definition
+    text: >-
+     States that radio interferometry is a technique where signals from two
+     or more antennas are combined to simulate a single larger telescope.
+    summary: Interferometry combines signals from multiple antennas to simulate one larger telescope.
+    weight: 1.0
+  - id: Mechanism
+    text: >-
+     Explains the basic mechanism. An interferometer samples the visibility function
+     by correlating the signals between each pair of antennas. This visibility 
+     function represents the Fourier transform of the sky's brightness distribution.
+     The final image must be reconstructed from this raw visibility data. 
+    summary: An interferometer samples the visibility function (the Fourier transform of the sky brightness distribution)
+  - id: Angular_resolution
+    text: >-
+     Explains that while the angular resolution of a single-dish telescope is
+     diffraction-limited by its diameter, the angular resolution of
+     an interferometer is instead determined by the maximum distance between
+     antennas. Because that separation can be much larger than the diameter of
+     any single dish, interferometers can reach much higher angular resolutions 
+     than single-dish telescopes.
+    summary: Resolution is set by the max baseline (not a single dish's diameter), enabling higher angular resolution.
+    weight: 1.0
+  - id: Array_configurations
+    text: >-
+      Explains that the antennas can be moved to form different distributions of
+      baseline lengths (the distance between antennas), where more extended
+      configurations result in higher angular resolution, and more compact
+      configurations are more sensitive to larger-scale emission.
+    summary: Baseline configuration determines angular resolution and the largest-scale emission that can be recovered.
+    weight: 0.75
+  - id: Max_recoverable_size
+    text: >-
+     Explains that interferometers can miss, or "filter out" larger-scale emission that extends beyond the
+     maximum recoverable scale, which is determined by the shortest baseline (spacing between arrays)
+     in the array configuration.
+    #  Explains that for a given configuration, the shortest baseline determines the
+    #  largest-scale emission that can be detected, meaning emission that extends beyond
+    #  this size will be missed or "filtered out" (missing flux).
+    summary: The shortest baseline sets the maximum recoverable scale; more extended emission is filtered out.
+    weight: 1.0
+  # - id: Multiple_configurations
+  #   text: >-
+  #     Notes that imaging both extended structures and smaller-scale details often requires multiple configurations,
+  #     which increases the observing time required.
+  #   summary: Imaging both smaller-scale and extended structures often requires multiple configuration (and more observing time) 
+  #   weight: 0.75
+  - id: MRS_mitigation
+    text: >-
+     Notes that the Atacama Compact Array (7-m antennas) and single-dish/total-power 
+     observations can be used to recover larger-scale emission that is filtered out 
+     by the main ALMA 12-m Array.
+    summary: The ACA and/or single-dish total-power data can be used to recover larger-scale "missing" flux.
+    weight: 0.5
+  - id: FOV
+    text: >-
+     Explains that the field of view is determined by the observing frequency and
+     diameter of a single antenna (not the array configuration), meaning observing
+     a field larger than this requires mosaicing.
+    summary: Field of view is set by frequency and antenna diameter; larger fields need mosaicking.
+    weight: 0.5
+  - id: Imaging_flexibility
+    text: >- 
+      Includes some mention of imaging flexibility, meaning the raw data 
+      (visibilities) can be re-processed in different ways (e.g., using different 
+      weighting schemes) to trade resolution against sensitivity. May mention that
+      spectral channels can also be averaged before imaging to improve sensitivity for 
+      continuum (broadband) observations.
+    weight: 0.5
+  - id: Dirty_image
+    text: >-
+      Explains that because any finite array samples only a limited, irregular set
+      of points in the UV plane, directly inverting the data produces a "dirty
+      image" with artifacts. Algorithms like CLEAN are used to deconvolve the 
+      point spread function (PSF) from the dirty image to get a useable image.
+    summary: Sparse uv-sampling produces a "dirty image" with artifacts, requiring CLEAN deconvolution.
+    weight: 0.5
+  - id: Imaging_degeneracy
+    text: >- 
+     Explains that the final images are affected by the parameter and method choices 
+     made during this cleaning/deconvolution step, meaning there is often not one 
+     single definitively "correct" final image.
+    weight: 0.5
+
+rubric:
+  - name: accuracy
+    description: "Is everything stated in the response factually correct, including claims, terms, and
+                  reasoning? This should be scored independently of checklist coverage, meaning an
+                  answer can satisfy every checklist item and still contain an unrelated factual error,
+                  a misapplied term, or an incorrect description, and any such error should lower this
+                  score even if it doesn't affect whether the answer satisfies the checklist."
+    scale: 5
+    weight: 0.5
+  - name: caveating
+    description: "Does the response express an appropriate level of confidence about its own claims
+                  (avoiding overconfident assertions on points that are wrong or genuinely uncertain),
+                  and does it hedge or flag uncertainty about its own statements when scientifically
+                  warranted? This assesses the model's self-assessed confidence in what it asserts,
+                  not whether the response describes a concept, process, or result that is itself
+                  inherently ambiguous or non-unique. Score this independently of checklist coverage
+                  and of whether the underlying content is correct."
+    scale: 5
+    weight: 0.25
+  - name: clarity
+    description: "Is the response well-organized, appropriately detailed, and easy to act on, with enough
+                  detail for a non-expert to follow and apply it without being overly verbose? A response
+                  can be complete and accurate while still being disorganized, overly verbose, or too
+                  generic to be useful; this score should capture that quality independent of content
+                  correctness or coverage."
+    scale: 5
+    weight: 0.25
+    
+scoring:
+  checklist_weight: 0.6
+  rubric_weight: 0.4

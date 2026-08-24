@@ -1,0 +1,84 @@
+#References:
+#https://ui.adsabs.harvard.edu/abs/1985ARA%26A..23...19C/abstract
+
+id: seeing
+category: optical
+prompt: |
+  What is "seeing" in optical astronomy and how does it limit measurement?
+checklist:
+  - id: definition
+    text: >-
+      Defines seeing as the blurring/smearing/distortion of an astronomical image caused
+      by turbulence in Earth's atmosphere (refractive index fluctuations
+      distorting the incoming wavefront).
+    summary: Seeing is atmospheric turbulence-induced blurring of an astronomical image.
+    weight: 1.0
+  - id: resolution_limit
+    text: >-
+      Explains that the seeing limits the achievable angular resolution for ground-based 
+      optical observations, which would otherwise be determined by the telescope’s 
+      diffraction limit.
+    summary: Seeing limits the achievable angular resolution for ground-based optical observations. 
+    weight: 1.0
+  - id: effects
+    text: >-
+      Includes at least one example of how the degraded angular resolution limits observations 
+      (e.g., makes it more difficult to resolve close binaries / companions)    
+    summary: Provides example of how degraded angular resolution limits observations
+    weight: 0.75
+  - id: quantification
+    text: >-
+      Mentions that seeing can be described by the FWHM (full width at half
+      maximum) of the point spread function (PSF), typically expressed
+      in arcseconds.
+    summary: Seeing can be described by the FWHM of the PSF (usually in arcseconds).
+    weight: 0.5
+  - id: variability
+    text: >-
+      Makes it clear that seeing is not a fixed quantity; it changes with time and depends on the 
+      observation site / conditions. (weight=0.5)
+    summary: Seeing changes with time and depends on the observation site/conditions.
+    weight: 0.75
+  - id: mitigation
+    text: >-
+      Mentions at least one mitigation strategy, e.g. adaptive optics, space-based
+      observations (e.g., with HST or JWST), lucky imaging, or choosing high-altitude
+      observing sites.
+    summary: Mentions a mitigation strategy (adaptive optics, space telescopes, lucky imaging, etc.).
+    weight: 0.5
+rubric:
+  - name: accuracy
+    description: >-
+      Is everything stated in the response factually correct, including
+      claims, terms, and reasoning? This should be scored independently of
+      checklist coverage, meaning an answer can satisfy every checklist item
+      and still contain an unrelated factual error, a misapplied term, or an
+      incorrect description, and any such error should lower this score even
+      if it doesn't affect whether the answer satisfies the checklist.
+    scale: 5
+    weight: 0.5
+  - name: caveating
+    description: >-
+      Does the response express an appropriate level of confidence about its
+      own claims (avoiding overconfident assertions on points that are wrong
+      or genuinely uncertain), and does it hedge or flag uncertainty about
+      its own statements when scientifically warranted? This assesses the
+      model's self-assessed confidence in what it asserts, not whether the
+      response describes a concept, process, or result that is itself
+      inherently ambiguous or non-unique. Score this independently of
+      checklist coverage and of whether the underlying content is correct.
+    scale: 5
+    weight: 0.25
+  - name: clarity
+    description: >-
+      Is the response well-organized, appropriately detailed, and easy to act
+      on, with enough detail for a non-expert to follow and apply it without
+      being overly verbose? A response can be complete and accurate while
+      still being disorganized, overly verbose, or too generic to be useful;
+      this score should capture that quality independent of content
+      correctness or coverage.
+    scale: 5
+    weight: 0.25
+scoring:
+  checklist_weight: 0.6
+  rubric_weight: 0.4

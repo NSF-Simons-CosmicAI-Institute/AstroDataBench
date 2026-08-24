@@ -1,8 +1,0 @@
-{
-  "analysis": "Successfully generated output.json with 14 unique MOUS observations matching all filter criteria (Band 6/7, spatial_resolution < 1.0 arcsec, public science observations of HH 212). The data includes all required fields: member_ous_uid, project_code, alma_source_name, ra_hms, dec_dms, band, best_spatial_resolution_arcsec, qa2_status. All qa2_status values are 'T' (passed). Bands present are 6 and 7 only. Resolution range is 0.0148 to 0.8028 arcsec. The summary provides appropriate context.",
-  "plan": "Verify the output.json file is valid JSON and matches the required schema exactly by reading it back and checking structure/types.",
-  "commands": [
-    {"keystrokes": "python3 -c \"import json; d=json.load(open('/app/output.json')); print('Valid JSON'); print('Keys:', list(d.keys())); print('num_observations:', d['num_observations']); print('len(observations):', len(d['observations'])); print('unique mous:', len(set(o['member_ous_uid'] for o in d['observations'])))\"\n", "duration": 3.0},
-    {"keystrokes": "ls -la /app/output.json\n", "duration": 0.1}
-  ]
-}
