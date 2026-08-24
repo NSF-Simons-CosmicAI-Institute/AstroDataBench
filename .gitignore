@@ -1,0 +1,12 @@
+.DS_Store
+__pycache__/
+*.pyc
+.env
+
+domain-expertise/.venv/
+domain-expertise/results/
+domain-expertise/.pytest_cache/
+
+data-discovery/jobs/
+
+runs/

@@ -1,0 +1,68 @@
+id: galaxy_sed
+category: cross-regime
+prompt: |
+  I want to build a global spectral energy distribution (SED) for the galaxy NGC 628 
+  spanning ultraviolet to radio wavelengths (roughly 10 nm to over 1 cm). What are 
+  the main factors that I need to account for when combining images from these
+  different regimes into one SED?
+checklist:
+  - id: astrometric_corrections
+    text: Mentions that all images must first be re-aligned to a common astrometric frame.
+    weight: 1.0
+  - id: spatial_resolution_variation
+    text: Addresses the variable spatial resolution (or PSF/beam size) across different 
+          telescopes/instruments and mentions at least one technique for handling this, 
+          such as convolving to a common PSF or redistributing flux based on optical priors.
+    weight: 1.0
+  - id: unit_consistency
+    text: Notes that combining datasets across wavelength regimes involves handling heterogeneous
+          data products and that unit conversions must be performed to obtain the flux density at
+          each bandpass in a common unit (typically Jy).
+    weight: 1.0
+  - id: different_emission_sources
+    text: Notes that different wavelength regimes trace different emission sources/mechanisms (e.g.,
+          stellar populations at UV-near-IR, AGN and dust at mid-IR, dust and gas at far-IR, 
+          AGN and X-ray binaries at X-ray and radio regimes. etc.), and that global galaxy
+          SEDs are often modeled as a composite of these components (rather than being fit 
+          with a single function).
+    weight: 1.0
+  - id: aperture_consistency
+    text: Notes that the same physical aperture (same position and physical size) should be applied 
+          across all bands.
+    weight: 0.75
+  - id: interferometry_mrs
+    text: Notes that interferometers (like ALMA) resolve out emission larger than the maximum recoverable 
+          scale, and that for an extended object like a galaxy, single-dish or compact configuration data 
+          may be needed to recover the “missing” flux.
+    weight: 0.75
+  - id: contamination
+    text: Notes different sources of background and foreground contamination at different wavelengths
+          (e.g., background galaxies at UV/Optical wavelengths, "Galactic Cirrus" emission at far-IR, etc.).
+    weight: 0.5
+rubric:
+  - name: accuracy
+    description: "Is everything stated in the response factually correct, including claims, terms, and
+                  reasoning? This should be scored independently of checklist coverage, meaning an
+                  answer can satisfy every checklist item and still contain an unrelated factual error,
+                  a misapplied term, or an incorrect description, and any such error should lower this
+                  score even if it doesn't affect whether the answer satisfies the checklist."
+    scale: 5
+    weight: 0.5
+  - name: caveating
+    description: "Does the response express an appropriate level of confidence about its own claims
+                  (avoiding overconfident assertions on points that are wrong or genuinely uncertain),
+                  and does it hedge or flag uncertainty about its own statements when scientifically
+                  warranted? This assesses the model's self-assessed confidence in what it asserts,
+                  not whether the response describes a concept, process, or result that is itself
+                  inherently ambiguous or non-unique. Score this independently of checklist coverage
+                  and of whether the underlying content is correct."
+    scale: 5
+    weight: 0.25
+  - name: clarity
+    description: "Is the response well-organized, appropriately detailed, and easy to act on, with enough
+                  detail for a non-expert to follow and apply it without being overly verbose? A response
+                  can be complete and accurate while still being disorganized, overly verbose, or too
+                  generic to be useful; this score should capture that quality independent of content
+                  correctness or coverage."
+    scale: 5
+    weight: 0.25

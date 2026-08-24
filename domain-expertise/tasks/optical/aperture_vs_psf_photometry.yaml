@@ -1,0 +1,86 @@
+#References: 
+#https://www.sdss4.org/dr12/algorithms/magnitudes/
+#https://datalab.noirlab.edu/data-explorer?showTable=sdss_dr17.photoplate
+#https://srmastro.uvacreate.virginia.edu/astr313/lectures/photometry/photometry_methods.html
+id: aperture_vs_psf_photometry
+category: cross-regime
+prompt: |
+  What's the difference between PSF magnitude and aperture magnitude in a catalog like SDSS DR17, and when should I use one over the other?
+checklist:
+  - id: photometry
+    text: Explains that both aperture photometry and PSF photometry are methods of
+          estimating the magnitude or total flux density of an astronomical source 
+          from an image.
+    summary: Both are methods for estimating a target source's magnitude or total flux density.
+    weight: 1.0
+  - id: aper_phot
+    text: Explains that aperture photometry sums pixel values within a defined aperture 
+          (often circular) centered on the target source.
+    summary: Aperture photometry sums pixel counts within a defined region around the source.
+    weight: 1.0
+  - id: aper_phot_bkgsub
+    text: Mentions that in aperture photometry, the local sky background is estimated (may
+          note that this is often done using an annulus around the source) and subtracted from
+          the aperture counts to obtain a background-subtracted flux.
+    summary: Aperture photometry subtracts local sky background contribution.
+    weight: 0.5
+  - id: psf_phot
+    text: Explains that PSF photometry models the instrument's point spread function (PSF) 
+          and fits this model to the target pixels to derive the source's flux.
+    summary: PSF photometry fits a PSF model to the source to estimate flux.
+    weight: 1.0
+  - id: environment
+    text: Mentions that PSF photometry performs well in crowded fields because it can fit 
+          multiple overlapping profiles simultaneously, whereas aperture photometry can 
+          suffer from flux contamination from neighboring sources in these environments.
+    summary: PSF photometry performs well in crowded fields where aperture photometry can struggle.
+    weight: 1.0
+  - id: morphology
+    text: Mentions that PSF photometry assumes the target is an unresolved point source 
+          (e.g., stars or distant quasars) and will systematically underestimate flux 
+          if applied to extended sources. (e.g., galaxies, comets, circumstellar disks). 
+    summary: PSF photometry assumes a point source and is not well-suited for extended objects.
+    weight: 1.0
+  - id: galaxy_mag
+    text: Clarifies that BOTH the PSF magnitude AND the simple fixed-aperture magnitude in 
+          SDSS DR17 are inadequate for extended galaxies (due to truncation or excess sky noise); 
+          OR, suggests other SDSS DR17 measurements like composite model magnitude (cModelMag), or  
+          Petrosian magnitude (petroMag) for galaxies.
+    summary: Neither PSF or aperture photometry is ideal for galaxies.
+    weight: 0.5
+  - id: conditionality
+    text: Avoids calling one method universally superior, instead justifying the 
+          choice based on factors like object morphology and environmental crowding.
+    summary: Does not claim one method is universally better without the environment / morphology caveat.
+    weight: 0.75
+
+rubric:
+  - name: accuracy
+    description: "Is everything stated in the response factually correct, including claims, terms, and
+                  reasoning? This should be scored independently of checklist coverage, meaning an
+                  answer can satisfy every checklist item and still contain an unrelated factual error,
+                  a misapplied term, or an incorrect description, and any such error should lower this
+                  score even if it doesn't affect whether the answer satisfies the checklist."
+    scale: 5
+    weight: 0.5
+  - name: caveating
+    description: "Does the response express an appropriate level of confidence about its own claims
+                  (avoiding overconfident assertions on points that are wrong or genuinely uncertain),
+                  and does it hedge or flag uncertainty about its own statements when scientifically
+                  warranted? This assesses the model's self-assessed confidence in what it asserts,
+                  not whether the response describes a concept, process, or result that is itself
+                  inherently ambiguous or non-unique. Score this independently of checklist coverage
+                  and of whether the underlying content is correct."
+    scale: 5
+    weight: 0.25
+  - name: clarity
+    description: "Is the response well-organized, appropriately detailed, and easy to act on, with enough
+                  detail for a non-expert to follow and apply it without being overly verbose? A response
+                  can be complete and accurate while still being disorganized, overly verbose, or too
+                  generic to be useful; this score should capture that quality independent of content
+                  correctness or coverage."
+    scale: 5
+    weight: 0.25
+scoring:
+  checklist_weight: 0.6
+  rubric_weight: 0.4
