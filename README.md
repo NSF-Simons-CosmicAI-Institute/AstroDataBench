@@ -1,5 +1,7 @@
 # AstroDataBench 
 
+> **Status: under active development.** The benchmark framework is functional, but the prompt set is being expanded and revised. Current prompts and scores should be treated as preliminary and may change between versions. Please check back for updates before citing results.
+
 AstroDataBench is a reusable benchmarking framework that evaluates how well LLMs perform on two kinds of tasks: multiwavelength data discovery (finding the right data across archives) and cross-regime domain expertise (answering conceptual questions that come up when working in an unfamiliar wavelength regime). These tasks are separated into two suites that are implemented and organized as follows:
 
 
